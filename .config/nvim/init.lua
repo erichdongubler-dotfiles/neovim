@@ -15,6 +15,7 @@ require('packer').startup(function()
 	augroup END
 	]])
 	vim.cmd('nnoremap <Leader>vs :source ' .. vim.fn.stdpath('config') .. '/init.lua<CR>')
+	vim.cmd('nnoremap <Leader>ve :e ' .. vim.fn.stdpath('config') .. '/init.lua<CR>')
 
 	use 'wbthomason/packer.nvim'
 
