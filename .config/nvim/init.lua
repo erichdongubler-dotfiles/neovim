@@ -917,7 +917,7 @@ require('packer').startup(function()
 	-- TODO: Investigate https://github.com/mfussenegger/nvim-dap
 
 	--   Language-specific integration
-	
+
 	use 'vitalk/vim-shebang'
 
 	use {
