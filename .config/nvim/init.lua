@@ -801,6 +801,24 @@ require('packer').startup(function()
 		end,
 	}
 
+	-- TODO: Does this work?
+	use 'folke/lsp-colors.nvim'
+	-- TODO: Get colors and highlighting for LSP actually looking good
+
+	use {
+		"folke/lsp-trouble.nvim",
+		config = function()
+			require("trouble").setup {
+				auto_close = true,
+				auto_open = true,
+				fold_closed = ">",
+				fold_open = "v",
+				icons = false,
+				use_lsp_diagnostic_signs = true,
+			}
+		end,
+	}
+
 	--   Completion
 
 	vim.opt.completeopt = 'menuone,noinsert,noselect'
