@@ -148,6 +148,7 @@ require('packer').startup(function()
 
 	--   Buffer display above
 	vim.g.wintabs_ui_show_vimtab_name = 2
+	-- TODO: Make previous and next bindings available in `insert` mode
 	vim.cmd [[
 	map <C-PageUp> :WintabsPrevious<CR>
 	map <C-PageDown> :WintabsNext<CR>
@@ -382,7 +383,7 @@ require('packer').startup(function()
 					lualine_z = { 'location' }
 				},
 			})
-		end
+		end,
 	}
 
 	-- Navigation
@@ -606,8 +607,7 @@ require('packer').startup(function()
 		config = function()
 			-- Not sure why this needs to be in vimscript. :scratch-head:
 			vim.cmd 'let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)'
-			local recipes = vim.g['sandwich#recipes'] 
-			print(recipes)
+			local recipes = vim.g['sandwich#recipes']
 
 			local vim_surround_ish_recipes = {
 				{buns = {'{ ', ' }'}, nesting = 1, match_syntax = 1, kind = {'add', 'replace'}, action = {'add'}, input = {'{'}},
@@ -621,7 +621,7 @@ require('packer').startup(function()
 				table.insert(recipes, v)
 			end
 
-			vim.g['sandwich#recipes'] = recipes 
+			vim.g['sandwich#recipes'] = recipes
 		end
 	}
 
@@ -735,7 +735,7 @@ require('packer').startup(function()
 	]]
 	use {
 		'ludovicchabant/vim-gutentags',
-		setup = function() 
+		setup = function()
 			if vim.fn.executable('fd') then
 				vim.g.gutentags_file_list_command = 'fd --follow --type file'
 			elseif vim.fn.executable('rg') then
@@ -839,7 +839,7 @@ require('packer').startup(function()
 					tag = true,
 				},
 			})
-			-- NOTE: Order is important. You can't lazy loading lexima.vim.
+			-- NOTE: Order is important. You can't lazy-load `lexima.vim`.
 			vim.cmd [[
 			inoremap <silent><expr> <C-Space> compe#complete()
 			inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
@@ -913,6 +913,9 @@ require('packer').startup(function()
 		end,
 	}
 
+	-- Debugging
+	-- TODO: Investigate https://github.com/mfussenegger/nvim-dap
+
 	--   Language-specific integration
 	
 	use 'vitalk/vim-shebang'
@@ -952,7 +955,7 @@ require('packer').startup(function()
 			add_rust_sandwich_binding('u', 'unsafe { ', ' }')
 			add_rust_sandwich_binding('v', 'vec![', ']')
 
-			vim.g['sandwich#recipes'] = recipes 
+			vim.g['sandwich#recipes'] = recipes
 
 			-- TODO
 			function _G.configure_rust()
@@ -986,6 +989,7 @@ require('packer').startup(function()
 			-- ]]
 
 			require('lspconfig').rust_analyzer.setup({})
+			-- TODO: get to know keybinds: https://github.com/neovim/nvim-lspconfig#Keybindings-and-completion
 		end
 	}
 end)
