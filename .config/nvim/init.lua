@@ -367,7 +367,20 @@ require('packer').startup(function()
 		'hoob3rt/lualine.nvim',
 		config = function()
 			require('lualine').setup({
-				theme = 'powerline',
+				options = {
+					component_separators = '',
+					icons_enabled = false,
+					section_separators = '',
+					theme = 'powerline',
+				},
+				sections = {
+					lualine_a = { 'mode' },
+					lualine_b = { 'filename' },
+					lualine_c = { 'diagnostic', sources = nvim_lsp },
+					lualine_x = { 'encoding', 'fileformat', 'filetype' },
+					lualine_y = { 'progress' },
+					lualine_z = { 'location' }
+				},
 			})
 		end
 	}
