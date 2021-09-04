@@ -602,13 +602,21 @@ require('packer').startup(function()
 		end
 	}
 
+	sandwich_initted = false
+	function _G.init_sandwich_recipes_once()
+		if not sandwich_initted then
+			-- Not sure why this needs to be in vimscript. :scratch-head:
+			vim.cmd 'let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)'
+			sandwich_initted = true
+		end
+	end
+
 	use {
 		'machakann/vim-sandwich',
 		config = function()
-			-- Not sure why this needs to be in vimscript. :scratch-head:
-			vim.cmd 'let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)'
-			local recipes = vim.g['sandwich#recipes']
+			_G.init_sandwich_recipes_once()
 
+			local recipes = vim.g['sandwich#recipes']
 			local vim_surround_ish_recipes = {
 				{buns = {'{ ', ' }'}, nesting = 1, match_syntax = 1, kind = {'add', 'replace'}, action = {'add'}, input = {'{'}},
 				{buns = {'[ ', ' ]'}, nesting = 1, match_syntax = 1, kind = {'add', 'replace'}, action = {'add'}, input = {'['}},
@@ -929,6 +937,8 @@ require('packer').startup(function()
 			'vim-shebang',
 		},
 		config = function()
+			init_sandwich_recipes_once()
+
 			local recipes = vim.g['sandwich#recipes']
 
 			-- TODO: These are broken. :(
