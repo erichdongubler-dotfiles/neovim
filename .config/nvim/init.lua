@@ -208,30 +208,25 @@ require('packer').startup(function()
 	--   Session management
 
 	use {
-		'ctrlpvim/ctrlp.vim',
-		setup = function()
-			vim.g.ctrlp_bufname_mod = ':t'
-			vim.g.ctrlp_bufpath_mod = ':~:.:h'
-			vim.g.ctrlp_by_filename = 1
-			vim.g.ctrlp_extensions = { 'buffertag', 'line', 'rtscript' }
-			vim.g.ctrlp_follow_symlinks = 1
-			if vim.fn.executable('fd') then
-				vim.g.ctrlp_use_caching = 0
-				vim.g.ctrlp_user_command = 'fd "" %s --follow --type file'
-			elseif vim.fn.executable('rg') then
-				vim.g.ctrlp_use_caching = 0
-				vim.g.ctrlp_user_command = 'rg "" %s --follow --files'
-			end
-			vim.g.ctrlp_map = '<Leader>p'
-		end,
+		'nvim-telescope/telescope.nvim',
+		requires = 'nvim-lua/plenary.nvim',
 		config = function()
+			local actions = require('telescope.actions')
+			require('telescope').setup({
+				defaults = {
+					mappings = {
+						n = {
+							["<C-C>"] = actions.close,
+						}
+					}
+				}
+			})
 			vim.cmd [[
-			map <Leader>p :CtrlP<CR>
-			map <Leader>o :CtrlPMRU<CR>
-			map <Leader>O :CtrlPBuffer<CR>
-			map <Leader>r :CtrlPBufTag %<CR>
-			map <Leader>R :CtrlPTag<CR>
-			map <Leader>/ :CtrlPLine<CR>
+			nnoremap <Leader>p <cmd>Telescope find_files<CR>
+			nnoremap <Leader>o <cmd>Telescope oldfiles<CR>
+			nnoremap <Leader>O <cmd>Telescope buffers<CR>
+			nnoremap <Leader>r <cmd>Telescope current_buffer_tags<CR>
+			nnoremap <Leader>R <cmd>Telescope tags<CR>
 			]]
 		end,
 	}
