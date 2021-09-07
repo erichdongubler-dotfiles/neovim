@@ -227,14 +227,12 @@ require('packer').startup(function()
 			nnoremap <Leader>O <cmd>Telescope buffers<CR>
 			nnoremap <Leader>r <cmd>Telescope current_buffer_tags<CR>
 			nnoremap <Leader>R <cmd>Telescope tags<CR>
+			nnoremap <Leader>l<C-]> <cmd>Telescope lsp_definitions<CR>
+			nnoremap <Leader>la <cmd>Telescope lsp_code_actions<CR>
+			vnoremap <Leader>la <cmd>Telescope lsp_range_code_actions<CR>
 			]]
 		end,
 	}
-	-- use {
-	-- 	'FelikZ/ctrlp-py-matcher',
-	-- 	requires = 'ctrlpvim/ctrlp.vim'
-	-- }
-	-- vim.g.ctrlp_match_func = { match = 'pymatcher#PyMatch' }
 
 	use {
 		'ivalkeen/vim-ctrlp-tjump',
@@ -279,26 +277,37 @@ require('packer').startup(function()
 
 	--   File management
 
-	-- Get some nice command aliases for basic file management
-	use 'tpope/vim-eunuch'
-
 	use {
-		'Xuyuanp/nerdtree-git-plugin',
-		setup = function()
-			vim.g.NERDTreeIndicatorMapCustom = {
-				Clean     = "✓",
-				Deleted   = "✖",
-				Dirty     = "*",
-				Ignored   = "Ø",
-				Modified  = "*",
-				Renamed   = "➜",
-				Staged    = "+",
-				Unknown   = "?",
-				Unmerged  = "=",
-				Untracked = "_",
+		'kyazdani42/nvim-tree.lua',
+		config = function()
+			vim.cmd [[
+			nnoremap <Leader>k <cmd>NvimTreeToggle<CR>
+			nnoremap - <cmd>NvimTreeFindFile<CR>
+			]]
+			vim.g.nvim_tree_icons = {
+				default = nil,
+				symlink = nil,
+				git = {
+					deleted = "✖",
+					ignored = "Ø",
+					renamed = "➜",
+					staged = "+",
+					unmerged = "=",
+					unstaged = "*",
+					untracked = "_",
+				},
+			}
+			vim.g.nvim_tree_show_icons = {
+				git = 1,
+				folders = 0,
+				files = 0,
+				folder_arrows = 1,
 			}
 		end,
 	}
+
+	-- Get some nice command aliases for basic file management
+	use 'tpope/vim-eunuch'
 
 	-- Color scheme and highlighting configuration
 
