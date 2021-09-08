@@ -1006,5 +1006,8 @@ require('packer').startup(function()
 			-- TODO: get to know keybinds: https://github.com/neovim/nvim-lspconfig#Keybindings-and-completion
 		end
 	}
+
+	-- -- TODO: TS integration
+	-- require('lspconfig').tsserver.setup({})
 end)
 
