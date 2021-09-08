@@ -840,8 +840,6 @@ require('packer').startup(function()
 		end,
 	}
 
-	-- TODO: Does this work?
-	use 'folke/lsp-colors.nvim'
 	-- TODO: Get colors and highlighting for LSP actually looking good
 
 	use {
