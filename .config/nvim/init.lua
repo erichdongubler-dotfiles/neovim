@@ -921,6 +921,11 @@ require('packer').startup(function()
 			function _G.disable_retab()
 				vim.b.autoformat_retab = 0
 			end
+			function _G.disable_whitespace_fixing()
+				_G.disable_trailing_whitespace_stripping()
+				_G.disable_indentation_fixing()
+				_G.disable_retab()
+			end
 			vim.cmd[[
 			augroup WhitespaceAutoformatBlacklist
 				au!
