@@ -286,6 +286,7 @@ require('packer').startup(function()
 			nnoremap <Leader>k <cmd>NvimTreeToggle<CR>
 			nnoremap - <cmd>NvimTreeFindFile<CR>
 			]]
+			vim.g.nvim_tree_add_trailing = 1
 			vim.g.nvim_tree_icons = {
 				default = nil,
 				symlink = nil,
@@ -305,6 +306,7 @@ require('packer').startup(function()
 				files = 0,
 				folder_arrows = 1,
 			}
+			vim.g.nvim_tree_group_empty = 1
 		end,
 	}
 
