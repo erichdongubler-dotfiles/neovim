@@ -840,8 +840,18 @@ require('packer').startup(function()
 					update_in_insert = true,
 				}
 			)
+			vim.fn.sign_define('LspDiagnosticsSignError', { text = ">>", texthl = "LspDiagnosticsDefaultError" })
+			vim.fn.sign_define('LspDiagnosticsSignWarning', { text = ">>", texthl = "LspDiagnosticsDefaultWarning" })
+			vim.fn.sign_define('LspDiagnosticsSignInformation', { text = "!!", texthl = "LspDiagnosticsDefaultInformation" })
+			vim.fn.sign_define('LspDiagnosticsSignHint', { text = "??", texthl = "LspDiagnosticsDefaultHint" })
 		end,
 	}
+
+	--     LSP bindings
+
+	vim.cmd [[
+	nnoremap <Leader>lK     <cmd>lua vim.lsp.buf.hover()<CR>
+	]]
 
 	-- TODO: Get colors and highlighting for LSP actually looking good
 
