@@ -230,6 +230,8 @@ require('packer').startup(function()
 			nnoremap <Leader>l<C-]> <cmd>Telescope lsp_definitions<CR>
 			nnoremap <Leader>la <cmd>Telescope lsp_code_actions<CR>
 			vnoremap <Leader>la <cmd>Telescope lsp_range_code_actions<CR>
+			nnoremap <Leader>lgi <cmd>Telescope lsp_implementations<CR>
+			nnoremap <Leader>lgr <cmd>Telescope lsp_references<CR>
 			]]
 		end,
 	}
