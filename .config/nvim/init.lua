@@ -599,6 +599,37 @@ require('packer').startup(function()
 			vim.fn['g:SublimeMonokaiHighlight']('MatchParen', { format = 'reverse' })
 			vim.fn['g:SublimeMonokaiHighlight']('MatchTag', { format = 'reverse' })
 			vim.fn['g:SublimeMonokaiHighlight']('MatchWord', { format = 'reverse' })
+
+			local lsp_highlight_groups = {
+				['Error'] = {
+					['Default'] = 'Error',
+					['Sign'] = 'Error',
+					['Underline'] = 'SpellBad',
+					['VirtualText'] = 'Comment',
+				},
+				['Warning'] = {
+					['Default'] = 'SpellCap',
+					['Sign'] = 'SpellCap',
+					['Underline'] = 'SpellCap',
+					['VirtualText'] = 'Comment',
+				},
+				['Information'] = {
+					['Default'] = 'Comment',
+				},
+				['Hint'] = {
+					['Default'] = 'Comment',
+				},
+			}
+			for severity, rest in pairs(lsp_highlight_groups) do
+				for highlight_location, highlight_spec in pairs(rest) do
+					local highlight_group = 'LspDiagnostics' .. highlight_location .. severity
+					if type(highlight_spec) == "string" then
+						vim.cmd('hi! link ' .. highlight_group .. ' ' .. highlight_spec)
+					else
+						vim.fn['g:SublimeMonokaiHighlight'](highlight_group, highlight_spec)
+					end
+				end
+			end
 		end
 	}
 
