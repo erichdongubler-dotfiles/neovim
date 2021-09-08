@@ -1026,11 +1026,10 @@ require('packer').startup(function()
 			augroup end
 			]]
 
-			-- -- TODO: Not working yet. :(
-			-- vim.cmd [[
-			-- AddShebangPattern! rust ^#!.*/bin/env\s\+run-cargo-(script|eval)\>
-			-- AddShebangPattern! rust ^#!.*/bin/run-cargo-(script|eval)\>
-			-- ]]
+			vim.cmd [[
+			AddShebangPattern! rust ^#!.*/bin/env\s\+run-cargo-(script|eval)\>
+			AddShebangPattern! rust ^#!.*/bin/run-cargo-(script|eval)\>
+			]]
 
 			require('lspconfig').rust_analyzer.setup({})
 			-- TODO: get to know keybinds: https://github.com/neovim/nvim-lspconfig#Keybindings-and-completion
