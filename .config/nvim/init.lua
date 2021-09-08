@@ -363,15 +363,7 @@ require('packer').startup(function()
 
 	vim.opt.laststatus = 2
 	vim.opt.showmode = false
-	-- TODO: Disable lightline `tab` functionality?
-	-- use {
-	-- 	'itchyny/lightline.vim',
-	-- 	config = function()
-	-- 		vim.g.lightline = {
-	-- 			enable = { tabline = false }
-	-- 		}
-	-- 	end
-	-- }
+
 	use {
 		'hoob3rt/lualine.nvim',
 		config = function()
