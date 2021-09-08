@@ -794,7 +794,7 @@ require('packer').startup(function()
 
 	use {
 		'majutsushi/tagbar',
-		config = function() 
+		config = function()
 			vim.cmd [[nmap <Leader>t :TagbarToggle<CR>]]
 		end,
 	}
