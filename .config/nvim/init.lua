@@ -1031,7 +1031,16 @@ require('packer').startup(function()
 			AddShebangPattern! rust ^#!.*/bin/run-cargo-(script|eval)\>
 			]]
 
-			require('lspconfig').rust_analyzer.setup({})
+			require('lspconfig').rust_analyzer.setup({
+				settings = {
+					["rust-analyzer"] = {
+						cargo = { runBuildScripts = true, },
+						procMacro = {
+							enable = true,
+						},
+					}
+				}
+			})
 			-- TODO: get to know keybinds: https://github.com/neovim/nvim-lspconfig#Keybindings-and-completion
 		end
 	}
