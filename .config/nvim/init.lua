@@ -725,33 +725,40 @@ require('packer').startup(function()
 
 	use 'knsh14/vim-github-link'
 
-	-- -- TODO: Investigate!
-	-- use {
-	-- 	'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
-	-- 	config = function()
-	-- 		require('gitsigns').setup()
-	-- 	end
-	-- }
 	use {
-		'airblade/vim-gitgutter',
-		setup = function()
-			vim.g.gitgutter_map_keys = false
-			if vim.fn.executable('rg') then
-				vim.g.gitgutter_grep = 'rg --follow'
-			end
-		end,
+		'lewis6991/gitsigns.nvim',
+		requires = 'nvim-lua/plenary.nvim',
 		config = function()
-			vim.cmd [[
-			nmap [h <Plug>(GitGutterPrevHunk)
-			nmap ]h <Plug>(GitGutterNextHunk)
-			nmap ghp <Plug>(GitGutterPreviewHunk)
-			nmap ghs <Plug>(GitGutterStageHunk)
-			nmap ghu <Plug>(GitGutterUndoHunk)
-			omap ah <Plug>(GitGutterTextObjectOuterPending)
-			omap ih <Plug>(GitGutterTextObjectInnerPending)
-			xmap ah <Plug>(GitGutterTextObjectOuterVisual)
-			xmap ih <Plug>(GitGutterTextObjectInnerVisual)
-			]]
+			require('gitsigns').setup({
+				signs = {
+				  add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+				  change       = {hl = 'GitSignsChange', text = '|', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+				  delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+				  topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+				  changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+				},
+				keymaps = {
+					noremap = true,
+
+					['n ]h'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+					['n [h'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+
+					['n ghs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+					['v ghs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+					['n ghu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+					['n ghr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+					['v ghr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+					['n ghR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+					['n ghp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+					['n ghb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+					['n ghS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
+					['n ghU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
+
+					-- Text objects
+					['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+					['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+				},
+			})
 		end,
 	}
 
