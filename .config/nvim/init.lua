@@ -14,8 +14,8 @@ require('packer').startup(function()
 	au BufWritePost init.lua source <afile> | PackerCompile
 	augroup END
 	]])
-	vim.cmd('nnoremap <Leader>vs :source ' .. vim.fn.stdpath('config') .. '/init.lua<CR>')
-	vim.cmd('nnoremap <Leader>ve :e ' .. vim.fn.stdpath('config') .. '/init.lua<CR>')
+	vim.cmd('nnoremap <Leader>vs <cmd>source ' .. vim.fn.stdpath('config') .. '/init.lua<CR>')
+	vim.cmd('nnoremap <Leader>ve <cmd>e ' .. vim.fn.stdpath('config') .. '/init.lua<CR>')
 
 	use 'wbthomason/packer.nvim'
 
@@ -134,11 +134,11 @@ require('packer').startup(function()
 	command! -bang Qa :qa!
 	command! QA :qa
 	command! -bang QA :qa!
-	nnoremap <Leader>q :q<CR>
-	nnoremap <Leader>Q :q!<CR>
-	nnoremap <Leader> :qa!<CR>
+	nnoremap <Leader>q <cmd>q<CR>
+	nnoremap <Leader>Q <cmd>q!<CR>
+	nnoremap <Leader> <cmd>qa!<CR>
 	"   Get a Leader mapping for saves
-	nmap <Leader>s :w<CR>
+	nmap <Leader>s <cmd>w<CR>
 	command! -bang W :w!
 	]]
 
@@ -150,10 +150,10 @@ require('packer').startup(function()
 	vim.g.wintabs_ui_show_vimtab_name = 2
 	-- TODO: Make previous and next bindings available in `insert` mode
 	vim.cmd [[
-	map <C-PageUp> :WintabsPrevious<CR>
-	map <C-PageDown> :WintabsNext<CR>
-	map <Leader>w :WintabsClose<CR>
-	map <Leader>W :WintabsOnly<CR>:WintabsClose<CR>
+	map <C-PageUp> <cmd>WintabsPrevious<CR>
+	map <C-PageDown> <cmd>WintabsNext<CR>
+	map <Leader>w <cmd>WintabsClose<CR>
+	map <Leader>W <cmd>WintabsOnly<CR>:WintabsClose<CR>
 	]]
 	use 'zefei/vim-wintabs'
 
@@ -172,8 +172,8 @@ require('packer').startup(function()
 	-- let bufferline.icon_close_tab = 'x'
 	-- let bufferline.icon_close_tab_modified = '*'
 	--
-	-- nnoremap <silent> <C-PageUp> :BufferPrevious<CR>
-	-- nnoremap <silent> <C-PageDown> :BufferNext<CR>
+	-- nnoremap <silent> <C-PageUp> <cmd>BufferPrevious<CR>
+	-- nnoremap <silent> <C-PageDown> <cmd>BufferNext<CR>
 	-- ]])
 	-- use 'romgrk/barbar.nvim'
 
@@ -182,9 +182,9 @@ require('packer').startup(function()
 		'ErichDonGubler/vim-file-browser-integration',
 		config = function()
 			vim.cmd [[
-			nnoremap <Leader>e :SelectCurrentFile<CR>
-			nnoremap <Leader>x :OpenCurrentFile<CR>
-			nnoremap <Leader>E :OpenCWD<CR>
+			nnoremap <Leader>e <cmd>SelectCurrentFile<CR>
+			nnoremap <Leader>x <cmd>OpenCurrentFile<CR>
+			nnoremap <Leader>E <cmd>OpenCWD<CR>
 			]]
 		end,
 	}
@@ -244,8 +244,8 @@ require('packer').startup(function()
 		end,
 		config = function()
 			vim.cmd [[
-			nnoremap <c-]> :CtrlPtjump<CR>
-			vnoremap <c-]> :CtrlPtjumpVisual<CR>
+			nnoremap <c-]> <cmd>CtrlPtjump<CR>
+			vnoremap <c-]> <cmd>CtrlPtjumpVisual<CR>
 			]]
 		end,
 	}
@@ -479,7 +479,7 @@ require('packer').startup(function()
 	end
 	function map_device_character_append(sequence, name)
 		vim.cmd('command! -nargs=0 Append' .. name .. ' call v:lua.append_chars(\'' .. sequence .. '\')')
-		vim.cmd('nnoremap <Leader>' .. sequence .. ' :Append' .. name .. '<CR>')
+		vim.cmd('nnoremap <Leader>' .. sequence .. ' <cmd>Append' .. name .. '<CR>')
 	end
 	map_device_character_append(';', 'Semicolon')
 	map_device_character_append('.', 'Period')
@@ -497,8 +497,8 @@ require('packer').startup(function()
 	--   Search-and-replace
 
 	vim.cmd([[
-	map <Leader>h :%s/
-	vmap <Leader>h :s/
+	map <Leader>h <cmd>%s/
+	vmap <Leader>h <cmd>s/
 	]])
 
 	use 'mg979/vim-visual-multi'
@@ -693,7 +693,7 @@ require('packer').startup(function()
 		'FooSoft/vim-argwrap',
 		config = function()
 			vim.cmd [[
-			nnoremap <silent> <leader>] :ArgWrap<CR>
+			nnoremap <silent> <leader>] <cmd>ArgWrap<CR>
 			]]
 		end,
 	}
@@ -802,7 +802,7 @@ require('packer').startup(function()
 	use {
 		'majutsushi/tagbar',
 		config = function()
-			vim.cmd [[nmap <Leader>t :TagbarToggle<CR>]]
+			vim.cmd [[nmap <Leader>t <cmd>TagbarToggle<CR>]]
 		end,
 	}
 
@@ -1024,19 +1024,19 @@ require('packer').startup(function()
 			-- TODO
 			function _G.configure_rust()
 				vim.cmd [[
-				nnoremap <LocalLeader>b :Cargo build<CR>
-				nnoremap <LocalLeader>B :Cargo build --release<CR>
-				nnoremap <LocalLeader>c :Cargo check<CR>
-				nnoremap <LocalLeader>d :Cargo doc<CR>
-				nnoremap <LocalLeader>D :Cargo doc --open<CR>
-				nnoremap <LocalLeader>F :Cargo fmt<CR>
-				nnoremap <LocalLeader>f :RustFmt<CR>
-				nnoremap <LocalLeader>p :RustPlay<CR>
-				nnoremap <LocalLeader>r :Cargo run<CR>
-				nnoremap <LocalLeader>R :Cargo run --release<CR>
-				nnoremap <LocalLeader>s :Cargo script "%"<CR>
-				nnoremap <LocalLeader>t :RustTest<CR>
-				nnoremap <LocalLeader>T :Cargo test<CR>
+				nnoremap <LocalLeader>b <cmd>Cargo build<CR>
+				nnoremap <LocalLeader>B <cmd>Cargo build --release<CR>
+				nnoremap <LocalLeader>c <cmd>Cargo check<CR>
+				nnoremap <LocalLeader>d <cmd>Cargo doc<CR>
+				nnoremap <LocalLeader>D <cmd>Cargo doc --open<CR>
+				nnoremap <LocalLeader>F <cmd>Cargo fmt<CR>
+				nnoremap <LocalLeader>f <cmd>RustFmt<CR>
+				nnoremap <LocalLeader>p <cmd>RustPlay<CR>
+				nnoremap <LocalLeader>r <cmd>Cargo run<CR>
+				nnoremap <LocalLeader>R <cmd>Cargo run --release<CR>
+				nnoremap <LocalLeader>s <cmd>Cargo script "%"<CR>
+				nnoremap <LocalLeader>t <cmd>RustTest<CR>
+				nnoremap <LocalLeader>T <cmd>Cargo test<CR>
 				]]
 			end
 			vim.cmd [[
