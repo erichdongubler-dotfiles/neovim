@@ -59,23 +59,10 @@ require('packer').startup(function()
 
 	--   TODO: `limelight` and `goyo`?
 
-	--   GUI fonts
+	-- GUI-specific configuration; see `ginit.vim` for non-package stuff
 
-	if vim.fn.has("gui_macvim") == 0 then
-		vim.opt.guifont = 'Menlo Regular:h14'
-	elseif vim.fn.has("gui_win32") == 0 then
-		vim.opt.guifont = 'Consolas:h12'
-		use {
-			'drmikehenry/vim-fontdetect',
-			config = function()
-				if vim.fn['fontdetect#hasFontFamily']('Source Code Pro') then
-					vim.opt.guifont = 'Source Code Pro:h11'
-				end
-			end
-		}
-	else
-		vim.opt.guifont = 'Inconsolata 14'
-	end
+	--   Fonts
+	use 'drmikehenry/vim-fontdetect'
 
 	-- Fix terminal-specific settings so we get the correct colors and keybinds
 
@@ -190,20 +177,6 @@ require('packer').startup(function()
 	}
 
 	-- Project flows
-
-	--   GUI-specific configuration
-	--
-	--   Just gimme a rendering window, we'll do the fancy stuff ourselves!
-
-	vim.cmd [[
-	set guioptions-=M " Don't source the menu bar script
-	set guioptions-=m " Don't show the menu bar, either. ;)
-	set guioptions-=T " Don't show the toolbar
-	set guioptions-=e " Don't show GUI tabs
-	set guioptions-=r " Don't show right-hand scrollbar
-	set guioptions-=L " Don't show left-hand scrollbar
-	]]
-	vim.opt.mousemodel = '' -- Don't use right-click menu
 
 	--   Session management
 
