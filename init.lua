@@ -964,7 +964,7 @@ require('packer').startup(function()
 			'vim-shebang',
 		},
 		config = function()
-			init_sandwich_recipes_once()
+			_G.init_sandwich_recipes_once()
 
 			local recipes = vim.g['sandwich#recipes']
 
