@@ -14,7 +14,7 @@ require('packer').startup(function()
 	au BufWritePost init.lua source <afile> | PackerCompile
 	augroup END
 	]])
-	vim.cmd('nnoremap <Leader>vs <cmd>source ' .. vim.fn.stdpath('config') .. '/init.lua<CR>')
+	vim.cmd('nnoremap <Leader>vs <cmd>source ' .. vim.fn.stdpath('config') .. '/init.lua <Bar> PackerCompile<CR>')
 	vim.cmd('nnoremap <Leader>ve <cmd>e ' .. vim.fn.stdpath('config') .. '/init.lua<CR>')
 
 	use 'wbthomason/packer.nvim'
