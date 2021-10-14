@@ -735,6 +735,15 @@ require('packer').startup(function()
 		end,
 	}
 
+	use {
+		'tpope/vim-fugitive',
+		config = function()
+			vim.cmd[[
+			nnoremap ghB <cmd>Git blame<CR>
+			]]
+		end,
+	}
+
 	-- Time tracking via Wakatime
 	use 'wakatime/vim-wakatime'
 
