@@ -848,26 +848,20 @@ require('packer').startup(function()
 			-- TODO: Configure highlighting to work nicely
 		end,
 	}
-	use {
-		'nvim-lua/lsp_extensions.nvim',
-		requires = 'neovim/nvim-lspconfig',
-		config = function()
-			vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-				vim.lsp.diagnostic.on_publish_diagnostics, {
-					virtual_text = {
-						prefix = "»",
-						spacing = 2,
-					},
-					signs = true,
-					update_in_insert = true,
-				}
-			)
-			vim.fn.sign_define('LspDiagnosticsSignError', { text = ">>", texthl = "LspDiagnosticsDefaultError" })
-			vim.fn.sign_define('LspDiagnosticsSignWarning', { text = ">>", texthl = "LspDiagnosticsDefaultWarning" })
-			vim.fn.sign_define('LspDiagnosticsSignInformation', { text = "!!", texthl = "LspDiagnosticsDefaultInformation" })
-			vim.fn.sign_define('LspDiagnosticsSignHint', { text = "??", texthl = "LspDiagnosticsDefaultHint" })
-		end,
+	vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+	vim.lsp.diagnostic.on_publish_diagnostics, {
+		virtual_text = {
+			prefix = "»",
+			spacing = 2,
+		},
+		signs = true,
+		update_in_insert = true,
 	}
+	)
+	vim.fn.sign_define('LspDiagnosticsSignError', { text = ">>", texthl = "LspDiagnosticsDefaultError" })
+	vim.fn.sign_define('LspDiagnosticsSignWarning', { text = ">>", texthl = "LspDiagnosticsDefaultWarning" })
+	vim.fn.sign_define('LspDiagnosticsSignInformation', { text = "!!", texthl = "LspDiagnosticsDefaultInformation" })
+	vim.fn.sign_define('LspDiagnosticsSignHint', { text = "??", texthl = "LspDiagnosticsDefaultHint" })
 
 	--     LSP bindings
 
