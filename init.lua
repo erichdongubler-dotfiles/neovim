@@ -280,6 +280,7 @@ require('packer').startup(function()
 				folder_arrows = 1,
 			}
 			vim.g.nvim_tree_group_empty = 1
+			require('nvim-tree').setup({})
 		end,
 	}
 
