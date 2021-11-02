@@ -289,6 +289,22 @@ require('packer').startup(function()
 
 	-- Color scheme and highlighting configuration
 
+	--   Highlights inspection
+	--   TODO: I think this could be better?
+	function _G.syntax_stack()
+		if not vim.fn.exists('*synstack') then
+			return
+		end
+		return vim.fn.map(
+		vim.fn.synstack(vim.fn.line('.'), vim.fn.col('.')),
+		'synIDattr(v:val, "name")'
+		)
+	end
+	vim.cmd [[
+	command! -nargs=0 EchoHighlightingGroup echo v:lua.syntax_stack()
+	nnoremap <leader>0 :EchoHighlightingGroup<CR>
+	]]
+
 	use {
 		'ErichDonGubler/vim-sublime-monokai',
 		setup = function()
