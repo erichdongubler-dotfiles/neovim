@@ -460,6 +460,22 @@ require('packer').startup(function()
 
 	use 'tpope/vim-unimpaired' -- sort of a kitchen sink plugin
 
+	--   Default max document width
+
+	-- TODO: only do this once?
+	vim.opt.colorcolumn = "+1"
+	vim.opt.formatoptions = vim.opt.formatoptions - { "l" } + { "t" }
+	vim.opt.textwidth = 100
+
+	vim.cmd [[
+	command! -nargs=1 SetRowLimit setlocal textwidth=<args>
+
+	augroup DefaultRowLimit
+	au!
+	au FileType * SetRowLimit 100
+	augroup END
+	]]
+
 	--   Add some common line-ending shortcuts
 	function _G.append_chars(sequence)
 		local line = vim.fn.line('.')
