@@ -503,8 +503,8 @@ require('packer').startup(function()
 	--   Search-and-replace
 
 	vim.cmd([[
-	map <Leader>h <cmd>%s/
-	vmap <Leader>h <cmd>s/
+	map <Leader>h :%s/
+	vmap <Leader>h :s/
 	]])
 
 	use 'mg979/vim-visual-multi'
