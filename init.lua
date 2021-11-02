@@ -983,6 +983,82 @@ require('packer').startup(function()
 
 	use 'vitalk/vim-shebang'
 
+	use 'fidian/hexmode'
+
+	--   Language-specific integration
+
+	--     Document languages
+
+	use {
+		'plasticboy/vim-markdown',
+		requires = { 'tagbar' },
+		config = function()
+			vim.cmd [[
+			augroup markdown
+			au!
+			au FileType markdown SetRowLimit 80
+			au FileType markdown EnableWordWrap
+			augroup END
+			]]
+			vim.g.tagbar_type_markdown = {
+				ctagstype = 'markdown',
+				kinds = {
+					'h:Heading_L1',
+					'i:Heading_L2',
+					'k:Heading_L3'
+				}
+			}
+		end,
+	}
+	use {
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && npm install",
+		setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+		ft = { "markdown" },
+	}
+
+	use {
+		'liuchengxu/graphviz.vim',
+		setup = function()
+			vim.g.graphviz_output_format = 'svg'
+		end,
+	}
+
+	use {
+		'jceb/vim-orgmode',
+		requires = { 'tpope/vim-speeddating' },
+		setup = function()
+			vim.g.org_heading_highlight_colors = { 'Identifier' }
+			vim.g.org_heading_highlight_levels = 10
+		end,
+		config = function()
+			vim.cmd [[
+			augroup orgmode
+			au!
+			au FileType text,org :EnableWordWrap
+			augroup END
+			]]
+		end,
+	}
+
+	--     Shell scripting languages
+
+	use 'pprovost/vim-ps1'
+
+	--     Data/configuration/IDL-ish languages
+
+	use 'gisphm/vim-gitignore'
+
+	use 'cespare/vim-toml'
+
+	use 'zchee/vim-flatbuffers'
+
+	--     Native world
+
+	use 'pboettch/vim-cmake-syntax'
+
+	use 'octol/vim-cpp-enhanced-highlight'
+
 	use {
 		'rust-lang/rust.vim',
 		requires = {
