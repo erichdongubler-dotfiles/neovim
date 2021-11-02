@@ -838,16 +838,6 @@ require('packer').startup(function()
 
 	--   LSP
 
-	use {
-		'neovim/nvim-lspconfig',
-		config = function()
-			vim.cmd [[
-			map <Leader>n :lua vim.lsp.diagnostic.goto_next()<cr>
-			map <Leader>N :lua vim.lsp.diagnostic.goto_prev()<cr>
-			]]
-			-- TODO: Configure highlighting to work nicely
-		end,
-	}
 	vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
 	vim.lsp.diagnostic.on_publish_diagnostics, {
 		virtual_text = {
@@ -867,6 +857,8 @@ require('packer').startup(function()
 
 	vim.cmd [[
 	nnoremap <Leader>lK     <cmd>lua vim.lsp.buf.hover()<CR>
+	nnoremap <Leader>n :lua vim.lsp.diagnostic.goto_next()<cr>
+	nnoremap <Leader>N :lua vim.lsp.diagnostic.goto_prev()<cr>
 	]]
 
 	-- TODO: Get colors and highlighting for LSP actually looking good
