@@ -322,6 +322,7 @@ require('packer').startup(function()
 
 	use {
 		'ErichDonGubler/vim-sublime-monokai',
+		event = { 'VimEnter' },
 		setup = function()
 			vim.g.sublimemonokai_term_italic = true
 		end,
