@@ -596,6 +596,7 @@ require('packer').startup(function()
 
 	use {
 		'cohama/lexima.vim',
+		event = { 'BufRead' },
 		setup = function()
 			vim.g.lexima_no_default_rules = true
 		end,
