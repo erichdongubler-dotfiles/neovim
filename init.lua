@@ -882,6 +882,7 @@ require('packer').startup(function()
 
 	use {
 		"folke/lsp-trouble.nvim",
+		event = { 'BufReadPost' },
 		config = function()
 			require("trouble").setup {
 				auto_close = true,
