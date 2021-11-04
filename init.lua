@@ -197,6 +197,7 @@ require('packer').startup(function()
 	use {
 		'nvim-telescope/telescope.nvim',
 		requires = 'nvim-lua/plenary.nvim',
+		event = { 'VimEnter' },
 		config = function()
 			local actions = require('telescope.actions')
 			require('telescope').setup({
