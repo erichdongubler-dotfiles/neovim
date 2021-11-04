@@ -40,6 +40,20 @@ require('packer').startup(function()
 	-- vim.opt.lazyredraw = true
 	vim.opt.scrolloff = 5
 
+	use {
+		'xuyuanp/scrollbar.nvim',
+		config = function()
+			vim.cmd [[
+			augroup ScrollbarInit
+				autocmd!
+				autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
+				autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
+				autocmd WinLeave,BufLeave,BufWinLeave,FocusLost            * silent! lua require('scrollbar').clear()
+			augroup end
+			]]
+		end,
+	}
+
 	-- vimdiff: use vertical layout
 	vim.opt.diffopt = vim.opt.diffopt + { 'vertical' }
 
