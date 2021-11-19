@@ -586,8 +586,8 @@ require('packer').startup(function()
 	end
 	_G.set_word_wrap(false, true)
 	vim.cmd [[
-	command! -nargs=0 DisableWordWrap call v:lua.set_word_wrap(0)
-	command! -nargs=0 EnableWordWrap call v:lua.set_word_wrap(1)
+	command! -nargs=0 DisableWordWrap call v:lua.set_word_wrap(v:false)
+	command! -nargs=0 EnableWordWrap call v:lua.set_word_wrap(v:true)
 	]]
 	vim.api.nvim_set_keymap('n', '<Leader><Tab>', ':call v:lua.toggle_word_wrap(v:false)<CR>', { noremap = true })
 	vim.api.nvim_set_keymap('n', '<Leader><S-Tab>', ':call v:lua.toggle_word_wrap(v:true)<CR>', { noremap = true })
