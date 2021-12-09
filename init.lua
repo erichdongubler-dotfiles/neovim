@@ -1147,7 +1147,19 @@ require('packer').startup(function()
 			AddShebangPattern! rust ^#!.*/bin/run-cargo-(script|eval)\>
 			]]
 
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			local completionItem = capabilities.textDocument.completion.completionItem
+			completionItem.snippetSupport = true
+			completionItem.resolveSupport = {
+				properties = {
+					'documentation',
+					'detail',
+					'additionalTextEdits',
+				},
+			}
+
 			require('lspconfig').rust_analyzer.setup({
+				capabilities = capabilities,
 				settings = {
 					["rust-analyzer"] = {
 						cargo = { runBuildScripts = true, },
