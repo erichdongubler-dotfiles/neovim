@@ -207,9 +207,9 @@ require('packer').startup(function()
 					mappings = {
 						n = {
 							["<C-C>"] = actions.close,
-						}
-					}
-				}
+						},
+					},
+				},
 			})
 			vim.cmd [[
 			nnoremap <Leader>p <cmd>Telescope find_files<CR>
