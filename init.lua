@@ -256,7 +256,6 @@ require('packer').startup(function()
 	vim.opt.sessionoptions:append('tabpages')
 	vim.opt.sessionoptions:append('globals')
 
-	use 'tpope/vim-obsession'
 	use {
 		'dhruvasagar/vim-prosession',
 		requires = {
