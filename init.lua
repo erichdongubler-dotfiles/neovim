@@ -196,8 +196,9 @@ require('packer').startup(function()
 
 	use {
 		'nvim-telescope/telescope.nvim',
-		requires = 'nvim-lua/plenary.nvim',
-		event = { 'VimEnter' },
+		requires = {
+			'nvim-lua/plenary.nvim',
+		},
 		config = function()
 			local actions = require('telescope.actions')
 			require('telescope').setup({
@@ -226,7 +227,9 @@ require('packer').startup(function()
 
 	use {
 		'ivalkeen/vim-ctrlp-tjump',
-		requires = 'ctrlpvim/ctrlp.vim',
+		requires = {
+			'ctrlpvim/ctrlp.vim',
+		},
 		setup = function()
 			vim.g.ctrlp_tjump_only_silent = 1
 		end,
@@ -245,7 +248,9 @@ require('packer').startup(function()
 	use 'tpope/vim-obsession'
 	use {
 		'dhruvasagar/vim-prosession',
-		requires = 'tpope/vim-obsession',
+		requires = {
+			'tpope/vim-obsession',
+		},
 	}
 	-- TODO: fuzzy session selection?
 
@@ -322,7 +327,9 @@ require('packer').startup(function()
 
 	use {
 		'ErichDonGubler/vim-sublime-monokai',
-		event = { 'VimEnter' },
+		event = {
+			'VimEnter',
+		},
 		setup = function()
 			vim.g.sublimemonokai_term_italic = true
 		end,
@@ -607,7 +614,10 @@ require('packer').startup(function()
 
 	use {
 		'andymass/vim-matchup',
-		after = { 'vim-sublime-monokai', 'vim-sandwich' },
+		after = {
+			'vim-sublime-monokai',
+			'vim-sandwich',
+		},
 		setup = function()
 			vim.g.matchup_matchparen_deferred = 1
 			vim.g.matchup_matchparen_hi_surround_always = 1
@@ -750,7 +760,9 @@ require('packer').startup(function()
 
 	use {
 		'lewis6991/gitsigns.nvim',
-		requires = 'nvim-lua/plenary.nvim',
+		requires = {
+			'nvim-lua/plenary.nvim',
+		},
 		event = { 'BufReadPost' },
 		config = function()
 			require('gitsigns').setup({
@@ -844,7 +856,9 @@ require('packer').startup(function()
 	use {
 		'SirVer/ultisnips',
 		disable = vim.fn.has('python3') == 0,
-		requires = 'honza/vim-snippets',
+		requires = {
+			'honza/vim-snippets',
+		},
 		setup = function()
 			vim.g.UltiSnipsExpandTrigger = '<Tab>'
 			vim.g.UltiSnipsJumpForwardTrigger = '<Tab>'
@@ -883,7 +897,9 @@ require('packer').startup(function()
 
 	use {
 		"folke/lsp-trouble.nvim",
-		event = { 'BufReadPost' },
+		event = {
+			'BufReadPost',
+		},
 		config = function()
 			require("trouble").setup {
 				auto_close = true,
@@ -903,7 +919,9 @@ require('packer').startup(function()
 
 	use {
 		'hrsh7th/nvim-compe',
-		after = 'lexima.vim',
+		after = {
+			'lexima.vim',
+		},
 		config = function()
 			require('compe').setup({
 				enabled = true,
@@ -1010,7 +1028,9 @@ require('packer').startup(function()
 
 	use {
 		'plasticboy/vim-markdown',
-		requires = { 'tagbar' },
+		requires = {
+			'tagbar',
+		},
 		config = function()
 			vim.cmd [[
 			augroup markdown
@@ -1045,7 +1065,9 @@ require('packer').startup(function()
 
 	use {
 		'jceb/vim-orgmode',
-		requires = { 'tpope/vim-speeddating' },
+		requires = {
+			'tpope/vim-speeddating',
+		},
 		setup = function()
 			vim.g.org_heading_highlight_colors = { 'Identifier' }
 			vim.g.org_heading_highlight_levels = 10
