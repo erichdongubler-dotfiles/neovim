@@ -644,27 +644,27 @@ require('packer').startup(function()
 
 			local lsp_highlight_groups = {
 				['Error'] = {
-					['Default'] = 'Error',
+					[''] = 'Error',
 					['Sign'] = 'Error',
 					['Underline'] = 'SpellBad',
 					['VirtualText'] = 'Comment',
 				},
 				['Warning'] = {
-					['Default'] = 'SpellCap',
+					[''] = 'SpellCap',
 					['Sign'] = 'SpellCap',
 					['Underline'] = 'SpellCap',
 					['VirtualText'] = 'Comment',
 				},
 				['Information'] = {
-					['Default'] = 'Comment',
+					[''] = 'Comment',
 				},
 				['Hint'] = {
-					['Default'] = 'Comment',
+					[''] = 'Comment',
 				},
 			}
 			for severity, rest in pairs(lsp_highlight_groups) do
 				for highlight_location, highlight_spec in pairs(rest) do
-					local highlight_group = 'LspDiagnostics' .. highlight_location .. severity
+					local highlight_group = 'Diagnostic' .. highlight_location .. severity
 					if type(highlight_spec) == "string" then
 						vim.cmd('hi! link ' .. highlight_group .. ' ' .. highlight_spec)
 					else
@@ -889,10 +889,10 @@ require('packer').startup(function()
 		update_in_insert = true,
 	}
 	)
-	vim.fn.sign_define('LspDiagnosticsSignError', { text = ">>", texthl = "LspDiagnosticsDefaultError" })
-	vim.fn.sign_define('LspDiagnosticsSignWarning', { text = ">>", texthl = "LspDiagnosticsDefaultWarning" })
-	vim.fn.sign_define('LspDiagnosticsSignInformation', { text = "!!", texthl = "LspDiagnosticsDefaultInformation" })
-	vim.fn.sign_define('LspDiagnosticsSignHint', { text = "??", texthl = "LspDiagnosticsDefaultHint" })
+	vim.fn.sign_define('DiagnosticSignError', { text = ">>", texthl ="DiagnosticSignError" })
+	vim.fn.sign_define('DiagnosticSignWarn', { text = ">>", texthl = "DiagnosticSignWarn" })
+	vim.fn.sign_define('DiagnosticSignInfo', { text = "!!", texthl = "DiagnosticSignInfo" })
+	vim.fn.sign_define('DiagnosticSignHint', { text = "??", texthl = "DiagnosticSignHint" })
 
 	--     LSP bindings
 
