@@ -203,6 +203,7 @@ require('packer').startup(function()
 			local actions = require('telescope.actions')
 			require('telescope').setup({
 				defaults = {
+					color_devicons = false,
 					mappings = {
 						n = {
 							["<C-C>"] = actions.close,
