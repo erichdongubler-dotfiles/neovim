@@ -209,6 +209,8 @@ require('packer').startup(function()
 							["<C-C>"] = actions.close,
 						},
 					},
+					layout_strategy = 'flex',
+					path_display = { 'smart' },
 				},
 			})
 			vim.cmd [[
