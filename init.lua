@@ -264,7 +264,6 @@ require('packer').startup(function()
 	}
 	-- TODO: fuzzy session selection?
 
-
 	--   These make using the command-line interface much easier.
 	use 'EinfachToll/DidYouMean'
 	use 'pbrisbin/vim-mkdir' -- make parent directories automatically
