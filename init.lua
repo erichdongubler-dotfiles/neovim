@@ -214,16 +214,24 @@ require('packer').startup(function()
 				},
 			})
 			vim.cmd [[
-			nnoremap <Leader>p <cmd>Telescope find_files<CR>
-			nnoremap <Leader>o <cmd>Telescope oldfiles<CR>
 			nnoremap <Leader>O <cmd>Telescope buffers<CR>
-			nnoremap <Leader>r <cmd>Telescope current_buffer_tags<CR>
 			nnoremap <Leader>R <cmd>Telescope tags<CR>
+			nnoremap <Leader>T <cmd>Telescope builtin<CR>
+			nnoremap <Leader>o <cmd>Telescope oldfiles<CR>
+			nnoremap <Leader>p <cmd>Telescope find_files<CR>
 			nnoremap <Leader>l<C-]> <cmd>Telescope lsp_definitions<CR>
+			nnoremap <Leader>lD <cmd>Telescope lsp_workspace_diagnostics<CR>
+			nnoremap <Leader>lR <cmd>Telescope lsp_dynamic_workspace_symbols<CR>
 			nnoremap <Leader>la <cmd>Telescope lsp_code_actions<CR>
-			vnoremap <Leader>la <cmd>Telescope lsp_range_code_actions<CR>
+			nnoremap <Leader>ld <cmd>Telescope lsp_document_diagnostics<CR>
+			nnoremap <Leader>lgd <cmd>Telescope lsp_definitions<CR>
 			nnoremap <Leader>lgi <cmd>Telescope lsp_implementations<CR>
 			nnoremap <Leader>lgr <cmd>Telescope lsp_references<CR>
+			nnoremap <Leader>lgt <cmd>Telescope lsp_type_definitions<CR>
+			nnoremap <Leader>lr <cmd>Telescope lsp_document_symbols<CR>
+			nnoremap <Leader>r <cmd>Telescope current_buffer_tags<CR>
+
+			vnoremap <Leader>la <cmd>Telescope lsp_range_code_actions<CR>
 			]]
 		end,
 	}
