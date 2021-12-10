@@ -283,6 +283,9 @@ require('packer').startup(function()
 
 	use {
 		'kyazdani42/nvim-tree.lua',
+		event = {
+			'BufReadPost',
+		},
 		config = function()
 			vim.cmd [[
 			nnoremap <Leader>k <cmd>NvimTreeToggle<CR>
