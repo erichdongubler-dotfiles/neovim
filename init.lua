@@ -908,7 +908,7 @@ require('packer').startup(function()
 	-- TODO: Get colors and highlighting for LSP actually looking good
 
 	use {
-		"folke/lsp-trouble.nvim",
+		'folke/lsp-trouble.nvim',
 		event = {
 			'BufReadPost',
 		},
