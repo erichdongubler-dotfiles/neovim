@@ -45,10 +45,10 @@ require('packer').startup(function()
 		config = function()
 			vim.cmd [[
 			augroup ScrollbarInit
-				autocmd!
-				autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
-				autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
-				autocmd WinLeave,BufLeave,BufWinLeave,FocusLost            * silent! lua require('scrollbar').clear()
+			autocmd!
+			autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
+			autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
+			autocmd WinLeave,BufLeave,BufWinLeave,FocusLost            * silent! lua require('scrollbar').clear()
 			augroup end
 			]]
 		end,
@@ -832,8 +832,8 @@ require('packer').startup(function()
 	vim.opt.tags = '.tags'
 	vim.cmd [[
 	augroup tags
-		au!
-		au BufNewFile,BufRead .tags setlocal filetype=tags
+	au!
+	au BufNewFile,BufRead .tags setlocal filetype=tags
 	augroup END
 	]]
 	use {
@@ -983,8 +983,8 @@ require('packer').startup(function()
 		config = function()
 			vim.cmd [[
 			augroup WhitespaceAutoformat
-				au!
-				au BufWrite * :Autoformat
+			au!
+			au BufWrite * :Autoformat
 			augroup END
 			]]
 
@@ -1004,28 +1004,28 @@ require('packer').startup(function()
 			end
 			vim.cmd[[
 			augroup WhitespaceAutoformatBlacklist
-				au!
-				au BufNewFile,BufRead *.diff call v:lua.disable_whitespace_fixing()
-				au BufNewFile,BufRead *.patch call v:lua.disable_whitespace_fixing()
-				au FileType diff call v:lua.disable_whitespace_fixing()
-				au FileType ctrlsf call v:lua.disable_whitespace_fixing()
-				au FileType git call v:lua.disable_whitespace_fixing()
-				au FileType gitrebase call v:lua.disable_whitespace_fixing()
-				au FileType gitcommit call v:lua.disable_indentation_fixing()
-				au BufNewFile,BufRead git-rebase-todo call v:lua.disable_whitespace_fixing()
-				au BufNewFile,BufRead git-revise-todo call v:lua.disable_whitespace_fixing()
-				au BufNewFile,BufRead *.md call v:lua.disable_indentation_fixing()
-				au FileType markdown call v:lua.disable_indentation_fixing()
-				au FileType snippets call v:lua.disable_whitespace_fixing()
-				au FileType typescript call v:lua.disable_indentation_fixing()
-				au FileType javascript call v:lua.disable_indentation_fixing()
-				au FileType rust call v:lua.disable_indentation_fixing()
-				au FileType toml call v:lua.disable_indentation_fixing()
-				au FileType sh call v:lua.disable_indentation_fixing()
-				au FileType dot call v:lua.disable_indentation_fixing()
-				au FileType xml call v:lua.disable_indentation_fixing()
-				au FileType cpp call v:lua.disable_whitespace_fixing()
-				au FileType csv call v:lua.disable_whitespace_fixing()
+			au!
+			au BufNewFile,BufRead *.diff call v:lua.disable_whitespace_fixing()
+			au BufNewFile,BufRead *.patch call v:lua.disable_whitespace_fixing()
+			au FileType diff call v:lua.disable_whitespace_fixing()
+			au FileType ctrlsf call v:lua.disable_whitespace_fixing()
+			au FileType git call v:lua.disable_whitespace_fixing()
+			au FileType gitrebase call v:lua.disable_whitespace_fixing()
+			au FileType gitcommit call v:lua.disable_indentation_fixing()
+			au BufNewFile,BufRead git-rebase-todo call v:lua.disable_whitespace_fixing()
+			au BufNewFile,BufRead git-revise-todo call v:lua.disable_whitespace_fixing()
+			au BufNewFile,BufRead *.md call v:lua.disable_indentation_fixing()
+			au FileType markdown call v:lua.disable_indentation_fixing()
+			au FileType snippets call v:lua.disable_whitespace_fixing()
+			au FileType typescript call v:lua.disable_indentation_fixing()
+			au FileType javascript call v:lua.disable_indentation_fixing()
+			au FileType rust call v:lua.disable_indentation_fixing()
+			au FileType toml call v:lua.disable_indentation_fixing()
+			au FileType sh call v:lua.disable_indentation_fixing()
+			au FileType dot call v:lua.disable_indentation_fixing()
+			au FileType xml call v:lua.disable_indentation_fixing()
+			au FileType cpp call v:lua.disable_whitespace_fixing()
+			au FileType csv call v:lua.disable_whitespace_fixing()
 			augroup END
 			]]
 		end,
@@ -1177,8 +1177,8 @@ require('packer').startup(function()
 			end
 			vim.cmd [[
 			augroup rust
-				au!
-				au FileType rust call v:lua.configure_rust()
+			au!
+			au FileType rust call v:lua.configure_rust()
 			augroup end
 			]]
 
