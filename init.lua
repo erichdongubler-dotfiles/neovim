@@ -627,6 +627,9 @@ require('packer').startup(function()
 			'vim-sublime-monokai',
 			'vim-sandwich',
 		},
+		requires = {
+			'vim-sublime-monokai',
+		},
 		setup = function()
 			vim.g.matchup_matchparen_deferred = 1
 			vim.g.matchup_matchparen_hi_surround_always = 1
@@ -961,6 +964,9 @@ require('packer').startup(function()
 
 	use {
 		'ntpeters/vim-better-whitespace',
+		after = {
+			'vim-sublime-monokai',
+		},
 		setup = function()
 			vim.g.better_whitespace_operator = '_s'
 			vim.g.show_spaces_that_precede_tabs = 0
