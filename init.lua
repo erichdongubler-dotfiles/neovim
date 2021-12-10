@@ -1151,6 +1151,7 @@ require('packer').startup(function()
 	use {
 		'rust-lang/rust.vim',
 		after = {
+			'nvim-lspconfig',
 			'vim-sublime-monokai',
 		},
 		requires = {
