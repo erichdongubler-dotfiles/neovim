@@ -1244,7 +1244,6 @@ require('packer').startup(function()
 					}
 				}
 			})
-			-- TODO: get to know keybinds: https://github.com/neovim/nvim-lspconfig#Keybindings-and-completion
 
 			vim.cmd [[
 			hi! link rustAttribute      SublimeDocumentation
