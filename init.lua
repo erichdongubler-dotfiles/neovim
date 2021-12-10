@@ -426,9 +426,21 @@ require('packer').startup(function()
 	noremap <S-Down> <Nop>
 	]]
 
-	use 'dominikduda/vim_current_word'
-	vim.g['vim_current_word#highlight_only_in_focused_window'] = 1
-	vim.cmd [[hi link CurrentWord Underlined]]
+	use {
+		'dominikduda/vim_current_word',
+		after = {
+			'vim-sublime-monokai',
+		},
+		setup = function()
+			vim.g['vim_current_word#highlight_only_in_focused_window'] = 1
+		end,
+		config = function()
+			vim.cmd [[
+			hi! link CurrentWord Underlined
+			hi! link CurrentWordTwins Underlined
+			]]
+		end,
+	}
 
 	--   Mouse scrolling
 
