@@ -1251,7 +1251,7 @@ require('packer').startup(function()
 			hi! link rustDeriveTrait    SublimeDocumentation
 			hi! link rustLifetime       Special
 			]]
-		end
+		end,
 	}
 
 	-- -- TODO: TS integration
