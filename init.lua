@@ -370,10 +370,6 @@ require('packer').startup(function()
 			" It's nice to have the builtins highlighted, but they can cause some conflicts
 			hi! link pythonBuiltInObj   Constant
 			hi! link pythonBuiltInType  Constant
-			hi! link rustAttribute      SublimeDocumentation
-			hi! link rustDerive         SublimeDocumentation
-			hi! link rustDeriveTrait    SublimeDocumentation
-			hi! link rustLifetime       Special
 			hi! link xmlProcessingDelim Comment
 			hi! link zshOption          Special
 			hi! link zshTypes           SublimeType
@@ -1132,11 +1128,15 @@ require('packer').startup(function()
 
 	use {
 		'rust-lang/rust.vim',
+		after = {
+			'vim-sublime-monokai',
+		},
 		requires = {
 			'nvim-compe',
 			'nvim-lspconfig',
 			'vim-sandwich',
 			'vim-shebang',
+			'vim-sublime-monokai',
 		},
 		config = function()
 			_G.init_sandwich_recipes_once()
@@ -1222,6 +1222,13 @@ require('packer').startup(function()
 				}
 			})
 			-- TODO: get to know keybinds: https://github.com/neovim/nvim-lspconfig#Keybindings-and-completion
+
+			vim.cmd [[
+			hi! link rustAttribute      SublimeDocumentation
+			hi! link rustDerive         SublimeDocumentation
+			hi! link rustDeriveTrait    SublimeDocumentation
+			hi! link rustLifetime       Special
+			]]
 		end
 	}
 
