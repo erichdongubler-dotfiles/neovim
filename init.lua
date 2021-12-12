@@ -955,7 +955,7 @@ require('packer').startup(function()
 				fold_closed = ">",
 				fold_open = "v",
 				icons = false,
-				use_lsp_diagnostic_signs = true,
+				use_diagnostic_signs = true,
 			}
 		end,
 	}
