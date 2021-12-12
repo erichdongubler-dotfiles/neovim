@@ -145,7 +145,13 @@ require('packer').startup(function()
 
 	--   File change management
 	vim.opt.undofile = true
-	use 'djoshea/vim-autoread'
+	use {
+		'ErichDonGubler/vim-playnice',
+		branch = 'initial-release',
+		setup = function()
+			vim.opt.autoread = true
+		end,
+	}
 
 	--   Buffer display above
 	vim.g.wintabs_ui_show_vimtab_name = 2
