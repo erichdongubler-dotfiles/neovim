@@ -404,7 +404,7 @@ require('packer').startup(function()
 				sections = {
 					lualine_a = { 'mode' },
 					lualine_b = { 'filename' },
-					lualine_c = { { 'diagnostics', sources = { 'nvim_lsp' } } },
+					lualine_c = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
 					lualine_x = { 'encoding', 'fileformat', 'filetype' },
 					lualine_y = { 'progress' },
 					lualine_z = { 'location' }
@@ -837,7 +837,10 @@ require('packer').startup(function()
 	}
 
 	-- Time tracking via Wakatime
-	use 'wakatime/vim-wakatime'
+	use {
+		'ErichDonGubler/vim-wakatime', -- TODO: use upstream
+		branch = 'neovim-no-detach',
+	}
 
 	-- fix `tmux` focus
 	use 'tmux-plugins/vim-tmux-focus-events'
