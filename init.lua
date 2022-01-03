@@ -1296,7 +1296,14 @@ require('packer').startup(function()
 
 	use 'mxw/vim-jsx'
 
-	-- -- TODO: TS integration
-	-- require('lspconfig').tsserver.setup({})
+	use {
+		'leafgarland/typescript-vim',
+		after = {
+			'nvim-lspconfig',
+		},
+		config = function()
+			require('lspconfig').tsserver.setup({})
+		end,
+	}
 end)
 
