@@ -1294,6 +1294,8 @@ require('packer').startup(function()
 		end,
 	}
 
+	use 'mxw/vim-jsx'
+
 	-- -- TODO: TS integration
 	-- require('lspconfig').tsserver.setup({})
 end)
