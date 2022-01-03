@@ -202,6 +202,7 @@ require('packer').startup(function()
 
 	use {
 		'nvim-telescope/telescope.nvim',
+		event = { 'BufEnter' },
 		requires = {
 			'nvim-lua/plenary.nvim',
 		},
@@ -482,6 +483,7 @@ require('packer').startup(function()
 
 	use {
 		'dyng/ctrlsf.vim',
+		event = { 'BufEnter' },
 		setup = function()
 			vim.g.ctrlsf_auto_focus = { at = 'start' }
 			vim.api.nvim_set_keymap('n', '<Leader>f', ':CtrlSFToggle<CR>', { noremap = true })
@@ -724,6 +726,7 @@ require('packer').startup(function()
 
 	use {
 		'arthurxavierx/vim-caser',
+		event = { 'BufEnter' },
 		setup = function()
 			vim.g.caser_prefix = 'gS'
 		end,
@@ -734,6 +737,7 @@ require('packer').startup(function()
 	-- -- TODO: Is this better than `vim-commentary`?
 	use {
 		'b3nj5m1n/kommentary',
+		event = { 'BufEnter' },
 		config = function()
 			require('kommentary.config').configure_language("default", {
 				prefer_single_line_comments = true,
@@ -881,6 +885,7 @@ require('packer').startup(function()
 
 	use {
 		'SirVer/ultisnips',
+		event = { 'BufEnter' },
 		disable = vim.fn.has('python3') == 0,
 		requires = {
 			'honza/vim-snippets',
