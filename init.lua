@@ -1349,5 +1349,20 @@ require('packer').startup(function()
 			]]
 		end,
 	}
+
+	use {
+		'StanAngeloff/php.vim',
+		after = {
+			'vim-sublime-monokai',
+		},
+		setup = function()
+			vim.g.php_var_selector_is_identifier = 1
+		end,
+		config = function()
+			vim.cmd [[
+			hi! link phpMemberSelector Keyword
+			]]
+		end,
+	}
 end)
 
