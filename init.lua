@@ -1317,5 +1317,11 @@ require('packer').startup(function()
 	}
 
 	use 'andys8/vim-elm-syntax'
+
+	--     Other general-purpose languages
+
+	vim.g.java_comment_strings = 1
+	vim.g.java_highlight_functions = 1
+	vim.g.java_highlight_java_lang_ids = 1
 end)
 
