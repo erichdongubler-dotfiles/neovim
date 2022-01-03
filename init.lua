@@ -1305,5 +1305,15 @@ require('packer').startup(function()
 			require('lspconfig').tsserver.setup({})
 		end,
 	}
+
+	use {
+		'posva/vim-vue',
+		ft = { "markdown" },
+		run = function()
+			if vim.fn.executable('npm') then
+				vim.cmd 'silent !npm i -g eslint eslint-plugin-vue'
+			end
+		end,
+	}
 end)
 
