@@ -370,8 +370,6 @@ require('packer').startup(function()
 			hi! link diffLine           SublimeAqua
 			hi! link diffNewFile        SublimeBrightWhite
 			hi! link dotBrackEncl       Keyword
-			hi! link goExtraType        Special
-			hi! link goTypeConstructor  SublimeType
 			" It's nice to have the builtins highlighted, but they can cause some conflicts
 			hi! link pythonBuiltInObj   Constant
 			hi! link pythonBuiltInType  Constant
@@ -1325,5 +1323,31 @@ require('packer').startup(function()
 	vim.g.java_highlight_java_lang_ids = 1
 
 	use 'OrangeT/vim-csharp'
+
+	use {
+		'fatih/vim-go',
+		after = {
+			'vim-sublime-monokai',
+		},
+		setup = function()
+			vim.g.go_highlight_format_strings = 1
+			vim.g.go_highlight_function_arguments = 1
+			vim.g.go_highlight_function_calls = 1
+			vim.g.go_highlight_functions = 1
+			vim.g.go_highlight_operators = 1
+			vim.g.go_highlight_types = 1
+
+			vim.g.go_highlight_extra_types = 1
+			vim.g.go_highlight_fields = 1
+			vim.g.go_highlight_generate_tags = 1
+			vim.g.go_highlight_variable_assignments = 1
+			vim.g.go_highlight_variable_declarations = 1
+
+			vim.cmd [[
+			hi! link goExtraType        Special
+			hi! link goTypeConstructor  SublimeType
+			]]
+		end,
+	}
 end)
 
