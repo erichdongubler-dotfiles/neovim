@@ -974,31 +974,90 @@ require('packer').startup(function()
 	-- vim.opt.shortmess:append({ 'c' })
 
 	use {
-		'hrsh7th/nvim-compe',
-		after = {
-			'lexima.vim',
+		'hrsh7th/nvim-cmp',
+		requires = {
+			'cmp-buffer',
+			'cmp-calc',
+			'cmp-cmdline',
+			'cmp-nvim-lsp',
+			'cmp-nvim-tags',
+			'cmp-nvim-ultisnips',
+			'cmp-path',
+			'ultisnips',
 		},
 		config = function()
-			require('compe').setup({
-				enabled = true,
-				source = {
-					buffer = true,
-					calc = true,
-					-- nvim_lua = true,
-					nvim_lsp = true,
-					path = true,
-					tag = true,
+			local cmp = require('cmp')
+
+			cmp.setup({
+				mapping = {
+					['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+					['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+					['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+					['<C-y>'] = cmp.config.disable,
+					['<C-e>'] = cmp.mapping({
+						i = cmp.mapping.abort(),
+						c = cmp.mapping.close(),
+					}),
+					['<CR>'] = cmp.mapping.confirm({ select = true }),
+				},
+				snippet = {
+					expand = function(args)
+						vim.fn["UltiSnips#Anon"](args.body)
+					end,
+				},
+				sources = {
+					{ name = 'buffer' },
+					{ name = 'calc' },
+					{ name = 'nvim_lsp' },
+					{ name = 'tags' },
+					{ name = 'ultisnips' },
 				},
 			})
-			-- NOTE: Order is important. You can't lazy-load `lexima.vim`.
-			vim.cmd [[
-			inoremap <silent><expr> <C-Space> compe#complete()
-			inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
-			inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-			inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-			inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-			]]
-		end
+
+			for _, cmd_type in ipairs({'/', '?'}) do
+				cmp.setup.cmdline(cmd_type, {
+					sources = {
+						{ name = 'buffer' }
+					}
+				})
+			end
+
+			cmp.setup.cmdline(':', {
+				sources = cmp.config.sources({
+					{ name = 'path' }
+				}, {
+					{ name = 'cmdline' }
+				})
+			})
+		end,
+	}
+	use {
+		'hrsh7th/cmp-buffer',
+		after = 'nvim-cmp',
+	}
+	use {
+		'hrsh7th/cmp-calc',
+		after = 'nvim-cmp',
+	}
+	use {
+		'hrsh7th/cmp-cmdline',
+		after = 'nvim-cmp',
+	}
+	use {
+		'hrsh7th/cmp-nvim-lsp',
+		after = 'nvim-cmp',
+	}
+	use {
+		'hrsh7th/cmp-path',
+		after = 'nvim-cmp',
+	}
+	use {
+		'quangnguyen30192/cmp-nvim-tags',
+		after = 'nvim-cmp',
+	}
+	use {
+		'quangnguyen30192/cmp-nvim-ultisnips',
+		after = 'nvim-cmp',
 	}
 
 	--   Auto-formatting
@@ -1164,11 +1223,12 @@ require('packer').startup(function()
 	use {
 		'rust-lang/rust.vim',
 		after = {
+			'cmp-nvim-lsp',
 			'nvim-lspconfig',
 			'vim-sublime-monokai',
 		},
 		requires = {
-			'nvim-compe',
+			'cmp-nvim-lsp',
 			'nvim-lspconfig',
 			'vim-sandwich',
 			'vim-shebang',
@@ -1235,7 +1295,7 @@ require('packer').startup(function()
 			AddShebangPattern! rust ^#!.*/bin/run-cargo-(script|eval)\>
 			]]
 
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 			local completionItem = capabilities.textDocument.completion.completionItem
 			completionItem.snippetSupport = true
 			completionItem.resolveSupport = {
