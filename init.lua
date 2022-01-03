@@ -1315,5 +1315,7 @@ require('packer').startup(function()
 			end
 		end,
 	}
+
+	use 'andys8/vim-elm-syntax'
 end)
 
