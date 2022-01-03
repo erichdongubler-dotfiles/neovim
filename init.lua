@@ -372,10 +372,6 @@ require('packer').startup(function()
 			hi! link dotBrackEncl       Keyword
 			hi! link goExtraType        Special
 			hi! link goTypeConstructor  SublimeType
-			hi! link jsRegexpCharClass  Special
-			hi! link jsRegexpBackRef    SpecialChar
-			hi! link jsRegexpMod        SpecialChar
-			hi! link jsRegexpOr         SpecialChar
 			" It's nice to have the builtins highlighted, but they can cause some conflicts
 			hi! link pythonBuiltInObj   Constant
 			hi! link pythonBuiltInType  Constant
@@ -1264,6 +1260,36 @@ require('packer').startup(function()
 			hi! link rustDerive         SublimeDocumentation
 			hi! link rustDeriveTrait    SublimeDocumentation
 			hi! link rustLifetime       Special
+			]]
+		end,
+	}
+
+	--     Web
+
+	use {
+		'pangloss/vim-javascript',
+		requires = {
+			'tagbar',
+			'vim-sublime-monokai',
+		},
+		setup = function()
+			vim.g.tagbar_type_javascript = {
+				ctagstype = 'JavaScript',
+				kinds = {
+					'o:objects',
+					'c:classes',
+					'f:functions',
+					'a:arrays',
+					'm:methods',
+					'n:constants',
+					's:strings'
+				}
+			}
+			vim.cmd [[
+			hi! link jsRegexpCharClass  Special
+			hi! link jsRegexpBackRef    SpecialChar
+			hi! link jsRegexpMod        SpecialChar
+			hi! link jsRegexpOr         SpecialChar
 			]]
 		end,
 	}
