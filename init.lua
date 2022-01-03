@@ -1070,7 +1070,7 @@ require('packer').startup(function()
 	-- Debugging
 	-- TODO: Investigate https://github.com/mfussenegger/nvim-dap
 
-	--   Language-specific integration
+	-- Specialized editing modes
 
 	use 'vitalk/vim-shebang'
 
