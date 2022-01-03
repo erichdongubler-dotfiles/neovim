@@ -1323,5 +1323,7 @@ require('packer').startup(function()
 	vim.g.java_comment_strings = 1
 	vim.g.java_highlight_functions = 1
 	vim.g.java_highlight_java_lang_ids = 1
+
+	use 'OrangeT/vim-csharp'
 end)
 
