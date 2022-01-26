@@ -665,7 +665,7 @@ require('packer').startup(function()
 					['Underline'] = 'SpellBad',
 					['VirtualText'] = 'Comment',
 				},
-				['Warning'] = {
+				['Warn'] = {
 					[''] = 'SpellCap',
 					['Sign'] = 'SpellCap',
 					['Underline'] = 'SpellCap',
