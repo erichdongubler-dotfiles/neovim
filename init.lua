@@ -59,17 +59,15 @@ require('packer').startup(function()
 
 	--   Whitespace
 
-	-- -- TODO: This...doesn't seem great.
-	-- vim.opt.fillchars = "vert:|"
-	-- use {
-	-- 	'lukas-reineke/indent-blankline.nvim',
-	-- 	config = function()
-	-- 		require("indent_blankline").setup {
-	-- 			char = '┆',
-	-- 			buftype_exclude = {"terminal"}
-	-- 		}
-	-- 	end
-	-- }
+	use {
+		'lukas-reineke/indent-blankline.nvim',
+		config = function()
+			require("indent_blankline").setup {
+				char = '┆',
+				buftype_exclude = {"terminal"}
+			}
+		end,
+	}
 
 	--   TODO: `limelight` and `goyo`?
 
