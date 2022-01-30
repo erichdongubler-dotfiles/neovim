@@ -931,6 +931,8 @@ require('packer').startup(function()
 
 	use 'ray-x/lsp_signature.nvim'
 
+	use 'kosayoda/nvim-lightbulb'
+
 	--     LSP bindings
 
 	vim.cmd [[
