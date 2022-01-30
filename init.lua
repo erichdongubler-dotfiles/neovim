@@ -32,6 +32,7 @@ require('packer').startup(function()
 		'tversteeg/registers.nvim',
 		setup = function()
 			vim.g.registers_insert_mode = 0
+			vim.g.registers_normal_mode = 0
 			vim.g.registers_visual_mode = 0
 		end,
 	}
