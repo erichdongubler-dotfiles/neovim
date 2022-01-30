@@ -923,6 +923,8 @@ require('packer').startup(function()
 		end,
 	}
 
+	use 'ray-x/lsp_signature.nvim'
+
 	--     LSP bindings
 
 	vim.cmd [[
