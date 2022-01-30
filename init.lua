@@ -28,6 +28,13 @@ require('packer').startup(function()
 	vim.g.maplocalleader = '|'
 
 	vim.opt.clipboard = 'unnamed,unnamedplus'
+	use {
+		'tversteeg/registers.nvim',
+		setup = function()
+			vim.g.registers_insert_mode = 0
+			vim.g.registers_visual_mode = 0
+		end,
+	}
 
 	vim.opt.encoding = 'utf-8'
 	vim.opt.fileencoding = 'utf-8'
