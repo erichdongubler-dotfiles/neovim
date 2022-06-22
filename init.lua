@@ -1008,7 +1008,7 @@ require('packer').startup(function()
 			local cmp = require('cmp')
 
 			cmp.setup({
-				mapping = {
+				mapping = cmp.mapping.preset.insert({
 					['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
 					['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
 					['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
@@ -1017,20 +1017,20 @@ require('packer').startup(function()
 						i = cmp.mapping.abort(),
 						c = cmp.mapping.close(),
 					}),
-					['<CR>'] = cmp.mapping.confirm({ select = true }),
-				},
+					['<CR>'] = cmp.mapping.confirm({ select = false }),
+				}),
 				snippet = {
 					expand = function(args)
 						vim.fn["UltiSnips#Anon"](args.body)
 					end,
 				},
-				sources = {
+				sources = cmp.config.sources({
 					{ name = 'buffer' },
 					{ name = 'calc' },
 					{ name = 'nvim_lsp' },
 					{ name = 'tags' },
 					{ name = 'ultisnips' },
-				},
+				}),
 			})
 
 			for _, cmd_type in ipairs({'/', '?'}) do
@@ -1065,6 +1065,18 @@ require('packer').startup(function()
 	use {
 		'hrsh7th/cmp-nvim-lsp',
 		after = 'nvim-cmp',
+		config = function()
+			local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+			local completionItem = capabilities.textDocument.completion.completionItem
+			completionItem.snippetSupport = true
+			completionItem.resolveSupport = {
+				properties = {
+					'documentation',
+					'detail',
+					'additionalTextEdits',
+				},
+			}
+		end
 	}
 	use {
 		'hrsh7th/cmp-path',
@@ -1247,7 +1259,6 @@ require('packer').startup(function()
 			'vim-sublime-monokai',
 		},
 		requires = {
-			'cmp-nvim-lsp',
 			'nvim-lspconfig',
 			'vim-sandwich',
 			'vim-shebang',
@@ -1313,17 +1324,6 @@ require('packer').startup(function()
 			AddShebangPattern! rust ^#!.*/bin/env\s\+run-cargo-(script|eval)\>
 			AddShebangPattern! rust ^#!.*/bin/run-cargo-(script|eval)\>
 			]]
-
-			local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-			local completionItem = capabilities.textDocument.completion.completionItem
-			completionItem.snippetSupport = true
-			completionItem.resolveSupport = {
-				properties = {
-					'documentation',
-					'detail',
-					'additionalTextEdits',
-				},
-			}
 
 			require('lspconfig').rust_analyzer.setup({
 				capabilities = capabilities,
