@@ -968,20 +968,7 @@ require('packer').startup(function()
 	au CursorMoved * lua vim.lsp.buf.clear_references()
 	augroup END
 	]]
-	use {
-		'neovim/nvim-lspconfig',
-		after = {
-			'vim-sublime-monokai',
-		},
-		config = function()
-			-- This doesn't actually require `nvim-lspconfig`, but it's convenient for depending on
-			-- `vim-sublime-monokai` loading first.
-			vim.fn['g:SublimeMonokaiHighlight']('LspReferenceText', { bg = vim.g.sublimemonokai_darkgrey })
-			vim.fn['g:SublimeMonokaiHighlight']('LspReferenceRead', { bg = vim.g.sublimemonokai_addbg })
-			vim.fn['g:SublimeMonokaiHighlight']('LspReferenceWrite', { bg = vim.g.sublimemonokai_changebg })
-		end,
-	}
-
+	use 'neovim/nvim-lspconfig'
 
 	use {
 		'folke/lsp-trouble.nvim',
