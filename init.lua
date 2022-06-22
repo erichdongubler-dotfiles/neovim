@@ -955,8 +955,8 @@ require('packer').startup(function()
 	nnoremap <Leader>lK <cmd>lua vim.lsp.buf.hover()<CR>
 	nnoremap <Leader>lci <cmd>lua vim.lsp.buf.incoming_calls()<CR>
 	nnoremap <Leader>lco <cmd>lua vim.lsp.buf.outgoing_calls()<CR>
-	nnoremap [d :lua vim.lsp.diagnostic.goto_prev()<cr>
-	nnoremap ]d :lua vim.lsp.diagnostic.goto_next()<cr>
+	nnoremap [d :lua vim.diagnostic.goto_prev()<cr>
+	nnoremap ]d :lua vim.diagnostic.goto_next()<cr>
 	]]
 
 	-- TODO: Get colors and highlighting for LSP actually looking good
