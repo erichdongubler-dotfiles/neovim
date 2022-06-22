@@ -935,6 +935,17 @@ require('packer').startup(function()
 		end,
 	}
 
+	use {
+		'rcarriga/nvim-notify',
+		config = function()
+			local notify = require('notify')
+			notify.setup({
+				stages = "slide",
+			})
+			vim.notify = notify
+		end,
+	}
+
 	use 'ray-x/lsp_signature.nvim'
 
 	--     LSP bindings
