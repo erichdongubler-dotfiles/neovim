@@ -67,17 +67,99 @@ require('packer').startup(function()
 
 	--   Whitespace
 
-	-- -- TODO: This...doesn't seem great.
-	-- vim.opt.fillchars = "vert:|"
-	-- use {
-	-- 	'lukas-reineke/indent-blankline.nvim',
-	-- 	config = function()
-	-- 		require("indent_blankline").setup {
-	-- 			char = '┆',
-	-- 			buftype_exclude = {"terminal"}
-	-- 		}
-	-- 	end
-	-- }
+	function set_listchars_verbose()
+		vim.opt.list = true
+		vim.cmd [[ set listchars= ]] -- NOTE: this is a hack -- there's no clearing or resetting from assignment below. :(
+		vim.opt.listchars = {
+			eol = "$",
+			extends = ">",
+			precedes = "<",
+			space = "·",
+			tab = "├─",
+			trail = "~",
+		}
+	end
+	_G.set_listchars_verbose = set_listchars_verbose
+
+	function set_listchars_quiet()
+		vim.opt.list = true
+		vim.cmd [[ set listchars= ]] -- NOTE: this is a hack -- there's no clearing or resetting from assignment below. :(
+		vim.opt.listchars = {
+			extends = ">",
+			precedes = "<",
+			tab = "┆ ",
+		}
+	end
+	_G.set_listchars_quiet = set_listchars_quiet
+
+	vim_indentguides_disabled = false
+	use {
+		-- 'thaerkh/vim-indentguides',
+		-- branch = "erichdongubler/tweaks",
+		'~/workspace/vim-indentguides',
+		disable = vim_indentguides_disabled,
+		setup = function()
+			-- NOTE: keep these in sync with `set_listchars_quiet`
+			vim.g.indentguides_spacechar = '·'
+			vim.g.indentguides_tabchar = '┆'
+		end,
+		config = function()
+			set_listchars_quiet() -- silly `vim-indentguides`, stop stomping mah `listchars`!
+		end,
+
+	} -- NOTE: Some functionality below depends on this.
+
+	if not vim_indentguides_disabled then
+		function disable_indentguides()
+			vim.b.toggle_indentguides = 0
+			vim.cmd [[
+			IndentGuidesToggle
+			]]
+			set_listchars_verbose()
+		end
+		_G.disable_indentguides = disable_indentguides
+
+		function enable_indentguides()
+			vim.b.toggle_indentguides = 1
+			vim.cmd [[
+			IndentGuidesToggle
+			]]
+			set_listchars_quiet()
+		end
+		_G.enable_indentguides = enable_indentguides
+
+		local is_indentation_verbose = false -- `vim-indentguides` is definitely enabled if we arrive here.
+		function _G.toggle_list_verbosity()
+			if is_indentation_verbose then
+				print('quieting vim-indentguides')
+				is_indentation_verbose = false
+				enable_indentguides()
+			else
+				print('verbosifying vim-indentguides')
+				is_indentation_verbose = true
+				disable_indentguides()
+			end
+		end
+	else
+		set_listchars_quiet()
+		local is_indentation_verbose = false
+		function _G.toggle_list_verbosity()
+			if is_indentation_verbose then
+				print('quieting vanilla')
+				is_indentation_verbose = false
+				set_listchars_quiet()
+			else
+				print('verbosifying vanilla')
+				is_indentation_verbose = true
+				set_listchars_verbose()
+			end
+		end
+	end
+
+	vim.cmd [[
+	command! -nargs=0 ToggleListVerbosity call v:lua.toggle_list_verbosity()
+	nnoremap <Leader>i :call v:lua.toggle_list_verbosity()<CR>
+	]]
 
 	--   TODO: `limelight` and `goyo`?
 
@@ -151,6 +233,16 @@ require('packer').startup(function()
 	command! -bang W :w!
 	]]
 
+	-- Add `Bwipeout{,!}` commands
+	use {
+		'famiu/bufdelete.nvim',
+		config = function()
+			vim.cmd [[
+			map <Leader>w <cmd>Bwipeout<CR>
+			]]
+		end
+	}
+
 	--   File change management
 	vim.opt.undofile = true
 	use 'mbbill/undotree'
@@ -163,15 +255,38 @@ require('packer').startup(function()
 	}
 
 	--   Buffer display above
-	vim.g.wintabs_ui_show_vimtab_name = 2
-	-- TODO: Make previous and next bindings available in `insert` mode
-	vim.cmd [[
-	map <C-PageUp> <cmd>WintabsPrevious<CR>
-	map <C-PageDown> <cmd>WintabsNext<CR>
-	map <Leader>w <cmd>WintabsClose<CR>
-	map <Leader>W <cmd>WintabsOnly<CR>:WintabsClose<CR>
-	]]
-	use 'zefei/vim-wintabs'
+	use {
+		'akinsho/bufferline.nvim',
+		tag = "v2.*",
+		config = function()
+			vim.cmd [[
+			map <C-PageUp> <cmd>BufferLineCyclePrev<CR>
+			map <C-PageDown> <cmd>BufferLineCycleNext<CR>
+			map <Leader>W <cmd>BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>
+			]]
+
+			require('bufferline').setup({
+				highlights = {
+					background = {
+						highlight = 'TabLine',
+					},
+					fill = {
+						highlight = 'TabLineSel'
+					},
+				},
+				options = {
+					buffer_close_icon = "⨯",
+					close_icon = "⨯",
+					diagnostics = "nvim_lsp",
+					left_trunc_marker = "...",
+					middle_mouse_command = "bdelete! %d",
+					right_trunc_marker = "...",
+					show_buffer_close_icons = false,
+					themable = true,
+				},
+			})
+		end
+	}
 
 	--   Temporarily narrow to a single window
 	use 'vim-scripts/ZoomWin'
@@ -211,18 +326,28 @@ require('packer').startup(function()
 
 	use {
 		'nvim-telescope/telescope.nvim',
-		event = { 'BufEnter' },
 		requires = {
+			'lsp-trouble.nvim',
 			'nvim-lua/plenary.nvim',
 		},
+		after = { 'lsp-trouble.nvim' },
 		config = function()
 			local actions = require('telescope.actions')
+			local trouble = require('trouble.providers.telescope')
+
 			require('telescope').setup({
 				defaults = {
 					color_devicons = false,
 					mappings = {
+						i = {
+							["<C-T>"] = trouble.open_with_trouble,
+						},
 						n = {
 							["<C-C>"] = actions.close,
+							["<C-Q>"] = actions.smart_send_to_qflist,
+							["<C-T>"] = trouble.open_with_trouble,
+							["<C-Space>"] = actions.toggle_selection,
+							["<ESC>"] = require('telescope.actions').close,
 						},
 					},
 					layout_strategy = 'flex',
@@ -235,6 +360,7 @@ require('packer').startup(function()
 			nnoremap <Leader>R <cmd>Telescope tags<CR>
 			nnoremap <Leader>T <cmd>Telescope builtin<CR>
 			nnoremap <Leader>d <cmd>Telescope diagnostics bufnr=0<CR>
+			nnoremap <Leader>f <cmd>Telescope live_grep<CR>
 			nnoremap <Leader>o <cmd>Telescope oldfiles<CR>
 			nnoremap <Leader>p <cmd>Telescope find_files<CR>
 			nnoremap <Leader>l<C-]> <cmd>Telescope lsp_definitions<CR>
@@ -306,6 +432,13 @@ require('packer').startup(function()
 			vim.cmd [[
 			nnoremap <Leader>k <cmd>NvimTreeToggle<CR>
 			nnoremap - <cmd>NvimTreeFindFile<CR>
+			hi! link NvimTreeFolderIcon Comment
+
+			hi! link NvimTreeGitDirty SublimeYellow
+			hi! link NvimTreeGitStaged SublimeGreen
+			hi! link NvimTreeGitMerge SublimePink
+			hi! link NvimTreeGitRenamed SublimeOrange
+			hi! link NvimTreeGitDeleted SublimeRed
 			]]
 			require('nvim-tree').setup({
 				renderer = {
@@ -333,6 +466,9 @@ require('packer').startup(function()
 							git = true,
 						},
 					},
+					-- indent_markers = {
+					--	enable = true,
+					-- },
 				},
 			})
 		end,
@@ -393,6 +529,37 @@ require('packer').startup(function()
 			hi! link zshOption          Special
 			hi! link zshTypes           SublimeType
 			]])
+
+			local lsp_highlight_groups = {
+				['Error'] = {
+					[''] = 'Error',
+					['Sign'] = 'Error',
+					['Underline'] = 'SpellBad',
+					['VirtualText'] = 'Comment',
+				},
+				['Warn'] = {
+					[''] = 'SpellCap',
+					['Sign'] = 'SpellCap',
+					['Underline'] = 'SpellCap',
+					['VirtualText'] = 'Comment',
+				},
+				['Information'] = {
+					[''] = 'Comment',
+				},
+				['Hint'] = {
+					[''] = 'Comment',
+				},
+			}
+			for severity, rest in pairs(lsp_highlight_groups) do
+				for highlight_location, highlight_spec in pairs(rest) do
+					local highlight_group = 'Diagnostic' .. highlight_location .. severity
+					if type(highlight_spec) == "string" then
+						vim.cmd('hi! link ' .. highlight_group .. ' ' .. highlight_spec)
+					else
+						vim.fn['g:SublimeMonokaiHighlight'](highlight_group, highlight_spec)
+					end
+				end
+			end
 		end
 	}
 
@@ -403,6 +570,7 @@ require('packer').startup(function()
 
 	use {
 		'hoob3rt/lualine.nvim',
+		after = { 'vim-sublime-monokai' },
 		config = function()
 			require('lualine').setup({
 				options = {
@@ -501,11 +669,8 @@ require('packer').startup(function()
 		event = { 'BufEnter' },
 		setup = function()
 			vim.g.ctrlsf_auto_focus = { at = 'start' }
-			vim.api.nvim_set_keymap('n', '<Leader>f', ':CtrlSFToggle<CR>', { noremap = true })
-			vim.api.nvim_set_keymap('n', '<Leader>F', ':CtrlSF<Space>', { noremap = true })
-			vim.g.ctrlsf_default_view_mode = 'compact'
+			vim.api.nvim_set_keymap('n', '<Leader>H', ':CtrlSF<Space>', { noremap = true })
 			vim.g.ctrlsf_indent = 2
-			vim.g.ctrlsf_populate_qflist = 1
 			vim.g.ctrlsf_search_mode = 'async'
 		end,
 	}
@@ -672,37 +837,6 @@ require('packer').startup(function()
 			vim.fn['g:SublimeMonokaiHighlight']('MatchParen', { format = 'reverse' })
 			vim.fn['g:SublimeMonokaiHighlight']('MatchTag', { format = 'reverse' })
 			vim.fn['g:SublimeMonokaiHighlight']('MatchWord', { format = 'reverse' })
-
-			local lsp_highlight_groups = {
-				['Error'] = {
-					[''] = 'Error',
-					['Sign'] = 'Error',
-					['Underline'] = 'SpellBad',
-					['VirtualText'] = 'Comment',
-				},
-				['Warn'] = {
-					[''] = 'SpellCap',
-					['Sign'] = 'SpellCap',
-					['Underline'] = 'SpellCap',
-					['VirtualText'] = 'Comment',
-				},
-				['Information'] = {
-					[''] = 'Comment',
-				},
-				['Hint'] = {
-					[''] = 'Comment',
-				},
-			}
-			for severity, rest in pairs(lsp_highlight_groups) do
-				for highlight_location, highlight_spec in pairs(rest) do
-					local highlight_group = 'Diagnostic' .. highlight_location .. severity
-					if type(highlight_spec) == "string" then
-						vim.cmd('hi! link ' .. highlight_group .. ' ' .. highlight_spec)
-					else
-						vim.fn['g:SublimeMonokaiHighlight'](highlight_group, highlight_spec)
-					end
-				end
-			end
 		end
 	}
 
@@ -784,6 +918,26 @@ require('packer').startup(function()
 	use 'kana/vim-textobj-user'
 	use 'thalesmello/vim-textobj-methodcall'
 
+	-- "Exchange" motions, which are surprisingly handy!
+
+	use({
+		"gbprod/substitute.nvim",
+		config = function()
+			require("substitute").setup({
+				prefix = "S",
+			})
+			vim.keymap.set("n", "ss", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
+			vim.keymap.set("n", "sss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
+			vim.keymap.set("n", "sS", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
+			vim.keymap.set("x", "ss", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
+
+			vim.keymap.set("n", "sx", "<cmd>lua require('substitute.exchange').operator()<cr>", { noremap = true })
+			vim.keymap.set("n", "sxx", "<cmd>lua require('substitute.exchange').line()<cr>", { noremap = true })
+			vim.keymap.set("n", "sX", "<cmd>lua require('substitute.exchange').eol()<cr>", { noremap = true })
+			vim.keymap.set("x", "sx", "<cmd>lua require('substitute.exchange').visual()<cr>", { noremap = true })
+		end
+	})
+
 	--     URLs
 
 	use 'mattn/vim-textobj-url'
@@ -798,7 +952,16 @@ require('packer').startup(function()
 
 	-- CVS integration
 
-	use 'knsh14/vim-github-link'
+	use {
+		-- 'ruifm/gitlinker.nvim',
+		'~/workspace/gitlinker.nvim',
+		requires = 'nvim-lua/plenary.nvim',
+		config = function()
+			require('gitlinker').setup({
+				add_current_line_on_normal_mode = true,
+			})
+		end,
+	}
 
 	use {
 		'lewis6991/gitsigns.nvim',
@@ -826,6 +989,7 @@ require('packer').startup(function()
 					['n ghs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
 					['v ghs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
 					['n ghu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+					['v ghu'] = '<cmd>lua require"gitsigns".undo_stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
 					['n ghr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
 					['v ghr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
 					['n ghR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
@@ -849,6 +1013,21 @@ require('packer').startup(function()
 			nnoremap ghB <cmd>Git blame<CR>
 			]]
 		end,
+	}
+
+	-- GitHub integration
+
+	use {
+		'ldelossa/gh.nvim',
+		requires = { 'ldelossa/litee.nvim' },
+		config = function()
+			if not pcall(require, 'litee.lib') then
+				vim.notify('failed to load `gh.nvim`: `litee` not available')
+				return
+			end
+			require('litee.lib').setup()
+			require('litee.gh').setup()
+		end
 	}
 
 	-- Time tracking via Wakatime
@@ -918,16 +1097,21 @@ require('packer').startup(function()
 
 	--   LSP
 
-	vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-	vim.lsp.diagnostic.on_publish_diagnostics, {
-		virtual_text = {
-			prefix = "»",
-			spacing = 2,
+
+	vim.diagnostic.config({
+		float = {
+			border = 'rounded',
+			focusable = false,
+			header = 'Diagnostic(s):',
+			source = 'always',
 		},
 		signs = true,
 		update_in_insert = true,
-	}
-	)
+		virtual_text = use_lsp_lines and {
+			prefix = "»",
+			spacing = 2,
+		} or false,
+	})
 	vim.fn.sign_define('DiagnosticSignError', { text = ">>", texthl ="DiagnosticSignError" })
 	vim.fn.sign_define('DiagnosticSignWarn', { text = ">>", texthl = "DiagnosticSignWarn" })
 	vim.fn.sign_define('DiagnosticSignInfo', { text = "!!", texthl = "DiagnosticSignInfo" })
@@ -940,6 +1124,7 @@ require('packer').startup(function()
 		end,
 	}
 
+	vim.g.termguicolors = true
 	use {
 		'rcarriga/nvim-notify',
 		config = function()
@@ -953,6 +1138,15 @@ require('packer').startup(function()
 
 	use 'ray-x/lsp_signature.nvim'
 
+	local use_lsp_lines = true
+	use {
+		'ErichDonGubler/lsp_lines.nvim',
+		disable = not use_lsp_lines,
+		config = function()
+			require('lsp_lines').setup()
+		end,
+	}
+
 	--     LSP bindings
 
 	vim.cmd [[
@@ -960,6 +1154,8 @@ require('packer').startup(function()
 	nnoremap <Leader>lK <cmd>lua vim.lsp.buf.hover()<CR>
 	nnoremap <Leader>lci <cmd>lua vim.lsp.buf.incoming_calls()<CR>
 	nnoremap <Leader>lco <cmd>lua vim.lsp.buf.outgoing_calls()<CR>
+	nnoremap [d :lua vim.diagnostic.goto_prev()<cr>
+	nnoremap ]d :lua vim.diagnostic.goto_next()<cr>
 	nnoremap [d :lua vim.diagnostic.goto_prev()<cr>
 	nnoremap ]d :lua vim.diagnostic.goto_next()<cr>
 	]]
@@ -973,22 +1169,57 @@ require('packer').startup(function()
 	au CursorMoved * lua vim.lsp.buf.clear_references()
 	augroup END
 	]]
-	use 'neovim/nvim-lspconfig'
+	use {
+		'neovim/nvim-lspconfig',
+		config = function()
+			vim.api.nvim_create_augroup("ErichDonGublerDetachDeletedBuffersFromLspClients", {
+				clear = true
+			})
+			vim.api.nvim_create_autocmd("BufDelete", {
+				group = "ErichDonGublerDetachDeletedBuffersFromLspClients",
+				callback = function()
+					local bufnr = tonumber(vim.fn.expand("<abuf>"))
+					local clients = vim.lsp.buf_get_clients(bufnr)
+					for client_id, _ in pairs(clients) do
+						vim.lsp.buf_detach_client(bufnr, client_id)
+					end
+				end,
+			})
+		end,
+	}
 
 	use {
 		'folke/lsp-trouble.nvim',
-		event = {
-			'BufReadPost',
-		},
 		config = function()
 			require("trouble").setup {
 				auto_close = true,
 				auto_open = true,
+				auto_preview = false,
 				fold_closed = ">",
 				fold_open = "v",
 				icons = false,
 				use_diagnostic_signs = true,
 			}
+
+			vim.cmd [[
+			nnoremap <Leader>n <cmd>lua require('trouble').next({ skip_groups = true, jump = true })<CR>
+			nnoremap <Leader>N <cmd>lua require('trouble').previous({ skip_groups = true, jump = true })<CR>
+			nnoremap <Leader>m <cmd>TroubleToggle<CR>
+			nnoremap <Leader>M <cmd>Trouble workspace_diagnostics<CR>
+			]]
+
+			-- function _G.erichdongubler_trouble_bindings()
+			--	for {
+			--		{ "<S-Up>", "previous({ skip_groups = true, jump = true })" }
+			--	}
+			--	vim.api.nvim_buf_set_keymap("n", "<S-Up>", "lua require('trouble').previous:<Up>", { silent = true, noremap = true })
+			-- end
+			-- vim.cmd [[
+			-- augroup TroubleBindings
+			-- au!
+			-- au FileType Trouble call v:lua.erichdongubler_trouble_bindings()
+			-- augroup END
+			-- ]]
 		end,
 	}
 
@@ -1176,6 +1407,84 @@ require('packer').startup(function()
 
 	use 'fidian/hexmode'
 
+	use {
+		'anuvyklack/hydra.nvim',
+		after = {
+			'gitsigns.nvim', -- Git views
+			'vim-sublime-monokai', -- highlight groups
+		},
+		requires = {
+			'gitsigns.nvim', -- Git views
+			'anuvyklack/keymap-layer.nvim', -- needed only for pink hydras
+			'vim-sublime-monokai', -- highlight groups
+		},
+		config = function()
+			vim.cmd [[
+			hi! link HydraRed SublimeRed
+			hi! link HydraBlue SublimeAqua
+			hi! link HydraTeal Sublime
+			hi! link HydraPink SublimePink
+			hi! link HydraHint Special
+			]]
+
+			local hydra = require('hydra')
+			local gitsigns = require('gitsigns')
+
+			hydra({
+				hint = [[
+				_J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
+				_K_: prev hunk   _u_: undo stage hunk   _p_: preview hunk   _B_: blame show full
+				^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
+				^
+				^ ^              _<Enter>_: Neogit      _<Esc>_, _q_: exit
+				]],
+				config = {
+					color = 'pink',
+					invoke_on_body = true,
+					hint = {
+						position = 'bottom',
+						border = 'rounded'
+					},
+					on_enter = function()
+						vim.bo.modifiable = false
+						gitsigns.toggle_signs(true)
+						gitsigns.toggle_linehl(true)
+					end,
+					on_exit = function()
+						gitsigns.toggle_signs(false)
+						gitsigns.toggle_linehl(false)
+						gitsigns.toggle_deleted(false)
+					end
+				},
+				mode = {'n','x'},
+				body = '<leader>gg',
+				heads = {
+					{ 'J', function()
+						if vim.wo.diff then return ']c' end
+						vim.schedule(function() gitsigns.next_hunk() end)
+						return '<Ignore>'
+					end, { expr = true } },
+					{ 'K', function()
+						if vim.wo.diff then return '[c' end
+						vim.schedule(function() gitsigns.prev_hunk() end)
+						return '<Ignore>'
+					end, { expr = true } },
+					{ 's', ':Gitsigns stage_hunk<CR>', { silent = true } },
+					{ 'u', gitsigns.undo_stage_hunk },
+					{ 'S', gitsigns.stage_buffer },
+					{ 'p', gitsigns.preview_hunk },
+					{ 'd', gitsigns.toggle_deleted, { nowait = true } },
+					{ 'b', gitsigns.blame_line },
+					{ 'B', function() gitsigns.blame_line{ full = true } end },
+					{ '/', gitsigns.show, { exit = true } }, -- show the base of the file
+					{ '<Enter>', '<cmd>Neogit<CR>', { exit = true } },
+					{ '<Esc>', '<cmd>Neogit<CR>', { exit = true } },
+					{ 'q', nil, { exit = true, nowait = true } },
+				}
+			})
+		end
+	}
+
 	--   Language-specific integration
 
 	--     Document languages
@@ -1239,6 +1548,8 @@ require('packer').startup(function()
 	--     Shell scripting languages
 
 	use 'pprovost/vim-ps1'
+
+	use '~/workspace/vim-nushell'
 
 	--     Data/configuration/IDL-ish languages
 
@@ -1454,4 +1765,3 @@ require('packer').startup(function()
 		end,
 	}
 end)
-
