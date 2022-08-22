@@ -55,6 +55,9 @@ require('packer').startup(function()
 		end,
 	}
 
+	-- Replace several vanilla Neovim/Vim UIs with nicer ones
+	use 'stevearc/dressing.nvim'
+
 	-- vimdiff: use vertical layout
 	vim.opt.diffopt = vim.opt.diffopt + { 'vertical' }
 
