@@ -11,7 +11,8 @@ require('packer').startup(function()
 	vim.cmd([[
 	augroup PackerUpdate
 	au!
-	au BufWritePost init.lua source <afile> | PackerCompile
+	au BufWritePost init.lua source <afile> | PackerCompile profile=true
+	au User PackerCompileDone lua vim.notify('Finished compiling Packer startup script.', nil, { title = "`PackerCompile` finished" })
 	augroup END
 	]])
 	vim.cmd('nnoremap <Leader>vs <cmd>source ' .. vim.fn.stdpath('config') .. '/init.lua <Bar> PackerCompile<CR>')
