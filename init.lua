@@ -1,9 +1,10 @@
 -- Stolen from https://github.com/wbthomason/packer.nvim#bootstrapping
 
+local packer_bootstrap = false
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	print("`packer` is missing, installing...")
-	vim.fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
+	packer_bootstrap = vim.fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
 	vim.cmd 'packadd packer.nvim'
 end
 
@@ -1540,5 +1541,9 @@ require('packer').startup(function()
 			]]
 		end,
 	}
-end)
 
+	-- NOTE: This _must_ be at the end!
+	if packer_bootstrap then
+		require('packer').sync()
+	end
+end)
