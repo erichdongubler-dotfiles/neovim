@@ -19,6 +19,11 @@ require('packer').startup(function()
 
 	use 'wbthomason/packer.nvim'
 
+	-- Disable freezing on Windows when we press `CTRL + Z`.
+	if vim.fn.has('win32') then
+		vim.api.nvim_set_keymap('', '<C-z>', '<Nop>', {})
+	end
+
 	vim.opt.mouse = 'a'
 	vim.cmd 'behave xterm'
 
