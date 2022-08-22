@@ -60,17 +60,97 @@ require('packer').startup(function()
 
 	--   Whitespace
 
-	-- -- TODO: This...doesn't seem great.
-	-- vim.opt.fillchars = "vert:|"
-	-- use {
-	-- 	'lukas-reineke/indent-blankline.nvim',
-	-- 	config = function()
-	-- 		require("indent_blankline").setup {
-	-- 			char = '┆',
-	-- 			buftype_exclude = {"terminal"}
-	-- 		}
-	-- 	end
-	-- }
+	function set_listchars_verbose()
+		vim.opt.list = true
+		vim.cmd [[ set listchars= ]] -- NOTE: this is a hack -- there's no clearing or resetting from assignment below. :(
+		vim.opt.listchars = {
+			eol = "$",
+			extends = ">",
+			precedes = "<",
+			space = "·",
+			tab = "├─",
+			trail = "~",
+		}
+	end
+	_G.set_listchars_verbose = set_listchars_verbose
+
+	function set_listchars_quiet()
+		vim.opt.list = true
+		vim.cmd [[ set listchars= ]] -- NOTE: this is a hack -- there's no clearing or resetting from assignment below. :(
+		vim.opt.listchars = {
+			extends = ">",
+			precedes = "<",
+			tab = "┆ ",
+		}
+	end
+	_G.set_listchars_quiet = set_listchars_quiet
+
+	vim_indentguides_disabled = false
+	use {
+		'thaerkh/vim-indentguides',
+		disable = vim_indentguides_disabled,
+		setup = function()
+			-- NOTE: keep these in sync with `set_listchars_quiet`
+			vim.g.indentguides_spacechar = '·'
+			vim.g.indentguides_tabchar = '┆'
+		end,
+		config = function()
+			set_listchars_quiet() -- silly `vim-indentguides`, stop stomping mah `listchars`!
+		end,
+
+	} -- NOTE: Some functionality below depends on this.
+
+	if not vim_indentguides_disabled then
+		function disable_indentguides()
+			vim.b.toggle_indentguides = 0
+			vim.cmd [[
+			IndentGuidesToggle
+			]]
+			set_listchars_verbose()
+		end
+		_G.disable_indentguides = disable_indentguides
+
+		function enable_indentguides()
+			vim.b.toggle_indentguides = 1
+			vim.cmd [[
+			IndentGuidesToggle
+			]]
+			set_listchars_quiet()
+		end
+		_G.enable_indentguides = enable_indentguides
+
+		local is_indentation_verbose = false -- `vim-indentguides` is definitely enabled if we arrive here.
+		function _G.toggle_list_verbosity()
+			if is_indentation_verbose then
+				vim.notify('quieting vim-indentguides')
+				is_indentation_verbose = false
+				enable_indentguides()
+			else
+				vim.notify('verbosifying vim-indentguides')
+				is_indentation_verbose = true
+				disable_indentguides()
+			end
+		end
+	else
+		set_listchars_quiet()
+		local is_indentation_verbose = false
+		function _G.toggle_list_verbosity()
+			if is_indentation_verbose then
+				vim.notify('quieting vanilla')
+				is_indentation_verbose = false
+				set_listchars_quiet()
+			else
+				vim.notify('verbosifying vanilla')
+				is_indentation_verbose = true
+				set_listchars_verbose()
+			end
+		end
+	end
+
+	vim.cmd [[
+	command! -nargs=0 ToggleListVerbosity call v:lua.toggle_list_verbosity()
+	nnoremap <Leader>i :call v:lua.toggle_list_verbosity()<CR>
+	]]
 
 	--   TODO: `limelight` and `goyo`?
 
