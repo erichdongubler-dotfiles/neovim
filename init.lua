@@ -366,16 +366,16 @@ require('packer').startup(function()
 				},
 			})
 			vim.cmd [[
+			nnoremap <Leader>D <cmd>Telescope diagnostics<CR>
 			nnoremap <Leader>O <cmd>Telescope buffers<CR>
 			nnoremap <Leader>R <cmd>Telescope tags<CR>
 			nnoremap <Leader>T <cmd>Telescope builtin<CR>
+			nnoremap <Leader>d <cmd>Telescope diagnostics bufnr=0<CR>
 			nnoremap <Leader>o <cmd>Telescope oldfiles<CR>
 			nnoremap <Leader>p <cmd>Telescope find_files<CR>
 			nnoremap <Leader>l<C-]> <cmd>Telescope lsp_definitions<CR>
-			nnoremap <Leader>lD <cmd>Telescope lsp_workspace_diagnostics<CR>
 			nnoremap <Leader>lR <cmd>Telescope lsp_dynamic_workspace_symbols<CR>
 			nnoremap <Leader>la <cmd>lua vim.lsp.buf.code_action()<CR>
-			nnoremap <Leader>ld <cmd>Telescope lsp_document_diagnostics<CR>
 			nnoremap <Leader>lgd <cmd>Telescope lsp_definitions<CR>
 			nnoremap <Leader>lgi <cmd>Telescope lsp_implementations<CR>
 			nnoremap <Leader>lgr <cmd>Telescope lsp_references<CR>
