@@ -374,7 +374,7 @@ require('packer').startup(function()
 			nnoremap <Leader>l<C-]> <cmd>Telescope lsp_definitions<CR>
 			nnoremap <Leader>lD <cmd>Telescope lsp_workspace_diagnostics<CR>
 			nnoremap <Leader>lR <cmd>Telescope lsp_dynamic_workspace_symbols<CR>
-			nnoremap <Leader>la <cmd>Telescope lsp_code_actions<CR>
+			nnoremap <Leader>la <cmd>lua vim.lsp.buf.code_action()<CR>
 			nnoremap <Leader>ld <cmd>Telescope lsp_document_diagnostics<CR>
 			nnoremap <Leader>lgd <cmd>Telescope lsp_definitions<CR>
 			nnoremap <Leader>lgi <cmd>Telescope lsp_implementations<CR>
@@ -383,7 +383,7 @@ require('packer').startup(function()
 			nnoremap <Leader>lr <cmd>Telescope lsp_document_symbols<CR>
 			nnoremap <Leader>r <cmd>Telescope current_buffer_tags<CR>
 
-			vnoremap <Leader>la <cmd>Telescope lsp_range_code_actions<CR>
+			vnoremap <Leader>la <cmd>lua vim.lsp.buf.range_code_action()<CR>
 			]]
 		end,
 	}
