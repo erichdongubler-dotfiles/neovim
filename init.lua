@@ -154,15 +154,70 @@ require('packer').startup(function()
 	}
 
 	--   Buffer display above
-	vim.g.wintabs_ui_show_vimtab_name = 2
-	-- TODO: Make previous and next bindings available in `insert` mode
 	vim.cmd [[
-	map <C-PageUp> <cmd>WintabsPrevious<CR>
-	map <C-PageDown> <cmd>WintabsNext<CR>
-	map <Leader>w <cmd>WintabsClose<CR>
-	map <Leader>W <cmd>WintabsOnly<CR>:WintabsClose<CR>
+	nnoremap <Leader>w <cmd>:bw<CR>
+	nnoremap <Leader>W :BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>
 	]]
-	use 'zefei/vim-wintabs'
+	use {
+		'akinsho/bufferline.nvim',
+		tag = "v3.*",
+		after = {
+			'vim-sublime-monokai',
+		},
+		requires = {
+			'vim-sublime-monokai',
+		},
+		config = function()
+			vim.cmd([[
+			" Replace default bindings
+			nnoremap <silent> ]b <cmd>BufferLineCycleNext<CR>
+			nnoremap <silent> [b <cmd>BufferLineCyclePrev<CR>
+			nnoremap <silent> <C-PageUp> <cmd>BufferPrevious<CR>
+			nnoremap <silent> <C-PageDown> <cmd>BufferNext<CR>
+
+			hi! link BufferLineBackground TabLineFill
+			hi! link BufferLineBuffer TabLineFill
+			hi! link BufferLineCloseButton TabLineFill
+			hi! link BufferLineFill TabLineFill
+			hi! link BufferLineModified TabLineFill
+			hi! link BufferLineSeparator TabLineFill
+			hi! link BufferLineTab TabLineFill
+			hi! link BufferLineTabBackground TabLineFill
+			hi! link BufferLineTabSeparator TabLineFill
+
+			hi! link BufferLineBufferSelected TabLineSel
+			hi! link BufferLineIndicatorSelected TabLineSel
+			hi! link BufferLineCloseButtonSelected TabLineSel
+			hi! link BufferLineModifiedSelected TabLineSel
+			hi! link BufferLineTabSelected TabLineSel
+			hi! link BufferLineTabSeparatorSelected TabLineSel
+
+			hi! link BufferLineBufferVisible TabLine
+			hi! link BufferLineIndicatorVisible TabLine
+			hi! link BufferLineCloseButtonVisible TabLine
+			hi! link BufferLineSeparatorVisible TabLine
+			hi! link BufferLineTabClose TabLine
+
+			hi! link BufferLinePick SublimeAqua
+			hi! link BufferLinePickSelected SublimeAqua
+			hi! link BufferLinePickVisible SublimeAqua
+			]])
+			require("bufferline").setup({
+				options = {
+					buffer_close_icon = "⤬",
+					close_icon = "⤬",
+					indicator = {
+						style = 'none',
+					},
+					left_trunc_marker = "«",
+					right_trunc_marker = "»",
+					separator_style = { "|", "|" },
+					show_buffer_default_icon = false,
+					show_buffer_icons = false,
+				},
+			})
+		end,
+	}
 
 	--   Temporarily narrow to a single window
 	use 'vim-scripts/ZoomWin'
@@ -170,19 +225,6 @@ require('packer').startup(function()
 	--   Resize windows easily via keyboard
 	use 'simeji/winresizer'
 	vim.g.winresizer_start_key = '<Leader><CR>'
-
-	-- vim.cmd([[
-	-- let bufferline = get(g:, 'bufferline', {})
-	-- let bufferline.icons = 'numbers'
-	-- let bufferline.icon_separator_active = '|'
-	-- let bufferline.icon_separator_inactive = '|'
-	-- let bufferline.icon_close_tab = 'x'
-	-- let bufferline.icon_close_tab_modified = '*'
-	--
-	-- nnoremap <silent> <C-PageUp> <cmd>BufferPrevious<CR>
-	-- nnoremap <silent> <C-PageDown> <cmd>BufferNext<CR>
-	-- ]])
-	-- use 'romgrk/barbar.nvim'
 
 	-- TODO: Investigate `*CurrentFile` breakage here.
 	use {
