@@ -917,6 +917,14 @@ require('packer').startup(function()
 	vim.fn.sign_define('DiagnosticSignInfo', { text = "!!", texthl = "DiagnosticSignInfo" })
 	vim.fn.sign_define('DiagnosticSignHint', { text = "??", texthl = "DiagnosticSignHint" })
 
+	--     Show a nice diagnostic spinner for LSP operations
+	use {
+		'j-hui/fidget.nvim',
+		config = function()
+			require('fidget').setup()
+		end,
+	}
+
 	--     LSP bindings
 
 	vim.cmd [[
