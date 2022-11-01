@@ -1021,9 +1021,21 @@ require('packer').startup(function()
 			'BufReadPost',
 		},
 		config = function()
+			local trouble_bindings_normal = {
+				M = 'TroubleToggle',
+				md = 'TroubleToggle document_diagnostics',
+				mq = 'TroubleToggle loclist',
+				mw = 'TroubleToggle workspace_diagnostics',
+			}
+			for binding, cmd in pairs(trouble_bindings_normal) do
+				vim.keymap.set(
+				"n",
+				"<Leader>" .. binding,
+				"<cmd>" .. cmd .. "<cr>",
+				{ silent = true, noremap = true }
+				)
+			end
 			require("trouble").setup {
-				auto_close = true,
-				auto_open = true,
 				fold_closed = ">",
 				fold_open = "v",
 				icons = false,
