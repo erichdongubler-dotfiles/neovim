@@ -352,28 +352,33 @@ require('packer').startup(function()
 			nnoremap <Leader>k <cmd>NvimTreeToggle<CR>
 			nnoremap - <cmd>NvimTreeFindFile<CR>
 			]]
-			vim.g.nvim_tree_add_trailing = 1
-			vim.g.nvim_tree_icons = {
-				default = nil,
-				symlink = nil,
-				git = {
-					deleted = "✖",
-					ignored = "Ø",
-					renamed = "➜",
-					staged = "+",
-					unmerged = "=",
-					unstaged = "*",
-					untracked = "_",
+			require('nvim-tree').setup({
+				renderer = {
+					add_trailing = true,
+					group_empty = true,
+					icons = {
+						glyphs = {
+							folder = {
+								arrow_closed = "▸",
+								arrow_open = "▾",
+							},
+							git = {
+								deleted = "✖",
+								ignored = "⊘",
+								renamed = "➜",
+								staged = "⊕",
+								unmerged = "⑂",
+								unstaged = "⊛",
+								untracked = "?",
+							},
+						},
+						show = {
+							file = false,
+							folder = false,
+						},
+					},
 				},
-			}
-			vim.g.nvim_tree_show_icons = {
-				git = 1,
-				folders = 0,
-				files = 0,
-				folder_arrows = 1,
-			}
-			vim.g.nvim_tree_group_empty = 1
-			require('nvim-tree').setup({})
+			})
 		end,
 	}
 
