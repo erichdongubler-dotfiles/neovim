@@ -20,6 +20,7 @@ require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 
 	vim.opt.mouse = 'a'
+	vim.cmd 'behave xterm'
 
 	vim.opt.wildmode = 'longest,list,full'
 	vim.cmd [[set iskeyword-=.#]]
