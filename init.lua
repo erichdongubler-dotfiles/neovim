@@ -387,6 +387,12 @@ require('packer').startup(function()
 
 	use {
 		'hoob3rt/lualine.nvim',
+		after = {
+			'vim-sublime-monokai',
+		},
+		requires = {
+			'vim-sublime-monokai',
+		},
 		config = function()
 			require('lualine').setup({
 				options = {
