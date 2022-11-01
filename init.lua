@@ -154,17 +154,23 @@ require('packer').startup(function()
 	}
 
 	--   Buffer display above
-	vim.cmd [[
-	nnoremap <Leader>w <cmd>:bw<CR>
-	nnoremap <Leader>W :BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>
-	]]
+	use {
+		'famiu/bufdelete.nvim',
+		config = function()
+			vim.cmd [[
+			nnoremap <Leader>w <cmd>:bw<CR>
+			]]
+		end,
+	}
 	use {
 		'akinsho/bufferline.nvim',
 		tag = "v3.*",
 		after = {
+			'bufdelete.nvim',
 			'vim-sublime-monokai',
 		},
 		requires = {
+			'bufdelete.nvim',
 			'vim-sublime-monokai',
 		},
 		config = function()
@@ -174,6 +180,8 @@ require('packer').startup(function()
 			nnoremap <silent> [b <cmd>BufferLineCyclePrev<CR>
 			nnoremap <silent> <C-PageUp> <cmd>BufferPrevious<CR>
 			nnoremap <silent> <C-PageDown> <cmd>BufferNext<CR>
+
+			nnoremap <Leader>W :BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>
 
 			hi! link BufferLineBackground TabLineFill
 			hi! link BufferLineBuffer TabLineFill
@@ -202,14 +210,19 @@ require('packer').startup(function()
 			hi! link BufferLinePickSelected SublimeAqua
 			hi! link BufferLinePickVisible SublimeAqua
 			]])
+			local close_command = function(bufnum)
+				require('bufdelete').bufdelete(bufnum, true)
+			end
 			require("bufferline").setup({
 				options = {
 					buffer_close_icon = "⤬",
+					close_command = close_command,
 					close_icon = "⤬",
 					indicator = {
 						style = 'none',
 					},
 					left_trunc_marker = "«",
+					right_mouse_command = close_command,
 					right_trunc_marker = "»",
 					separator_style = { "|", "|" },
 					show_buffer_default_icon = false,
