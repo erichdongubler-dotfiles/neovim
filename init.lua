@@ -957,11 +957,14 @@ require('packer').startup(function()
 					noremap = true,
 
 					['n ]h'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+					['v ]h'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
 					['n [h'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+					['v [h'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
 
 					['n ghs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
 					['v ghs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
 					['n ghu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+					['v ghu'] = '<cmd>lua require"gitsigns".undo_stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
 					['n ghr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
 					['v ghr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
 					['n ghR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
