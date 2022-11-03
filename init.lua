@@ -370,6 +370,7 @@ require('packer').startup(function()
 			nnoremap <Leader>R <cmd>Telescope tags<CR>
 			nnoremap <Leader>T <cmd>Telescope builtin<CR>
 			nnoremap <Leader>d <cmd>Telescope diagnostics bufnr=0<CR>
+			nnoremap <Leader>f <cmd>Telescope live_grep<CR>
 			nnoremap <Leader>o <cmd>Telescope oldfiles<CR>
 			nnoremap <Leader>p <cmd>Telescope find_files<CR>
 			nnoremap <Leader>l<C-]> <cmd>Telescope lsp_definitions<CR>
@@ -676,11 +677,8 @@ require('packer').startup(function()
 		event = { 'BufEnter' },
 		setup = function()
 			vim.g.ctrlsf_auto_focus = { at = 'start' }
-			vim.api.nvim_set_keymap('n', '<Leader>f', ':CtrlSFToggle<CR>', { noremap = true })
-			vim.api.nvim_set_keymap('n', '<Leader>F', ':CtrlSF<Space>', { noremap = true })
-			vim.g.ctrlsf_default_view_mode = 'compact'
+			vim.api.nvim_set_keymap('n', '<Leader>H', ':CtrlSF<Space>', { noremap = true })
 			vim.g.ctrlsf_indent = 2
-			vim.g.ctrlsf_populate_qflist = 1
 			vim.g.ctrlsf_search_mode = 'async'
 		end,
 	}
