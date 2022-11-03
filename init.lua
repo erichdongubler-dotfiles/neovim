@@ -41,6 +41,18 @@ require('packer').startup(function()
 	vim.opt.fileencoding = 'utf-8'
 	use 's3rvac/AutoFenc'
 
+	--   Make Neovim's "default" notification sink a nice set of pop-ups on the side.
+	use {
+		'rcarriga/nvim-notify',
+		config = function()
+			local notify = require('notify')
+			notify.setup({
+				stages = "slide",
+			})
+			vim.notify = notify
+		end,
+	}
+
 	-- Buffer rendering
 
 	vim.opt.cursorline = true
