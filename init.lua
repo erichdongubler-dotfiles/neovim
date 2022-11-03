@@ -45,7 +45,6 @@ require('packer').startup(function()
 
 	vim.opt.cursorline = true
 	vim.opt.number = true
-	-- vim.opt.lazyredraw = true
 	vim.opt.scrolloff = 5
 
 	use {
