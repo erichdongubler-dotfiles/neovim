@@ -236,6 +236,7 @@ require('packer').startup(function()
 
 	--   File change management
 	vim.opt.undofile = true
+	use 'mbbill/undotree'
 	use {
 		'ErichDonGubler/vim-playnice',
 		branch = 'initial-release',
