@@ -355,6 +355,7 @@ require('packer').startup(function()
 			require('telescope').setup({
 				defaults = {
 					color_devicons = false,
+					dynamic_preview_title = true,
 					mappings = {
 						n = {
 							["<C-C>"] = actions.close,
