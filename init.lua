@@ -76,6 +76,7 @@ require('packer').startup(function()
 		vim.opt.listchars = {
 			eol = "$",
 			extends = ">",
+			nbsp = "⊘",
 			precedes = "<",
 			space = "·",
 			tab = "├─",
