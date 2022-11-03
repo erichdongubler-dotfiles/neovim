@@ -301,19 +301,17 @@ require('packer').startup(function()
 			hi! link BufferLinePickSelected SublimeAqua
 			hi! link BufferLinePickVisible SublimeAqua
 			]])
-			local close_command = function(bufnum)
-				require('bufdelete').bufdelete(bufnum, true)
-			end
 			require("bufferline").setup({
 				options = {
 					buffer_close_icon = "⤬",
-					close_command = close_command,
+					close_command = function(bufnum)
+						require('bufdelete').bufdelete(bufnum, true)
+					end,
 					close_icon = "⤬",
 					indicator = {
 						style = 'none',
 					},
 					left_trunc_marker = "«",
-					right_mouse_command = close_command,
 					right_trunc_marker = "»",
 					separator_style = { "|", "|" },
 					show_buffer_default_icon = false,
