@@ -527,6 +527,41 @@ require('packer').startup(function()
 			hi! link zshOption          Special
 			hi! link zshTypes           SublimeType
 			]])
+
+			local lsp_highlight_groups = {
+				['Error'] = {
+					[''] = 'Error',
+					['Sign'] = 'Error',
+					['Underline'] = 'SpellBad',
+					['VirtualText'] = 'Comment',
+				},
+				['Warn'] = {
+					[''] = 'SpellCap',
+					['Sign'] = 'SpellCap',
+					['Underline'] = 'SpellCap',
+					['VirtualText'] = 'Comment',
+				},
+				['Info'] = {
+					[''] = 'Comment',
+				},
+				['Hint'] = {
+					[''] = 'Comment',
+				},
+			}
+			for severity, rest in pairs(lsp_highlight_groups) do
+				for highlight_location, highlight_spec in pairs(rest) do
+					local highlight_group = 'Diagnostic' .. highlight_location .. severity
+					if type(highlight_spec) == "string" then
+						vim.cmd('hi! link ' .. highlight_group .. ' ' .. highlight_spec)
+					else
+						vim.fn['g:SublimeMonokaiHighlight'](highlight_group, highlight_spec)
+					end
+				end
+			end
+
+			vim.fn['g:SublimeMonokaiHighlight']('LspReferenceText', { bg = vim.g.sublimemonokai_darkgrey })
+			vim.fn['g:SublimeMonokaiHighlight']('LspReferenceRead', { bg = vim.g.sublimemonokai_addbg })
+			vim.fn['g:SublimeMonokaiHighlight']('LspReferenceWrite', { bg = vim.g.sublimemonokai_changebg })
 		end
 	}
 
@@ -812,37 +847,6 @@ require('packer').startup(function()
 			vim.fn['g:SublimeMonokaiHighlight']('MatchParen', { format = 'reverse' })
 			vim.fn['g:SublimeMonokaiHighlight']('MatchTag', { format = 'reverse' })
 			vim.fn['g:SublimeMonokaiHighlight']('MatchWord', { format = 'reverse' })
-
-			local lsp_highlight_groups = {
-				['Error'] = {
-					[''] = 'Error',
-					['Sign'] = 'Error',
-					['Underline'] = 'SpellBad',
-					['VirtualText'] = 'Comment',
-				},
-				['Warn'] = {
-					[''] = 'SpellCap',
-					['Sign'] = 'SpellCap',
-					['Underline'] = 'SpellCap',
-					['VirtualText'] = 'Comment',
-				},
-				['Info'] = {
-					[''] = 'Comment',
-				},
-				['Hint'] = {
-					[''] = 'Comment',
-				},
-			}
-			for severity, rest in pairs(lsp_highlight_groups) do
-				for highlight_location, highlight_spec in pairs(rest) do
-					local highlight_group = 'Diagnostic' .. highlight_location .. severity
-					if type(highlight_spec) == "string" then
-						vim.cmd('hi! link ' .. highlight_group .. ' ' .. highlight_spec)
-					else
-						vim.fn['g:SublimeMonokaiHighlight'](highlight_group, highlight_spec)
-					end
-				end
-			end
 		end
 	}
 
@@ -1103,19 +1107,7 @@ require('packer').startup(function()
 	au CursorMoved * lua vim.lsp.buf.clear_references()
 	augroup END
 	]]
-	use {
-		'neovim/nvim-lspconfig',
-		after = {
-			'vim-sublime-monokai',
-		},
-		config = function()
-			-- This doesn't actually require `nvim-lspconfig`, but it's convenient for depending on
-			-- `vim-sublime-monokai` loading first.
-			vim.fn['g:SublimeMonokaiHighlight']('LspReferenceText', { bg = vim.g.sublimemonokai_darkgrey })
-			vim.fn['g:SublimeMonokaiHighlight']('LspReferenceRead', { bg = vim.g.sublimemonokai_addbg })
-			vim.fn['g:SublimeMonokaiHighlight']('LspReferenceWrite', { bg = vim.g.sublimemonokai_changebg })
-		end,
-	}
+	use { 'neovim/nvim-lspconfig' }
 
 
 	use {
