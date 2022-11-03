@@ -1475,6 +1475,9 @@ require('packer').startup(function()
 		after = {
 			'nvim-lspconfig',
 		},
+		requires = {
+			'nvim-lspconfig',
+		},
 		config = function()
 			require('lspconfig').tsserver.setup({})
 		end,
