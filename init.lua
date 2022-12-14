@@ -1545,6 +1545,7 @@ require("packer").startup(function()
 			"cmp-nvim-lsp",
 			"nvim-lspconfig",
 			"vim-sublime-monokai",
+			"vim-sandwich",
 		},
 		requires = {
 			"cmp-nvim-lsp",
