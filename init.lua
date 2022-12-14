@@ -61,7 +61,7 @@ require("packer").startup(function()
 	vim.cmd("behave xterm")
 
 	vim.opt.wildmode = "longest,list,full"
-	vim.cmd([[set iskeyword-=.#]])
+	vim.opt.iskeyword:remove({ ".", "#" })
 
 	vim.g.mapleader = "\\"
 	vim.g.maplocalleader = "|"
@@ -159,17 +159,13 @@ require("packer").startup(function()
 	if not vim_indentguides_disabled then
 		function disable_indentguides()
 			vim.b.toggle_indentguides = 0
-			vim.cmd([[
-			IndentGuidesToggle
-			]])
+			vim.cmd.IndentGuidesToggle()
 			set_listchars_verbose()
 		end
 
 		function enable_indentguides()
 			vim.b.toggle_indentguides = 1
-			vim.cmd([[
-			IndentGuidesToggle
-			]])
+			vim.cmd.IndentGuidesToggle()
 			set_listchars_quiet()
 		end
 
