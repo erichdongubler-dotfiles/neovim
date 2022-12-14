@@ -356,7 +356,7 @@ require("packer").startup(function()
 				options = {
 					buffer_close_icon = "⤬",
 					close_command = function(bufnum)
-						require("bufdelete").bufdelete(bufnum, true)
+						require("bufdelete").bufwipeout(bufnum)
 					end,
 					close_icon = "⤬",
 					indicator = {
