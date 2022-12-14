@@ -917,79 +917,85 @@ require("packer").startup(function()
 	})
 
 	sandwich_initted = false
-	function _G.init_sandwich_recipes_once()
+	function _G.add_sandwich_recipes(callback)
 		if not sandwich_initted then
 			-- Not sure why this needs to be in vimscript. :scratch-head:
 			vim.cmd("let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)")
 			sandwich_initted = true
 		end
+		local recipes = vim.g["sandwich#recipes"]
+		function add_entry(recipe)
+			table.insert(recipes, recipe)
+		end
+		callback(add_entry)
+		vim.g["sandwich#recipes"] = recipes
 	end
 
 	use({
 		"machakann/vim-sandwich",
-		event = { "BufEnter" },
+		event = {
+			"BufEnter",
+		},
 		config = function()
-			_G.init_sandwich_recipes_once()
+			_G.add_sandwich_recipes(function(add_recipe)
+				local vim_surround_ish_recipes = {
+					{
+						buns = { "{ ", " }" },
+						nesting = 1,
+						match_syntax = 1,
+						kind = { "add", "replace" },
+						action = { "add" },
+						input = { "{" },
+					},
+					{
+						buns = { "[ ", " ]" },
+						nesting = 1,
+						match_syntax = 1,
+						kind = { "add", "replace" },
+						action = { "add" },
+						input = { "[" },
+					},
+					{
+						buns = { "( ", " )" },
+						nesting = 1,
+						match_syntax = 1,
+						kind = { "add", "replace" },
+						action = { "add" },
+						input = { "(" },
+					},
+					{
+						buns = { "{\\s*", "\\s*}" },
+						nesting = 1,
+						regex = 1,
+						match_syntax = 1,
+						kind = { "delete", "replace", "textobj" },
+						action = { "delete" },
+						input = { "{" },
+					},
+					{
+						buns = { "\\[\\s*", "\\s*\\]" },
+						nesting = 1,
+						regex = 1,
+						match_syntax = 1,
+						kind = { "delete", "replace", "textobj" },
+						action = { "delete" },
+						input = { "[" },
+					},
+					{
+						buns = { "(\\s*", "\\s*)" },
+						nesting = 1,
+						regex = 1,
+						match_syntax = 1,
+						kind = { "delete", "replace", "textobj" },
+						action = { "delete" },
+						input = { "(" },
+					},
+				}
 
-			local recipes = vim.g["sandwich#recipes"]
-			local vim_surround_ish_recipes = {
-				{
-					buns = { "{ ", " }" },
-					nesting = 1,
-					match_syntax = 1,
-					kind = { "add", "replace" },
-					action = { "add" },
-					input = { "{" },
-				},
-				{
-					buns = { "[ ", " ]" },
-					nesting = 1,
-					match_syntax = 1,
-					kind = { "add", "replace" },
-					action = { "add" },
-					input = { "[" },
-				},
-				{
-					buns = { "( ", " )" },
-					nesting = 1,
-					match_syntax = 1,
-					kind = { "add", "replace" },
-					action = { "add" },
-					input = { "(" },
-				},
-				{
-					buns = { "{\\s*", "\\s*}" },
-					nesting = 1,
-					regex = 1,
-					match_syntax = 1,
-					kind = { "delete", "replace", "textobj" },
-					action = { "delete" },
-					input = { "{" },
-				},
-				{
-					buns = { "\\[\\s*", "\\s*\\]" },
-					nesting = 1,
-					regex = 1,
-					match_syntax = 1,
-					kind = { "delete", "replace", "textobj" },
-					action = { "delete" },
-					input = { "[" },
-				},
-				{
-					buns = { "(\\s*", "\\s*)" },
-					nesting = 1,
-					regex = 1,
-					match_syntax = 1,
-					kind = { "delete", "replace", "textobj" },
-					action = { "delete" },
-					input = { "(" },
-				},
-			}
-			for _, v in pairs(vim_surround_ish_recipes) do
-				table.insert(recipes, v)
-			end
-
-			vim.g["sandwich#recipes"] = recipes
+				for _, recipe in pairs(vim_surround_ish_recipes) do
+					add_recipe(recipe)
+				end
+			end)
 		end,
 	})
 
@@ -1552,35 +1558,30 @@ require("packer").startup(function()
 			"vim-sublime-monokai",
 		},
 		config = function()
-			_G.init_sandwich_recipes_once()
-
-			local recipes = vim.g["sandwich#recipes"]
-
-			-- TODO: These are broken. :(
-			local add_rust_sandwich_binding = function(input, start, end_)
-				table.insert(recipes, {
-					buns = { start, end_ },
-					filetype = { "rust" },
-					input = { input },
-					nesting = 1,
-					indent = 1,
-				})
-			end
-			add_rust_sandwich_binding("A", "Arc<", ">")
-			add_rust_sandwich_binding("B", "Box<", ">")
-			add_rust_sandwich_binding("O", "Option<", ">")
-			add_rust_sandwich_binding("P", "PhantomData<", ">")
-			add_rust_sandwich_binding("R", "Result<", ">")
-			add_rust_sandwich_binding("V", "Vec<", ">")
-			add_rust_sandwich_binding("a", "Arc::new(", ")")
-			add_rust_sandwich_binding("b", "Box::new(", ")")
-			add_rust_sandwich_binding("d", "dbg!(", ")")
-			add_rust_sandwich_binding("o", "Some(", ")")
-			add_rust_sandwich_binding("r", "Ok(", ")")
-			add_rust_sandwich_binding("u", "unsafe { ", " }")
-			add_rust_sandwich_binding("v", "vec![", "]")
-
-			vim.g["sandwich#recipes"] = recipes
+			_G.add_sandwich_recipes(function(add_recipe)
+				local add_rust_sandwich_binding = function(input, start, end_)
+					add_recipe({
+						buns = { start, end_ },
+						filetype = { "rust" },
+						input = { input },
+						nesting = 1,
+						indent = 1,
+					})
+				end
+				add_rust_sandwich_binding("A", "Arc<", ">")
+				add_rust_sandwich_binding("B", "Box<", ">")
+				add_rust_sandwich_binding("O", "Option<", ">")
+				add_rust_sandwich_binding("P", "PhantomData<", ">")
+				add_rust_sandwich_binding("R", "Result<", ">")
+				add_rust_sandwich_binding("V", "Vec<", ">")
+				add_rust_sandwich_binding("a", "Arc::new(", ")")
+				add_rust_sandwich_binding("b", "Box::new(", ")")
+				add_rust_sandwich_binding("d", "dbg!(", ")")
+				add_rust_sandwich_binding("o", "Some(", ")")
+				add_rust_sandwich_binding("r", "Ok(", ")")
+				add_rust_sandwich_binding("u", "unsafe { ", " }")
+				add_rust_sandwich_binding("v", "vec![", "]")
+			end)
 
 			-- TODO
 			function configure_rust()
