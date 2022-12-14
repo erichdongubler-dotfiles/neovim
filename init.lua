@@ -8,14 +8,28 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.cmd("packadd packer.nvim")
 end
 
+function _G.augroup(name, callback)
+	local augroup_id = vim.api.nvim_create_augroup(name, {})
+	function au(name, patterns, cmd)
+		local args = { pattern = patterns, group = augroup_id }
+		if type(cmd) == "string" then
+			args.command = cmd
+		else
+			args.callback = cmd
+		end
+		vim.api.nvim_create_autocmd(name, args)
+	end
+	callback(au)
+end
+
 require("packer").startup(function()
-	vim.cmd([[
-	augroup PackerUpdate
-	au!
-	au BufWritePost init.lua source <afile> | PackerCompile profile=true
-	au User PackerCompileDone lua vim.notify('Finished compiling Packer startup script.', nil, { title = "`PackerCompile` finished" })
-	augroup END
-	]])
+	augroup("PackerUpdate", function(au)
+		au("BufWritePost", "init.lua", "source <afile> | PackerCompile profile=true")
+		au("User", { "PackerCompileDone" }, function()
+			vim.notify("Finished compiling Packer startup script.", nil, { title = "`PackerCompile` finished" })
+		end)
+	end)
+
 	vim.cmd("nnoremap <Leader>vs <cmd>source " .. vim.fn.stdpath("config") .. "/init.lua <Bar> PackerCompile<CR>")
 	vim.cmd("nnoremap <Leader>ve <cmd>e " .. vim.fn.stdpath("config") .. "/init.lua<CR>")
 
@@ -62,14 +76,17 @@ require("packer").startup(function()
 	use({
 		"xuyuanp/scrollbar.nvim",
 		config = function()
-			vim.cmd([[
-			augroup ScrollbarInit
-			autocmd!
-			autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
-			autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
-			autocmd WinLeave,BufLeave,BufWinLeave,FocusLost            * silent! lua require('scrollbar').clear()
-			augroup end
-			]])
+			local scrollbar = require("scrollbar")
+			function show()
+				scrollbar.show()
+			end
+			function clear()
+				scrollbar.clear()
+			end
+			augroup("ScrollbarInit", function(au)
+				au({ "CursorMoved", "VimResized", "QuitPre", "WinEnter", "FocusGained" }, "*", show, { silent = true })
+				au({ "WinLeave", "BufLeave", "BufWinLeave", "FocusLost" }, "*", clear, { silent = true })
+			end)
 		end,
 	})
 
@@ -713,12 +730,13 @@ require("packer").startup(function()
 
 	vim.cmd([[
 	command! -nargs=1 SetRowLimit setlocal textwidth=<args>
-
-	augroup DefaultRowLimit
-	au!
-	au FileType * SetRowLimit 100
-	augroup END
 	]])
+
+	augroup("DefaultRowLimit", function(au)
+		au("FileType", "*", function()
+			vim.cmd.SetRowLimit(100)
+		end)
+	end)
 
 	--   Add some common line-ending shortcuts
 	function _G.append_chars(sequence)
@@ -769,12 +787,11 @@ require("packer").startup(function()
 	use({
 		"ciaranm/detectindent",
 		config = function()
-			vim.cmd([[
-			augroup DetectIndent
-			au!
-			au BufReadPost * :DetectIndent
-			augroup END
-			]])
+			augroup("DetectIndent", function(au)
+				au("BufReadPost", "*", function()
+					vim.cmd.DetectIndent()
+				end)
+			end)
 		end,
 	})
 
@@ -1085,12 +1102,11 @@ require("packer").startup(function()
 	--   Tags: the poor man's Intellisense database
 
 	vim.opt.tags = ".tags"
-	vim.cmd([[
-	augroup tags
-	au!
-	au BufNewFile,BufRead .tags setlocal filetype=tags
-	augroup END
-	]])
+	augroup("tags", function(au)
+		au({ "BufNewFile", "BufRead" }, ".tags", function()
+			vim.opt_local.filetype = "tags"
+		end)
+	end)
 	use({
 		"ludovicchabant/vim-gutentags",
 		setup = function()
@@ -1171,14 +1187,10 @@ require("packer").startup(function()
 	]])
 
 	-- TODO: Get colors and highlighting for LSP actually looking good
-	vim.cmd([[
-	augroup ErichDonGublerCursorHoldLsp
-	au!
-	au CursorHold  * lua vim.lsp.buf.document_highlight()
-	au CursorHoldI * lua vim.lsp.buf.document_highlight()
-	au CursorMoved * lua vim.lsp.buf.clear_references()
-	augroup END
-	]])
+	augroup("ErichDonGublerCursorHoldLsp", function(au)
+		au({ "CursorHold", "CursorHoldI" }, "*", vim.lsp.buf.document_highlight)
+		au("CursorMoved", "*", vim.lsp.buf.clear_references)
+	end)
 	use({ "neovim/nvim-lspconfig" })
 
 	use({
@@ -1327,53 +1339,73 @@ require("packer").startup(function()
 		"Chiel92/vim-autoformat",
 		disable = vim.fn.has("python3") == 0,
 		config = function()
-			vim.cmd([[
-			augroup WhitespaceAutoformat
-			au!
-			au BufWrite * :Autoformat
-			augroup END
-			]])
+			augroup("WhitespaceAutoformat", function(au)
+				au("BufWrite", "*", ":Autoformat")
+			end)
 
-			function _G.disable_trailing_whitespace_stripping()
+			function disable_trailing_whitespace_stripping()
 				vim.b.autoformat_remove_trailing_spaces = 0
 			end
-			function _G.disable_indentation_fixing()
+			function disable_indentation_fixing()
 				vim.b.autoformat_autoindent = 0
 			end
-			function _G.disable_retab()
+			function disable_retab()
 				vim.b.autoformat_retab = 0
 			end
-			function _G.disable_whitespace_fixing()
-				_G.disable_trailing_whitespace_stripping()
-				_G.disable_indentation_fixing()
-				_G.disable_retab()
+			function disable_whitespace_fixing()
+				disable_trailing_whitespace_stripping()
+				disable_indentation_fixing()
+				disable_retab()
 			end
-			vim.cmd([[
-			augroup WhitespaceAutoformatBlacklist
-			au!
-			au BufNewFile,BufRead *.diff call v:lua.disable_whitespace_fixing()
-			au BufNewFile,BufRead *.patch call v:lua.disable_whitespace_fixing()
-			au FileType diff call v:lua.disable_whitespace_fixing()
-			au FileType ctrlsf call v:lua.disable_whitespace_fixing()
-			au FileType git call v:lua.disable_whitespace_fixing()
-			au FileType gitrebase call v:lua.disable_whitespace_fixing()
-			au FileType gitcommit call v:lua.disable_indentation_fixing()
-			au BufNewFile,BufRead git-rebase-todo call v:lua.disable_whitespace_fixing()
-			au BufNewFile,BufRead git-revise-todo call v:lua.disable_whitespace_fixing()
-			au BufNewFile,BufRead *.md call v:lua.disable_indentation_fixing()
-			au FileType markdown call v:lua.disable_indentation_fixing()
-			au FileType snippets call v:lua.disable_whitespace_fixing()
-			au FileType typescript call v:lua.disable_indentation_fixing()
-			au FileType javascript call v:lua.disable_indentation_fixing()
-			au FileType rust call v:lua.disable_indentation_fixing()
-			au FileType toml call v:lua.disable_indentation_fixing()
-			au FileType sh call v:lua.disable_indentation_fixing()
-			au FileType dot call v:lua.disable_indentation_fixing()
-			au FileType xml call v:lua.disable_indentation_fixing()
-			au FileType cpp call v:lua.disable_whitespace_fixing()
-			au FileType csv call v:lua.disable_whitespace_fixing()
-			augroup END
-			]])
+
+			local switch_to_file_events = { "BufNewFile", "BufRead" }
+
+			local file_type_event = { "FileType" }
+
+			local blacklist_entries = {}
+			function blacklist(event, pattern, callback)
+				blacklist_entries[event] = blacklist_entries[event] or {}
+				local event = blacklist_entries[event]
+
+				event[callback] = event[callback] or {}
+				local callback = event[callback]
+
+				callback[pattern] = {}
+			end
+
+			blacklist(switch_to_file_events, "*.diff", disable_whitespace_fixing)
+			blacklist(switch_to_file_events, "*.patch", disable_whitespace_fixing)
+			blacklist(file_type_event, "diff", disable_whitespace_fixing)
+			blacklist(file_type_event, "ctrlsf", disable_whitespace_fixing)
+			blacklist(file_type_event, "git", disable_whitespace_fixing)
+			blacklist(file_type_event, "gitrebase", disable_whitespace_fixing)
+			blacklist(file_type_event, "gitcommit", disable_indentation_fixing)
+
+			blacklist(switch_to_file_events, "git-rebase-todo", disable_whitespace_fixing)
+			blacklist(switch_to_file_events, "git-revise-todo", disable_whitespace_fixing)
+			blacklist(switch_to_file_events, "*.md", disable_indentation_fixing)
+			blacklist(file_type_event, "markdown", disable_indentation_fixing)
+			blacklist(file_type_event, "snippets", disable_whitespace_fixing)
+			blacklist(file_type_event, "typescript", disable_indentation_fixing)
+			blacklist(file_type_event, "javascript", disable_indentation_fixing)
+			blacklist(file_type_event, "rust", disable_indentation_fixing)
+			blacklist(file_type_event, "toml", disable_indentation_fixing)
+			blacklist(file_type_event, "sh", disable_indentation_fixing)
+			blacklist(file_type_event, "dot", disable_indentation_fixing)
+			blacklist(file_type_event, "xml", disable_indentation_fixing)
+			blacklist(file_type_event, "cpp", disable_whitespace_fixing)
+			blacklist(file_type_event, "csv", disable_whitespace_fixing)
+			blacklist(file_type_event, "dosini", disable_indentation_fixing)
+
+			augroup("WhitespaceAutoformatBlacklist", function(au)
+				for events, rest in pairs(blacklist_entries) do
+					for callback, rest in pairs(rest) do
+						for pattern, _should_be_nil in pairs(rest) do
+							au(events, pattern, callback)
+						end
+					end
+				end
+			end)
 		end,
 	})
 
@@ -1396,13 +1428,12 @@ require("packer").startup(function()
 			"tagbar",
 		},
 		config = function()
-			vim.cmd([[
-			augroup markdown
-			au!
-			au FileType markdown SetRowLimit 80
-			au FileType markdown EnableWordWrap
-			augroup END
-			]])
+			augroup("markdown", function()
+				au("FileType", "markdown", function()
+					vim.cmd.SetRowLimit(80)
+					vim.cmd.EnableWordWrap()
+				end)
+			end)
 			vim.g.tagbar_type_markdown = {
 				ctagstype = "markdown",
 				kinds = {
@@ -1439,12 +1470,9 @@ require("packer").startup(function()
 			vim.g.org_heading_highlight_levels = 10
 		end,
 		config = function()
-			vim.cmd([[
-			augroup orgmode
-			au!
-			au FileType text,org :EnableWordWrap
-			augroup END
-			]])
+			augroup("orgmode", function(au)
+				au("FileType", { "text", "org" }, vim.cmd.EnableWordWrap)
+			end)
 		end,
 	})
 
@@ -1531,12 +1559,9 @@ require("packer").startup(function()
 				nnoremap <LocalLeader>T <cmd>Cargo test<CR>
 				]])
 			end
-			vim.cmd([[
-			augroup rust
-			au!
-			au FileType rust call v:lua.configure_rust()
-			augroup end
-			]])
+			augroup("rust", function(au)
+				au("FileType", "rust", configure_rust)
+			end)
 
 			vim.cmd([[
 			AddShebangPattern! rust ^#!.*/bin/env\s\+run-cargo-(script|eval)\>
