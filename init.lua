@@ -21,6 +21,15 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.cmd("packadd packer.nvim")
 end
 
+-- Make our own little ecosystem for Vim config...
+
+function _G.bind_fuse(func, ...)
+	local args = { ... }
+	return function()
+		func(unpack(args))
+	end
+end
+
 function _G.command(name, command, opts)
 	opts = opts or {}
 	vim.api.nvim_create_user_command(name, command, opts)
@@ -76,9 +85,7 @@ packer.startup(function()
 	noremap("n", "<Leader>vs", function()
 		reload_config_and_compile_packer(this_script)
 	end)
-	noremap("n", "<Leader>ve", function()
-		vim.cmd.e(this_script)
-	end)
+	noremap("n", "<Leader>ve", bind_fuse(vim.cmd.e, this_script))
 
 	use("wbthomason/packer.nvim")
 
@@ -882,22 +889,10 @@ packer.startup(function()
 		opts_namespace.wrap = enabled
 	end
 	set_word_wrap(false, true)
-	command("DisableWordWrap", function()
-		set_word_wrap(false)
-	end, {
-		nargs = 0,
-	})
-	command("EnableWordWrap", function()
-		set_word_wrap(true)
-	end, {
-		nargs = 0,
-	})
-	noremap("n", "<Leader><Tab>", function()
-		toggle_word_wrap(false)
-	end)
-	noremap("n", "<Leader><S-Tab>", function()
-		toggle_word_wrap(true)
-	end)
+	command("DisableWordWrap", bind_fuse(set_word_wrap, false), { nargs = 0 })
+	command("EnableWordWrap", bind_fuse(set_word_wrap, true), { nargs = 0 })
+	noremap("n", "<Leader><Tab>", bind_fuse(toggle_word_wrap, false))
+	noremap("n", "<Leader><S-Tab>", bind_fuse(toggle_word_wrap, true))
 
 	--   Brackets
 
@@ -1269,16 +1264,11 @@ packer.startup(function()
 				icons = false,
 				use_diagnostic_signs = true,
 			})
-			function bind_toggle(type)
-				return function()
-					trouble.toggle(type)
-				end
-			end
 			local trouble_bindings_normal = {
 				["<Leader>M"] = trouble.toggle,
-				["<Leader>md"] = bind_toggle("document_diagnostics"),
-				["<Leader>mq"] = bind_toggle("loclist"),
-				["<Leader>mw"] = bind_toggle("workspace_diagnostics"),
+				["<Leader>md"] = bind_fuse(trouble.toggle, "document_diagnostics"),
+				["<Leader>mq"] = bind_fuse(trouble.toggle, "loclist"),
+				["<Leader>mw"] = bind_fuse(trouble.toggle, "workspace_diagnostics"),
 			}
 			for binding, cmd in pairs(trouble_bindings_normal) do
 				noremap("n", binding, cmd, { silent = true })
@@ -1603,28 +1593,22 @@ packer.startup(function()
 			-- TODO
 			function configure_rust()
 				local cargo = vim.cmd.Cargo
-				local bind_cargo = function(...)
-					local args = { ... }
-					return function()
-						cargo(unpack(args))
-					end
-				end
 				local rust_bindings = {
-					b = bind_cargo("build"),
-					B = bind_cargo("build", "--release"),
-					c = bind_cargo("check"),
-					d = bind_cargo("doc"),
-					D = bind_cargo("doc", "--open"),
-					F = bind_cargo("fmt"),
+					b = bind_fuse(cargo, "build"),
+					B = bind_fuse(cargo, "build", "--release"),
+					c = bind_fuse(cargo, "check"),
+					d = bind_fuse(cargo, "doc"),
+					D = bind_fuse(cargo, "doc", "--open"),
+					F = bind_fuse(cargo, "fmt"),
 					f = vim.cmd.RustFmt,
 					p = vim.cmd.RustPlay,
-					r = bind_cargo("run"),
-					R = bind_cargo("run", "--release"),
+					r = bind_fuse(cargo, "run"),
+					R = bind_fuse(cargo, "run", "--release"),
 					s = function()
 						cargo("script", vim.cmd.expand("%"))
 					end,
 					t = vim.cmd.RustTest,
-					T = bind_cargo("test"),
+					T = bind_fuse(cargo, "test"),
 				}
 				for binding, cmd in pairs(rust_bindings) do
 					noremap("n", "<LocalLeader>" .. binding, cmd)
