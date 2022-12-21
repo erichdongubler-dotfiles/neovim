@@ -302,14 +302,9 @@ packer.startup(function()
 
 	--   File change management
 	vim.opt.undofile = true
+	vim.opt.autoread = true
 	use("mbbill/undotree")
-	use({
-		"ErichDonGubler/vim-playnice",
-		branch = "initial-release",
-		setup = function()
-			vim.opt.autoread = true
-		end,
-	})
+	use({ "ErichDonGubler/vim-playnice", branch = "initial-release" })
 
 	--   Buffer display above
 	use({
