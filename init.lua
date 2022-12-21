@@ -1,4 +1,15 @@
 local this_script = vim.fs.normalize(vim.fn.expand("<script>:p"))
+local canonical_neovim_lua_config_path = vim.fs.normalize(vim.fn.stdpath("config") .. "/init.lua")
+
+if this_script ~= canonical_neovim_lua_config_path then
+	vim.notify(
+		"Warning: this script (`"
+			.. this_script
+			.. "`) expects to be the canonical Neovim Lua config path at `"
+			.. canonical_neovim_lua_config_path
+			.. "`, but that isn't true. Weirdness may happen, beware!"
+	)
+end
 
 -- Stolen from https://github.com/wbthomason/packer.nvim#bootstrapping
 
