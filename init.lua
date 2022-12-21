@@ -319,6 +319,7 @@ packer.startup(function()
 		after = {
 			"bufdelete.nvim",
 			"vim-sublime-monokai",
+			"vim-unimpaired", -- conflicts with `]b`-ish bindings
 		},
 		requires = {
 			"bufdelete.nvim",
