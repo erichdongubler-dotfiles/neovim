@@ -527,7 +527,7 @@ packer.startup(function()
 	--   File management
 
 	use({
-		"kyazdani42/nvim-tree.lua",
+		"nvim-tree/nvim-tree.lua",
 		event = {
 			"BufReadPost",
 		},
