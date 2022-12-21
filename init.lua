@@ -1300,7 +1300,6 @@ packer.startup(function()
 		event = { "BufEnter" },
 		requires = {
 			"cmp-buffer",
-			"cmp-calc",
 			"cmp-cmdline",
 			"cmp-nvim-lsp",
 			"cmp-nvim-tags",
@@ -1330,7 +1329,6 @@ packer.startup(function()
 				},
 				sources = cmp.config.sources({
 					{ name = "buffer" },
-					{ name = "calc" },
 					{ name = "nvim_lsp" },
 					{ name = "tags" },
 					{ name = "ultisnips" },
@@ -1356,10 +1354,6 @@ packer.startup(function()
 	})
 	use({
 		"hrsh7th/cmp-buffer",
-		after = "nvim-cmp",
-	})
-	use({
-		"hrsh7th/cmp-calc",
 		after = "nvim-cmp",
 	})
 	use({
