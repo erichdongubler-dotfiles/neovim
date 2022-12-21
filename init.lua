@@ -781,6 +781,8 @@ packer.startup(function()
 
 	use("tpope/vim-unimpaired") -- sort of a kitchen sink plugin
 
+	use("tpope/vim-endwise")
+
 	--   Default max document width
 
 	-- TODO: only do this once?
