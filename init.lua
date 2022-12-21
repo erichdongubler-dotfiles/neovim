@@ -66,7 +66,10 @@ packer.startup(function()
 			end
 		end)
 		au("User", { "PackerCompileDone" }, function()
-			vim.notify("Finished compiling Packer startup script.", nil, { title = "`PackerCompile` finished" })
+			vim.notify("Finished compiling Packer startup script from `" .. this_script .. "`", vim.log.levels.INFO, {
+				title = "`PackerCompile` finished",
+				timeout = 1000, -- ms
+			})
 		end)
 	end)
 
