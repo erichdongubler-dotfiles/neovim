@@ -1128,6 +1128,7 @@ packer.startup(function()
 					["v ghr"] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
 					["n ghR"] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
 					["n ghp"] = '<cmd>lua require"gitsigns".preview_hunk_inline()<CR>',
+					["v ghp"] = '<cmd>lua require"gitsigns".preview_hunk_inline({vim.fn.line("."), vim.fn.line("v")})<CR>',
 					["n ghb"] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
 					["n ghS"] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
 					["n ghU"] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
