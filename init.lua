@@ -146,8 +146,8 @@ packer.startup(function()
 	--   Whitespace
 
 	function set_listchars_verbose()
-		vim.opt.list = true
-		vim.cmd([[ set listchars= ]]) -- NOTE: this is a hack -- there's no clearing or resetting from assignment below. :(
+		vim.o.list = true
+		vim.o.listchars = ""
 		vim.opt.listchars = {
 			eol = "$",
 			extends = ">",
@@ -161,8 +161,8 @@ packer.startup(function()
 	_G.set_listchars_verbose = set_listchars_verbose
 
 	function set_listchars_quiet()
-		vim.opt.list = true
-		vim.cmd([[ set listchars= ]]) -- NOTE: this is a hack -- there's no clearing or resetting from assignment below. :(
+		vim.o.list = true
+		vim.o.listchars = ""
 		vim.opt.listchars = {
 			extends = ">",
 			precedes = "<",
