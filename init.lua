@@ -1,3 +1,5 @@
+local this_script = vim.fs.normalize(vim.fn.expand("<script>:p"))
+
 -- Stolen from https://github.com/wbthomason/packer.nvim#bootstrapping
 
 local packer_bootstrap = false
@@ -39,16 +41,28 @@ function _G.augroup(name, callback)
 	callback(au)
 end
 
-require("packer").startup(function()
+local packer = require("packer")
+packer.startup(function()
+	function reload_config_and_compile_packer(path)
+		vim.cmd.source(path)
+		packer.compile()
+	end
 	augroup("PackerUpdate", function(au)
-		au("BufWritePost", "init.lua", "source <afile> | PackerCompile profile=true")
+		au("BufWritePost", "init.lua", function()
+			local path_written = vim.fs.normalize(vim.fn.expand("<afile>:p"))
+			reload_config_and_compile_packer(path_written)
+		end)
 		au("User", { "PackerCompileDone" }, function()
 			vim.notify("Finished compiling Packer startup script.", nil, { title = "`PackerCompile` finished" })
 		end)
 	end)
 
-	noremap("n", "<Leader>vs", "<cmd>source " .. vim.fn.stdpath("config") .. "/init.lua <Bar> PackerCompile<CR>")
-	noremap("n", "<Leader>ve", "<cmd>e " .. vim.fn.stdpath("config") .. "/init.lua<CR>")
+	noremap("n", "<Leader>vs", function()
+		reload_config_and_compile_packer(this_script)
+	end)
+	noremap("n", "<Leader>ve", function()
+		vim.cmd.e(this_script)
+	end)
 
 	use("wbthomason/packer.nvim")
 
