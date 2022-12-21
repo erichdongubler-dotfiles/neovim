@@ -61,7 +61,9 @@ packer.startup(function()
 	augroup("PackerUpdate", function(au)
 		au("BufWritePost", "init.lua", function()
 			local path_written = vim.fs.normalize(vim.fn.expand("<afile>:p"))
-			reload_config_and_compile_packer(path_written)
+			if path_written == this_script then
+				reload_config_and_compile_packer(path_written)
+			end
 		end)
 		au("User", { "PackerCompileDone" }, function()
 			vim.notify("Finished compiling Packer startup script.", nil, { title = "`PackerCompile` finished" })
