@@ -1547,6 +1547,8 @@ packer.startup(function()
 
 	use("gutenye/json5.vim")
 
+	use("imsnif/kdl.vim")
+
 	--     Native world
 
 	use("pboettch/vim-cmake-syntax")
