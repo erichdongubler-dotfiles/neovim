@@ -1451,6 +1451,7 @@ packer.startup(function()
 			blacklist(file_type_event, "xml", disable_indentation_fixing)
 			blacklist(file_type_event, "cpp", disable_whitespace_fixing)
 			blacklist(file_type_event, "csv", disable_whitespace_fixing)
+			blacklist(file_type_event, "txt", disable_whitespace_fixing)
 			blacklist(file_type_event, "dosini", disable_indentation_fixing)
 
 			augroup("WhitespaceAutoformatBlacklist", function(au)
