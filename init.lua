@@ -109,6 +109,8 @@ packer.startup(function()
 	vim.opt.fileencoding = "utf-8"
 	use("s3rvac/AutoFenc")
 
+	vim.o.termguicolors = true
+
 	--   Make Neovim's "default" notification sink a nice set of pop-ups on the side.
 	use({
 		"rcarriga/nvim-notify",
