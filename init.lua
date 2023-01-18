@@ -35,9 +35,7 @@ function _G.command(name, command, opts)
 	vim.api.nvim_create_user_command(name, command, opts)
 end
 
-function _G.map(mode, lhs, rhs, opts)
-	vim.keymap.set(mode, lhs, rhs, options)
-end
+_G.map = vim.keymap.set
 
 function _G.noremap(mode, lhs, rhs, opts)
 	local options = { noremap = true }
