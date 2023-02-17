@@ -581,14 +581,19 @@ packer.startup(function()
 
 	--   Highlights inspection
 	--   TODO: I think this could be better?
-	function syntax_stack()
+	function print_syntax_stack()
 		if not vim.fn.exists("*synstack") then
 			return
 		end
-		return vim.fn.map(vim.fn.synstack(vim.fn.line("."), vim.fn.col(".")), 'synIDattr(v:val, "name")')
+		print(vim.inspect(vim.fn.map(
+			vim.fn.synstack(vim.fn.line("."), vim.fn.col(".")),
+			function()
+				return vim.fn.synIDattr(vim.v.val, "name")
+			end
+		)))
 	end
-	command("EchoHighlightingGroup", syntax_stack, { nargs = 0 })
-	noremap("n", "<Leader>0", syntax_stack)
+	command("EchoHighlightingGroup", print_syntax_stack, { nargs = 0 })
+	noremap("n", "<Leader>0", print_syntax_stack)
 
 	use({
 		"ErichDonGubler/vim-sublime-monokai",
