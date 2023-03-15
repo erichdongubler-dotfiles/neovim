@@ -1537,7 +1537,7 @@ packer.startup(function()
 		end,
 		config = function()
 			augroup("orgmode", function(au)
-				au("FileType", { "text", "org" }, vim.cmd.EnableWordWrap)
+				au("FileType", { "text", "org" }, bind_fuse(vim.cmd.EnableWordWrap))
 			end)
 		end,
 	})
