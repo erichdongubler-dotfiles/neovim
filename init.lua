@@ -635,19 +635,21 @@ packer.startup(function()
 					[""] = "Error",
 					["Sign"] = "Error",
 					["Underline"] = "SpellBad",
-					["VirtualText"] = "Comment",
+					["VirtualText"] = "NonText",
 				},
 				["Warn"] = {
 					[""] = "SpellCap",
 					["Sign"] = "SpellCap",
 					["Underline"] = "SpellCap",
-					["VirtualText"] = "Comment",
+					["VirtualText"] = "NonText",
 				},
 				["Info"] = {
 					[""] = "Comment",
+					["VirtualText"] = "NonText",
 				},
 				["Hint"] = {
 					[""] = "Comment",
+					["VirtualText"] = "NonText",
 				},
 			}
 			for severity, rest in pairs(lsp_highlight_groups) do
