@@ -1443,6 +1443,7 @@ packer.startup(function()
 			blacklist(file_type_event, "git", disable_whitespace_fixing)
 			blacklist(file_type_event, "gitrebase", disable_whitespace_fixing)
 			blacklist(file_type_event, "gitcommit", disable_indentation_fixing)
+			blacklist(file_type_event, "hgcommit", disable_indentation_fixing)
 
 			blacklist(switch_to_file_events, "git-rebase-todo", disable_whitespace_fixing)
 			blacklist(switch_to_file_events, "git-revise-todo", disable_whitespace_fixing)
