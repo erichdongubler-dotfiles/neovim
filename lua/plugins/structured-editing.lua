@@ -216,10 +216,9 @@ return {
 		end,
 	},
 	{
-		"junegunn/vim-easy-align",
+		"echasnovski/mini.align",
 		event = "VeryLazy",
-		config = function(_, opts)
-			map({ "x", "n" }, "ga", "<Plug>(EasyAlign)")
-		end,
+		version = "*",
+		config = true,
 	},
 }
