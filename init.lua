@@ -10,6 +10,16 @@ vim.g.number = true
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "|"
 
+_G.map = vim.keymap.set
+
+function _G.noremap(mode, lhs, rhs, opts)
+	local options = { noremap = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	map(mode, lhs, rhs, options)
+end
+
 function _G.augroup(name, callback)
 	local augroup_id = vim.api.nvim_create_augroup(name, {})
 	function au(name, patterns, cmd)

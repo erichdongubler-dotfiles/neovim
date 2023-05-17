@@ -4,13 +4,13 @@ return {
 	-- LSP-oriented integration
 	{
 		"williamboman/mason.nvim",
+		event = "VeryLazy",
 		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
-		config = function()
-			require("mason").setup()
-		end,
+		config = true,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
+		event = "VeryLazy",
 		dependencies = {
 			"mason.nvim",
 		},
@@ -24,13 +24,12 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
+		event = "VeryLazy",
 	},
 	{
 		"j-hui/fidget.nvim",
 		event = "VeryLazy",
-		config = function(_, opts)
-			require("fidget").setup(opts)
-		end,
+		config = true,
 	},
 	{
 		"folke/lsp-trouble.nvim",
@@ -273,11 +272,8 @@ return {
 			end)
 
 			vim.cmd([[
-
 			AddShebangPattern! rust ^#!.*/bin/env\s\+run-cargo-(script|eval)\>
-
 			AddShebangPattern! rust ^#!.*/bin/run-cargo-(script|eval)\>
-
 			]])
 
 			require("lspconfig").rust_analyzer.setup({
@@ -293,15 +289,10 @@ return {
 			})
 
 			vim.cmd([[
-
 			hi! link rustAttribute      SublimeDocumentation
-
 			hi! link rustDerive         SublimeDocumentation
-
 			hi! link rustDeriveTrait    SublimeDocumentation
-
 			hi! link rustLifetime       Special
-
 			]])
 		end,
 	},
