@@ -229,11 +229,9 @@ return {
 
 	-- TODO: Hoist everything below up
 	{
-		"junegunn/vim-easy-align",
+		"echasnovski/mini.align",
 		event = "VeryLazy",
-		config = function(_, opts)
-			map({ "x", "n" }, "ga", "<Plug>(EasyAlign)", { desc = "Begin EasyAlign" })
-		end,
+		opts = {},
 	},
 
 	{
