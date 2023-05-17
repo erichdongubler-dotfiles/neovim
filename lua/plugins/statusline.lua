@@ -4,7 +4,7 @@ return {
 		-- "vim-sublime-monokai",
 	},
 	init = function()
-		vim.opt.laststatus = 2
+		vim.opt.laststatus = 3
 		vim.opt.showmode = false
 	end,
 	opts = {
