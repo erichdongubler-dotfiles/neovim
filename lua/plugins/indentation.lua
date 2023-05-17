@@ -17,12 +17,4 @@ return {
 		"rhlobo/vim-super-retab",
 		event = "VeryLazy",
 	},
-	{
-		"junegunn/vim-easy-align",
-		event = "VeryLazy",
-		config = function()
-			-- map("x", "ga", vim.cmd["<Plug>(EasyAlign)"])
-			-- map("n", "ga", vim.cmd["<Plug>(EasyAlign)"])
-		end,
-	},
 }
