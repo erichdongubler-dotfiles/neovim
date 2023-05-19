@@ -7,10 +7,14 @@ return {
 		"AckslD/nvim-neoclip.lua",
 		event = "VeryLazy",
 		dependencies = {
+			"kkharji/sqlite.lua",
 			"telescope.nvim",
 			"which-key.nvim",
+			{ "kkharji/sqlite.lua", module = "sqlite" },
 		},
-		opts = {},
+		opts = {
+			enable_persistent_history = true,
+		},
 		config = function(_, opts)
 			require("neoclip").setup(opts)
 			require("telescope").load_extension("neoclip")
