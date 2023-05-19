@@ -263,4 +263,23 @@ return {
 			vim.g.caser_prefix = "gS"
 		end,
 	},
+
+	{
+		"ggandor/leap.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"tpope/vim-repeat",
+		},
+		config = function(_, opts)
+			require("which-key").register({
+				["<Leader><Leader>"] = {
+					s = { "<Plug>(leap-forward-to)", "Leap forward to" },
+					x = { "<Plug>(leap-forward-till)", "Leap forward till" },
+					S = { "<Plug>(leap-backward-to)", "Leap backward to" },
+					X = { "<Plug>(leap-backward-till)", "Leap backward till" },
+					gs = { "<Plug>(leap-from-window)", "Leap from window" },
+				},
+			})
+		end,
+	},
 }
