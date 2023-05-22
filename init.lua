@@ -10,6 +10,11 @@ vim.g.number = true
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "|"
 
+function _G.command(name, command, opts)
+	opts = opts or {}
+	vim.api.nvim_create_user_command(name, command, opts)
+end
+
 _G.map = vim.keymap.set
 
 function _G.noremap(mode, lhs, rhs, opts)
