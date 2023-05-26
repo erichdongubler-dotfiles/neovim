@@ -10,6 +10,13 @@ vim.g.number = true
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "|"
 
+function _G.bind_fuse(func, ...)
+	local args = { ... }
+	return function()
+		func(unpack(args))
+	end
+end
+
 function _G.command(name, command, opts)
 	opts = opts or {}
 	vim.api.nvim_create_user_command(name, command, opts)
@@ -37,13 +44,6 @@ function _G.augroup(name, callback)
 		vim.api.nvim_create_autocmd(name, args)
 	end
 	callback(au)
-end
-
-function _G.bind_fuse(func, ...)
-	local args = { ... }
-	return function()
-		func(unpack(args))
-	end
 end
 
 require("lazy").setup({
