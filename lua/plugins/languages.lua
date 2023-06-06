@@ -1,3 +1,8 @@
+noremap("n", "<Leader>l<F2>", vim.lsp.buf.rename, { desc = "Rename symbol under cursor" })
+noremap("n", "<Leader>lK", vim.lsp.buf.hover, { desc = "Show hover pop-up for symbol under cursor" })
+noremap("n", "<Leader>lci", vim.lsp.buf.incoming_calls, { desc = "Show incoming calls for symbol under cursor" })
+noremap("n", "<Leader>lco", vim.lsp.buf.outgoing_calls, { desc = "Show outgoing calls for symbol under cursor" })
+
 return {
 	"vitalk/vim-shebang",
 
