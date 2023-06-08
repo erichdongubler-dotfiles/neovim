@@ -13,6 +13,7 @@ return {
 			end,
 		},
 		"nvim-tree/nvim-web-devicons",
+		"vim-sublime-monokai",
 		"which-key.nvim",
 		-- "vim-sublime-monokai",
 		-- "vim-unimpaired", -- conflicts with `]b`-ish bindings

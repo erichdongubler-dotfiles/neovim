@@ -1,7 +1,7 @@
 return {
 	"hoob3rt/lualine.nvim",
 	dependencies = {
-		-- "vim-sublime-monokai",
+		"vim-sublime-monokai",
 	},
 	init = function()
 		vim.opt.laststatus = 3

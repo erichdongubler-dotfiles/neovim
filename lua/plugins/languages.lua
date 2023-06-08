@@ -179,7 +179,7 @@ return {
 			"nvim-lspconfig",
 			"vim-sandwich",
 			"vim-shebang",
-			-- "vim-sublime-monokai",
+			"vim-sublime-monokai",
 			"which-key.nvim",
 		},
 		config = function()
