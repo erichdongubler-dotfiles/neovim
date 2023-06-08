@@ -222,4 +222,9 @@ return {
 			map({ "x", "n" }, "ga", "<Plug>(EasyAlign)")
 		end,
 	},
+
+	{
+		"numToStr/Comment.nvim",
+		config = {},
+	},
 }
