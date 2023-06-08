@@ -50,6 +50,9 @@ require("lazy").setup({
 	spec = {
 		import = "plugins",
 	},
+	dev = {
+		path = "~/workspace/erichdongubler-dotfiles/neovim",
+	},
 	performance = {
 		rtp = {
 			disabled_plugins = {
