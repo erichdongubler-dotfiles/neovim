@@ -24,6 +24,7 @@ return {
 				"lua_ls",
 				"rust_analyzer",
 				"tsserver",
+				"wgsl_analyzer",
 			},
 		},
 	},
@@ -299,6 +300,19 @@ return {
 			hi! link rustDeriveTrait    SublimeDocumentation
 			hi! link rustLifetime       Special
 			]])
+		end,
+	},
+	--     other general-purpose languages
+
+	{
+		"DingDean/wgsl.vim",
+		dependencies = {
+			"nvim-lspconfig",
+		},
+		config = function(_, opts)
+			require("lspconfig").wgsl_analyzer.setup({
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			})
 		end,
 	},
 }
