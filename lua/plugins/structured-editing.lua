@@ -11,8 +11,8 @@ function map_device_character_append(sequence, name)
 	function cmd()
 		append_chars(sequence)
 	end
-	-- command("Append" .. name, cmd)
-	-- noremap("n", "<Leader>" .. sequence, cmd)
+	command("Append" .. name, cmd)
+	noremap("n", "<Leader>" .. sequence, cmd)
 end
 map_device_character_append(";", "Semicolon")
 map_device_character_append(".", "Period")
