@@ -18,9 +18,9 @@ function set_word_wrap(enabled, global)
 	opts_namespace.wrap = enabled
 end
 set_word_wrap(false, true)
--- command("DisableWordWrap", bind_fuse(set_word_wrap, false), { nargs = 0 })
--- command("EnableWordWrap", bind_fuse(set_word_wrap, true), { nargs = 0 })
--- noremap("n", "<Leader><Tab>", bind_fuse(toggle_word_wrap, false))
--- noremap("n", "<Leader><S-Tab>", bind_fuse(toggle_word_wrap, true))
+command("DisableWordWrap", bind_fuse(set_word_wrap, false), { nargs = 0 })
+command("EnableWordWrap", bind_fuse(set_word_wrap, true), { nargs = 0 })
+noremap("n", "<Leader><Tab>", bind_fuse(toggle_word_wrap, false))
+noremap("n", "<Leader><S-Tab>", bind_fuse(toggle_word_wrap, true))
 
 return {}
