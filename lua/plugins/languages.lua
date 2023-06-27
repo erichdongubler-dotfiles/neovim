@@ -334,6 +334,34 @@ return {
 
 	--     web
 
+	{
+		"pangloss/vim-javascript",
+		dependencies = {
+			-- "tagbar", -- TODO: Do we even still want this?
+			"vim-sublime-monokai",
+		},
+		init = function()
+			vim.g.tagbar_type_javascript = {
+				ctagstype = "javascript",
+				kinds = {
+					"o:objects",
+					"c:classes",
+					"f:functions",
+					"a:arrays",
+					"m:methods",
+					"n:constants",
+					"s:strings",
+				},
+			}
+			vim.cmd([[
+			hi! link jsregexpcharclass  special
+			hi! link jsregexpbackref    specialchar
+			hi! link jsregexpmod        specialchar
+			hi! link jsregexpor         specialchar
+			]])
+		end,
+	},
+
 	"mxw/vim-jsx",
 
 	{
