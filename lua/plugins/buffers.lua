@@ -7,11 +7,8 @@ return {
 	dependencies = {
 		{
 			"famiu/bufdelete.nvim",
-			dependencies = {
-				"which-key.nvim",
-			},
 			config = function(_, opts)
-				require("which-key").register({ ["<Leader>w"] = { vim.cmd.Bwipeout, "Close current buffer" } })
+				noremap("n", "<Leader>w", vim.cmd.Bwipeout, { desc = "Close current buffer" })
 			end,
 		},
 		"nvim-tree/nvim-web-devicons",
