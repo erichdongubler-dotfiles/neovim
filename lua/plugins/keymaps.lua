@@ -7,28 +7,16 @@ vim.keymap.set("", "<Esc>Od", "<C-Left")
 vim.keymap.set("", "<Esc>[5^", "<C-PageUp")
 vim.keymap.set("", "<Esc>[6^", "<C-PageDown>")
 
+noremap("n", "<Leader>ve", ":e " .. vim.fn.stdpath("config"), { desc = "Edit Neovim configuration" })
+noremap("n", "<Leader>", vim.cmd["qa!"], { desc = "Quit (force on all windows)" })
+noremap("n", "<Leader>Q", vim.cmd["q!"], { desc = "Quit (force on current window)" })
+noremap("n", "<Leader>q", vim.cmd.q, { desc = "Quit" })
+noremap("n", "<Leader>s", vim.cmd.w, { desc = "Write to file" })
+noremap("n", "<Leader>0", vim.cmd.Inspect, { desc = "Inspect current items at cursor (i.e., highlights)" })
+
 return {
 	{
 		"folke/which-key.nvim",
-		config = function(_, opts)
-			local which_key = require("which-key")
-			which_key.setup(opts)
-
-			which_key.register({
-				["ve"] = {
-					":e " .. vim.fn.stdpath("config"),
-					"Edit Neovim configuration",
-				},
-			}, { prefix = "<Leader>", silent = false })
-			which_key.register({
-				[""] = { vim.cmd["qa!"], "Quit (force on all windows)" },
-				["Q"] = { vim.cmd["q!"], "Quit (force on current window)" },
-				["q"] = { vim.cmd.q, "Quit" },
-
-				["s"] = { vim.cmd.w, "Write to file" },
-
-				["0"] = { ":Inspect<CR>", "Inspect current items at cursor (i.e., highlights)" },
-			}, { prefix = "<Leader>" })
-		end,
+		opts = {},
 	},
 }
