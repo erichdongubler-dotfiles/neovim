@@ -242,6 +242,8 @@ return {
 
 	--     Native world
 
+	"pboettch/vim-cmake-syntax",
+
 	{
 		"rust-lang/rust.vim",
 		ft = "rust",

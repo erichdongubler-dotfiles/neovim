@@ -44,6 +44,7 @@
   "vim-asterisk": { "branch": "master", "commit": "77e97061d6691637a034258cc415d98670698459" },
   "vim-autoformat": { "branch": "master", "commit": "7b35295b519f5f69be2e10b936db7fbac290b813" },
   "vim-better-whitespace": { "branch": "master", "commit": "1b22dc57a2751c7afbc6025a7da39b7c22db635d" },
+  "vim-cmake-syntax": { "branch": "master", "commit": "bcc3a97ab934f03e112becd4ce79286793152b47" },
   "vim-csharp": { "branch": "master", "commit": "b5982fc69bba7d507638a308d6875b031054280d" },
   "vim-easy-align": { "branch": "master", "commit": "12dd6316974f71ce333e360c0260b4e1f81169c3" },
   "vim-endwise": { "branch": "master", "commit": "e714ac3bcfd5a90038de49c3254eded7c70ae3c3" },
