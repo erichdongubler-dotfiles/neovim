@@ -244,6 +244,8 @@ return {
 
 	"pboettch/vim-cmake-syntax",
 
+	"octol/vim-cpp-enhanced-highlight",
+
 	{
 		"rust-lang/rust.vim",
 		ft = "rust",
