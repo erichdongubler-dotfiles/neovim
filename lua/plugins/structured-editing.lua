@@ -211,6 +211,6 @@ return {
 
 	{
 		"numToStr/Comment.nvim",
-		config = {},
+		opts = {},
 	},
 }
