@@ -133,6 +133,9 @@ return {
 			)
 		end,
 	},
+
+	-- Auto-pairing
+
 	{
 		"machakann/vim-sandwich",
 		event = "VeryLazy",
@@ -201,6 +204,8 @@ return {
 			end)
 		end,
 	},
+
+	-- TODO: Hoist everything below up
 	{
 		"junegunn/vim-easy-align",
 		event = "VeryLazy",
