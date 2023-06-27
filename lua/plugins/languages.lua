@@ -328,6 +328,21 @@ return {
 	--     other general-purpose languages
 
 	{
+		"StanAngeloff/php.vim",
+		dependencies = {
+			"vim-sublime-monokai",
+		},
+		init = function()
+			vim.g.php_var_selector_is_identifier = 1
+		end,
+		config = function(_, opts)
+			vim.cmd([[
+			hi! link phpMemberSelector Keyword
+			]])
+		end,
+	},
+
+	{
 		"DingDean/wgsl.vim",
 		dependencies = {
 			"mason-lspconfig.nvim",

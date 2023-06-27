@@ -31,6 +31,7 @@
   "nvim-tree.lua": { "branch": "master", "commit": "f5d970d4506f385b29534252d8c15a782fa53034" },
   "nvim-web-devicons": { "branch": "master", "commit": "2a125024a137677930efcfdf720f205504c97268" },
   "open-browser.vim": { "branch": "master", "commit": "7d4c1d8198e889d513a030b5a83faa07606bac27" },
+  "php.vim": { "branch": "master", "commit": "930aec5c7026297a6630bd2940c08c5ff552cf2a" },
   "plenary.nvim": { "branch": "master", "commit": "499e0743cf5e8075cd32af68baa3946a1c76adf1" },
   "rust.vim": { "branch": "master", "commit": "889b9a7515db477f4cb6808bef1769e53493c578" },
   "statuscol.nvim": { "branch": "main", "commit": "f13a5dbe83ed500e6022e8e96d3c404aa11ebfba" },
