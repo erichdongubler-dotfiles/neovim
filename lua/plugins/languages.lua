@@ -185,6 +185,10 @@ return {
 		end,
 	},
 
+	--     Data/configuration/IDL-ish languages
+
+	"gutenye/json5.vim",
+
 	--     Native world
 
 	{

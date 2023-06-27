@@ -16,6 +16,7 @@
   "graphviz.vim": { "branch": "master", "commit": "773d5a5d014af5ed19ec3f2c182c1a167ff958f2" },
   "guess-indent.nvim": { "branch": "main", "commit": "b8ae749fce17aa4c267eec80a6984130b94f80b2" },
   "is.vim": { "branch": "master", "commit": "d393cb346dcdf733fecd7bbfc45b70b8c05e9eb4" },
+  "json5.vim": { "branch": "master", "commit": "1e1718959b33b9af9406d0ebf61cfcd71e274385" },
   "lazy.nvim": { "branch": "main", "commit": "ae25448d39fb2bdc38a139339233270edec44484" },
   "lsp-trouble.nvim": { "branch": "main", "commit": "2af0dd9767526410c88c628f1cbfcb6cf22dd683" },
   "lualine.nvim": { "branch": "master", "commit": "05d78e9fd0cdfb4545974a5aa14b1be95a86e9c9" },
