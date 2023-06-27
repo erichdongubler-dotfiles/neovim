@@ -64,30 +64,6 @@ return {
 			noremap("n", "<Leader>mw", trouble.toggle, { desc = "Toggle `trouble` in workspace diagnostic mode" })
 		end,
 	},
-	{
-		"SmiteshP/nvim-navic",
-		event = "VeryLazy",
-		init = function()
-			vim.g.navic_silence = true
-			augroup("NvimNavicLspAttach", function(au)
-				au("LspAttach", nil, function(args)
-					local buffer = args.buf
-					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					if client.server_capabilities.documentSymbolProvider then
-						require("nvim-navic").attach(client, buffer)
-					end
-				end)
-			end)
-		end,
-		opts = function()
-			return {
-				separator = " ",
-				highlight = true,
-				depth_limit = 5,
-				-- icons = require("lazyvim.config").icons.kinds,
-			}
-		end,
-	},
 
 	-- Formatting
 	{
@@ -373,7 +349,6 @@ return {
 	{
 		"pangloss/vim-javascript",
 		dependencies = {
-			-- "tagbar", -- TODO: Do we even still want this?
 			"vim-sublime-monokai",
 		},
 		init = function()
