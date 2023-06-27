@@ -11,6 +11,7 @@
   "dressing.nvim": { "branch": "master", "commit": "572314728cb1ce012e825fd66331f52c94acac12" },
   "dropbar.nvim": { "branch": "fix-outside-paths", "commit": "344c34359c9887683a8501ff61ed3b418562e38e" },
   "fidget.nvim": { "branch": "main", "commit": "1ba38e4cbb24683973e00c2e36f53ae64da38ef5" },
+  "firenvim": { "branch": "master", "commit": "3c4babfa0a561d1dc3640a902e67ca0b8af70927" },
   "friendly-snippets": { "branch": "main", "commit": "dd2fd1281d4b22e7b4a5bfafa3e142d958e251f2" },
   "gitsigns.nvim": { "branch": "main", "commit": "805610a9393fa231f2c2b49cb521bfa413fadb3d" },
   "graphviz.vim": { "branch": "master", "commit": "dbe1de334097891186e09e5616671091d89011d5" },
