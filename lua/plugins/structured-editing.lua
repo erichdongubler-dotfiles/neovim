@@ -142,6 +142,28 @@ return {
 		opts = {},
 	},
 	{
+		"andymass/vim-matchup",
+		dependencies = {
+			"vim-sublime-monokai",
+			"vim-sandwich", -- No hard dependency, just needs to be after.
+		},
+		init = function()
+			vim.g.matchup_matchparen_deferred = 1
+			vim.g.matchup_matchparen_hi_surround_always = 1
+			vim.g.matchup_override_vimtex = 1
+			vim.g.matchup_surround_enabled = 1
+		end,
+		config = function(_, opts)
+			vim.cmd([[
+			hi! clear MatchParenCur
+			hi! clear MatchWordCur
+			]])
+			vim.fn["g:SublimeMonokaiHighlight"]("MatchParen", { format = "reverse" })
+			vim.fn["g:SublimeMonokaiHighlight"]("MatchTag", { format = "reverse" })
+			vim.fn["g:SublimeMonokaiHighlight"]("MatchWord", { format = "reverse" })
+		end,
+	},
+	{
 		"machakann/vim-sandwich",
 		event = "VeryLazy",
 		event = {
