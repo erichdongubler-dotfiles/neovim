@@ -50,7 +50,7 @@ return {
 		opts = {
 			use_diagnostic_signs = true,
 		},
-		config = function(_, opt)
+		config = function(_, opts)
 			local trouble = require("trouble")
 			trouble.setup(opts)
 			require("which-key").register({
