@@ -331,6 +331,20 @@ return {
 			]])
 		end,
 	},
+
+	--     web
+
+	{
+		"posva/vim-vue",
+		ft = { "markdown" },
+		run = function()
+			if vim.fn.executable("npm") then
+				-- TODO: I wonder if we can use Mason here?
+				vim.cmd("silent !npm i -g eslint eslint-plugin-vue")
+			end
+		end,
+	},
+
 	--     other general-purpose languages
 
 	{
