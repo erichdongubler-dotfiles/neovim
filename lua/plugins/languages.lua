@@ -53,24 +53,15 @@ return {
 		config = function(_, opts)
 			local trouble = require("trouble")
 			trouble.setup(opts)
-			require("which-key").register({
-				M = {
-					trouble.toggle,
-					"Toggle `trouble`",
-				},
-				md = {
-					bind_fuse(trouble.toggle, "document_diagnostics"),
-					"Toggle `trouble` in document diagnostic mode",
-				},
-				mq = {
-					bind_fuse(trouble.toggle, "loclist"),
-					"Toggle `trouble` in location list mode",
-				},
-				mw = {
-					bind_fuse(trouble.toggle, "workspace_diagnostics"),
-					"Toggle `trouble` in workspace diagnostic mode",
-				},
-			}, { prefix = "<Leader>" })
+			noremap("n", "<Leader>M", trouble.toggle, { desc = "Toggle `trouble`" })
+			noremap(
+				"n",
+				"<Leader>md",
+				bind_fuse(trouble.toggle, "document_diagnostics"),
+				{ desc = "Toggle `trouble` in document diagnostic mode" }
+			)
+			noremap("n", "<Leader>mq", trouble.toggle, { desc = "Toggle `trouble` in location list mode" })
+			noremap("n", "<Leader>mw", trouble.toggle, { desc = "Toggle `trouble` in workspace diagnostic mode" })
 		end,
 	},
 	{
