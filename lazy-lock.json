@@ -50,6 +50,7 @@
   "vim-fetch": { "branch": "master", "commit": "bbb75c3172f766d1a62832df0ec7674c69a560ad" },
   "vim-fugitive": { "branch": "master", "commit": "5f0d280b517cacb16f59316659966c7ca5e2bea2" },
   "vim-github-link": { "branch": "master", "commit": "2df594cd3148f7abb9773890acb03f72994d61c6" },
+  "vim-gitignore": { "branch": "master", "commit": "641dfa648d2581a5e5e9b0d11ffee37da8de49d7" },
   "vim-matchup": { "branch": "master", "commit": "3a17944bfa3942da805a381750a1be4b314c64d2" },
   "vim-mkdir": { "branch": "master", "commit": "f0ba7a7dc190a0cedf1d827958c99f3718109cf0" },
   "vim-ninja-feet": { "branch": "master", "commit": "cb9b448dd468a338255aed474e6113ed115612c1" },

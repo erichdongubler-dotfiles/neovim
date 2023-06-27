@@ -191,6 +191,8 @@ return {
 
 	--     Data/configuration/IDL-ish languages
 
+	"gisphm/vim-gitignore",
+
 	"gutenye/json5.vim",
 
 	"imsnif/kdl.vim",
