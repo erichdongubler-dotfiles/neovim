@@ -1,3 +1,4 @@
+-- Set default keyword character group
 vim.opt.iskeyword:remove({ ".", "#" })
 
 --   Add some common line-ending shortcuts
@@ -17,6 +18,9 @@ end
 map_device_character_append(";", "Semicolon")
 map_device_character_append(".", "Period")
 map_device_character_append(",", "Comma")
+
+-- Create some lazy init. machinery for plugins that init. or consume
+-- `vim-sandwich`
 
 sandwich_initted = false
 function _G.add_sandwich_recipes(callback)
