@@ -241,7 +241,7 @@ return {
 		"junegunn/vim-easy-align",
 		event = "VeryLazy",
 		config = function(_, opts)
-			map({ "x", "n" }, "ga", "<Plug>(EasyAlign)")
+			map({ "x", "n" }, "ga", "<Plug>(EasyAlign)", { desc = "Begin EasyAlign" })
 		end,
 	},
 
