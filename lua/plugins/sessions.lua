@@ -4,6 +4,7 @@ vim.opt.sessionoptions:append("globals")
 
 return {
 	"dhruvasagar/vim-prosession",
+	cond = not vim.g.started_by_firenvim,
 	dependencies = {
 		"tpope/vim-obsession",
 		"vim-fugitive", -- required for `prosession_per_branch`
