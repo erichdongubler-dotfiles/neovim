@@ -3,6 +3,7 @@ vim.opt.splitkeep = "screen"
 -- Create a VSCode-like tab bar.
 return {
 	"akinsho/bufferline.nvim",
+	cond = not vim.g.started_by_firenvim,
 	version = "v3.*",
 	dependencies = {
 		{

@@ -1,12 +1,15 @@
+if not vim.g.started_by_firenvim then
+	vim.opt.laststatus = 0
+else
+	vim.opt.laststatus = 3
+	vim.opt.showmode = false
+end
 return {
 	"hoob3rt/lualine.nvim",
+	cond = not vim.g.started_by_firenvim,
 	dependencies = {
 		"vim-sublime-monokai",
 	},
-	init = function()
-		vim.opt.laststatus = 3
-		vim.opt.showmode = false
-	end,
 	opts = {
 		options = {
 			component_separators = "",
