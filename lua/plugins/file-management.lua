@@ -26,11 +26,11 @@ return {
 			local which_key = require("which-key")
 			which_key.register({
 				["<Leader>k"] = {
-					bind_fuse(nvim_tree_api.tree.toggle, false, true),
+					bind_fuse(nvim_tree_api.tree.toggle, { focus = true }),
 					"Open file browser sidebar",
 				},
 				["-"] = {
-					bind_fuse(nvim_tree_api.tree.find_file, { open = true }),
+					bind_fuse(nvim_tree_api.tree.find_file, { focus = true, open = true }),
 					"Find current file in file browser sidebar",
 				},
 			})
