@@ -17,10 +17,9 @@ return {
 		event = "VeryLazy",
 		requires = {
 			"is.vim", -- for `is-nohl-1`
-			"which-key.nvim",
 		},
 		config = function(_, opts)
-			require("which-key").register({
+			local bindings = {
 				["*"] = {
 					"<Plug>(asterisk-z*)<Plug>(is-nohl-1)",
 					"Begin search forward (no initial move)",
@@ -37,7 +36,10 @@ return {
 					"<Plug>(asterisk-gz#)<Plug>(is-nohl-1)",
 					"Begin search  (no initial move)",
 				},
-			}, { mode = "" })
+			}
+			for lhs, obj in pairs(bindings) do
+				noremap("", lhs, obj[1], { desc = obj[2] })
+			end
 		end,
 	},
 
