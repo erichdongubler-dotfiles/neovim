@@ -176,6 +176,17 @@ return {
 
 	-- Specific languages
 
+	--     Document languages
+
+	{
+		"liuchengxu/graphviz.vim",
+		init = function()
+			vim.g.graphviz_output_format = "svg"
+		end,
+	},
+
+	--     Native world
+
 	{
 		"rust-lang/rust.vim",
 		ft = "rust",
