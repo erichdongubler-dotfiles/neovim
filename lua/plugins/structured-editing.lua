@@ -55,16 +55,8 @@ return {
 	{
 		"FooSoft/vim-argwrap",
 		event = "VeryLazy",
-		dependencies = {
-			"which-key.nvim",
-		},
 		config = function()
-			require("which-key").register({
-				["]"] = {
-					vim.cmd.ArgWrap,
-					"Toggle linedness of argument list",
-				},
-			}, { prefix = "<Leader>" })
+			noremap("n", "<Leader>]", vim.cmd.ArgWrap, { desc = "Toggle linedness of argument list" })
 		end,
 	},
 	{
