@@ -23,4 +23,19 @@ command("EnableWordWrap", bind_fuse(set_word_wrap, true), { nargs = 0 })
 noremap("n", "<Leader><Tab>", bind_fuse(toggle_word_wrap, false))
 noremap("n", "<Leader><S-Tab>", bind_fuse(toggle_word_wrap, true))
 
+-- Default max document width
+
+-- TODO: only do this once?
+vim.opt.colorcolumn = "+1"
+vim.opt.formatoptions = vim.opt.formatoptions - { "l" } + { "t" }
+vim.opt.textwidth = 100
+
+function set_row_limit(textwidth)
+	print("setting buffer textwidth:", vim.inspect(textwidth))
+	vim.bo.textwidth = textwidth
+end
+command("SetRowLimit", function(opts)
+	set_row_limit(tonumber(opts.args))
+end, { nargs = 1 })
+
 return {}
