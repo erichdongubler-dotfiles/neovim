@@ -185,6 +185,10 @@ return {
 		end,
 	},
 
+	--     Shell scripting languages
+
+	"pprovost/vim-ps1",
+
 	--     Data/configuration/IDL-ish languages
 
 	"gutenye/json5.vim",

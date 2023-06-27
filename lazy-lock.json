@@ -54,6 +54,7 @@
   "vim-obsession": { "branch": "master", "commit": "fe9d3e1a9a50171e7d316a52e1e56d868e4c1fe5" },
   "vim-playnice": { "branch": "initial-release", "commit": "73b6a1adfa7d809e39044a12be87161d610e9100" },
   "vim-prosession": { "branch": "master", "commit": "249b635d7483c8e1f8fcdcc50e1457b65a2bbf29" },
+  "vim-ps1": { "branch": "master", "commit": "502590f90a21f0de2b7664d6d0dcc90e5bb28a9c" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
   "vim-sandwich": { "branch": "master", "commit": "c5a2cc438ce6ea2005c556dc833732aa53cae21a" },
   "vim-shebang": { "branch": "master", "commit": "ae2e6f8f258ad7572cefdff4948c045203ee0bd9" },
