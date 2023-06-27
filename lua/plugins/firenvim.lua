@@ -22,6 +22,16 @@ return {
 				}, function()
 					vim.bo.filetype = "markdown"
 				end)
+				local timer = vim.uv.new_timer()
+				au({ "TextChanged", "TextChangedI" }, "*", function()
+					timer:start(
+						1000,
+						0,
+						vim.schedule_wrap(function()
+							vim.cmd("silent! w")
+						end)
+					)
+				end)
 			end)
 		end,
 	},
