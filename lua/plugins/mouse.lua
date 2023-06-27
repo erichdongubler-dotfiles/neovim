@@ -1,3 +1,3 @@
 vim.opt.mouse = "a"
-vim.cmd("behave xterm")
+vim.opt.mousemodel = "extend"
 return {}
