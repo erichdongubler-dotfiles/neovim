@@ -136,6 +136,7 @@ return {
 
 	-- Auto-pairing
 
+	"tpope/vim-endwise",
 	{
 		"machakann/vim-sandwich",
 		event = "VeryLazy",
