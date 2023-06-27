@@ -2,16 +2,8 @@ return {
 	"knsh14/vim-github-link",
 	{
 		"tpope/vim-fugitive",
-		dependencies = {
-			"which-key.nvim",
-		},
-		config = function()
-			require("which-key").register({
-				ghB = {
-					bind_fuse(vim.cmd.Git, "blame"),
-					"Show `git blame`",
-				},
-			})
+		config = function(_, opts)
+			noremap("n", "ghB", bind_fuse(vim.cmd.Git, "blame"), { desc = "Show `git blame`" })
 		end,
 	},
 	{
