@@ -38,6 +38,7 @@
   "vim-argwrap": { "branch": "master", "commit": "feaba6b8b6ca099d267c81ee2c4ba43ce6de8499" },
   "vim-asterisk": { "branch": "master", "commit": "77e97061d6691637a034258cc415d98670698459" },
   "vim-autoformat": { "branch": "master", "commit": "7b35295b519f5f69be2e10b936db7fbac290b813" },
+  "vim-better-whitespace": { "branch": "master", "commit": "1b22dc57a2751c7afbc6025a7da39b7c22db635d" },
   "vim-easy-align": { "branch": "master", "commit": "12dd6316974f71ce333e360c0260b4e1f81169c3" },
   "vim-eunuch": { "branch": "master", "commit": "291ef1f8c8996ca7715df1032a35a27b12d7b5cf" },
   "vim-fetch": { "branch": "master", "commit": "bbb75c3172f766d1a62832df0ec7674c69a560ad" },

@@ -213,4 +213,20 @@ return {
 		"numToStr/Comment.nvim",
 		opts = {},
 	},
+
+	{
+		"ntpeters/vim-better-whitespace",
+		event = "VeryLazy",
+		depdendencies = {
+			"vim-sublime-monokai",
+		},
+		init = function()
+			vim.g.better_whitespace_operator = "_s"
+			vim.g.show_spaces_that_precede_tabs = 0
+			vim.g.strip_whitespace_confirm = 0
+			vim.cmd([[
+			hi! link ExtraWhitespace Error
+			]])
+		end,
+	},
 }
