@@ -334,6 +334,8 @@ return {
 
 	--     web
 
+	"mxw/vim-jsx",
+
 	{
 		"posva/vim-vue",
 		ft = { "markdown" },
