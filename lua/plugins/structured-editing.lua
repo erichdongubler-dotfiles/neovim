@@ -125,18 +125,12 @@ return {
 		"tyru/open-browser.vim",
 		event = "VeryLazy",
 		config = function()
-			require("which-key").register({
-				u = {
-					"<Plug>(openbrowser-smart-search)",
-					"Open URL on current line in browser",
-				},
-			}, { prefix = "<Leader>" })
-			require("which-key").register({
-				u = {
-					"<Plug>(openbrowser-smart-search)",
-					"Open URL on current line in browser",
-				},
-			}, { mode = "v", prefix = "<Leader>" })
+			noremap(
+				{ "n", "v" },
+				"<Leader>u",
+				"<Plug>(openbrowser-smart-search)",
+				{ desc = "Open URL on current line in browser" }
+			)
 		end,
 	},
 	{
