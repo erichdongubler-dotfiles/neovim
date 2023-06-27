@@ -13,5 +13,15 @@ return {
 				},
 			}
 		end,
+		config = function()
+			augroup("Firenvim", function(au)
+				au("BufEnter", {
+					"github.com_*.txt",
+					"bugzilla.mozilla.org_show-bug-cgi_TEXTAREA-id-comment_*.txt",
+				}, function()
+					vim.bo.filetype = "markdown"
+				end)
+			end)
+		end,
 	},
 }
