@@ -193,6 +193,8 @@ return {
 
 	"gutenye/json5.vim",
 
+	"imsnif/kdl.vim",
+
 	--     Native world
 
 	{
