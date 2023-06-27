@@ -350,6 +350,32 @@ return {
 	--     other general-purpose languages
 
 	{
+		"fatih/vim-go",
+		dependencies = {
+			"vim-sublime-monokai",
+		},
+		init = function()
+			vim.g.go_highlight_format_strings = 1
+			vim.g.go_highlight_function_arguments = 1
+			vim.g.go_highlight_function_calls = 1
+			vim.g.go_highlight_functions = 1
+			vim.g.go_highlight_operators = 1
+			vim.g.go_highlight_types = 1
+
+			vim.g.go_highlight_extra_types = 1
+			vim.g.go_highlight_fields = 1
+			vim.g.go_highlight_generate_tags = 1
+			vim.g.go_highlight_variable_assignments = 1
+			vim.g.go_highlight_variable_declarations = 1
+
+			vim.cmd([[
+			hi! link goExtraType        Special
+			hi! link goTypeConstructor  SublimeType
+			]])
+		end,
+	},
+
+	{
 		"StanAngeloff/php.vim",
 		dependencies = {
 			"vim-sublime-monokai",
