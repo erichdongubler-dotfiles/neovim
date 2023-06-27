@@ -177,7 +177,7 @@ return {
 		ft = "rust",
 		dependencies = {
 			"cmp-nvim-lsp",
-			"nvim-lspconfig",
+			"mason-lspconfig.nvim",
 			"vim-sandwich",
 			"vim-shebang",
 			"vim-sublime-monokai",
@@ -307,7 +307,7 @@ return {
 	{
 		"DingDean/wgsl.vim",
 		dependencies = {
-			"nvim-lspconfig",
+			"mason-lspconfig.nvim",
 		},
 		config = function(_, opts)
 			require("lspconfig").wgsl_analyzer.setup({
