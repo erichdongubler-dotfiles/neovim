@@ -234,6 +234,8 @@ return {
 
 	"cespare/vim-toml",
 
+	"zchee/vim-flatbuffers",
+
 	"gutenye/json5.vim",
 
 	"imsnif/kdl.vim",

@@ -49,6 +49,7 @@
   "vim-endwise": { "branch": "master", "commit": "e714ac3bcfd5a90038de49c3254eded7c70ae3c3" },
   "vim-eunuch": { "branch": "master", "commit": "291ef1f8c8996ca7715df1032a35a27b12d7b5cf" },
   "vim-fetch": { "branch": "master", "commit": "bbb75c3172f766d1a62832df0ec7674c69a560ad" },
+  "vim-flatbuffers": { "branch": "master", "commit": "95c828bcc7dd83627f732bbb1d78888a3a870d6e" },
   "vim-fugitive": { "branch": "master", "commit": "5f0d280b517cacb16f59316659966c7ca5e2bea2" },
   "vim-github-link": { "branch": "master", "commit": "2df594cd3148f7abb9773890acb03f72994d61c6" },
   "vim-gitignore": { "branch": "master", "commit": "641dfa648d2581a5e5e9b0d11ffee37da8de49d7" },
