@@ -193,6 +193,8 @@ return {
 
 	"gisphm/vim-gitignore",
 
+	"cespare/vim-toml",
+
 	"gutenye/json5.vim",
 
 	"imsnif/kdl.vim",
