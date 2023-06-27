@@ -420,6 +420,8 @@ return {
 		end,
 	},
 
+	"andys8/vim-elm-syntax",
+
 	--     other general-purpose languages
 
 	"OrangeT/vim-csharp",

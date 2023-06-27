@@ -48,6 +48,7 @@
   "vim-cpp-enhanced-highlight": { "branch": "master", "commit": "4b7314a497ea2dd0a6911ccb94ce83b2d8684617" },
   "vim-csharp": { "branch": "master", "commit": "b5982fc69bba7d507638a308d6875b031054280d" },
   "vim-easy-align": { "branch": "master", "commit": "12dd6316974f71ce333e360c0260b4e1f81169c3" },
+  "vim-elm-syntax": { "branch": "master", "commit": "b65370b5292730ef35cbdb969da05b52d77d51dc" },
   "vim-endwise": { "branch": "master", "commit": "e714ac3bcfd5a90038de49c3254eded7c70ae3c3" },
   "vim-eunuch": { "branch": "master", "commit": "291ef1f8c8996ca7715df1032a35a27b12d7b5cf" },
   "vim-fetch": { "branch": "master", "commit": "bbb75c3172f766d1a62832df0ec7674c69a560ad" },
