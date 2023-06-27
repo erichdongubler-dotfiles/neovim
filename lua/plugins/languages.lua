@@ -3,6 +3,10 @@ noremap("n", "<Leader>lK", vim.lsp.buf.hover, { desc = "Show hover pop-up for sy
 noremap("n", "<Leader>lci", vim.lsp.buf.incoming_calls, { desc = "Show incoming calls for symbol under cursor" })
 noremap("n", "<Leader>lco", vim.lsp.buf.outgoing_calls, { desc = "Show outgoing calls for symbol under cursor" })
 
+vim.g.java_comment_strings = 1
+vim.g.java_highlight_functions = 1
+vim.g.java_highlight_java_lang_ids = 1
+
 return {
 	"vitalk/vim-shebang",
 
