@@ -138,6 +138,10 @@ return {
 
 	"tpope/vim-endwise",
 	{
+		"windwp/nvim-autopairs",
+		opts = {},
+	},
+	{
 		"machakann/vim-sandwich",
 		event = "VeryLazy",
 		event = {
