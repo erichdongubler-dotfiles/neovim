@@ -208,6 +208,22 @@ return {
 		end,
 	},
 
+	{
+		"jceb/vim-orgmode",
+		dependencies = {
+			"tpope/vim-speeddating",
+		},
+		init = function()
+			vim.g.org_heading_highlight_colors = { "Identifier" }
+			vim.g.org_heading_highlight_levels = 10
+		end,
+		config = function(_, opts)
+			augroup("orgmode", function(au)
+				au("FileType", { "text", "org" }, bind_fuse(vim.cmd.EnableWordWrap))
+			end)
+		end,
+	},
+
 	--     Shell scripting languages
 
 	"pprovost/vim-ps1",
