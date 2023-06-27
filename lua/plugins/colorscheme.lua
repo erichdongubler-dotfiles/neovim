@@ -4,6 +4,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		init = function()
+			vim.opt.termguicolors = true
 			vim.g.sublimemonokai_term_italic = true
 		end,
 		config = function(_, opts)
