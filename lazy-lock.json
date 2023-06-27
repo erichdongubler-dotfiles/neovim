@@ -38,6 +38,7 @@
   "statuscol.nvim": { "branch": "main", "commit": "f13a5dbe83ed500e6022e8e96d3c404aa11ebfba" },
   "targets.vim": { "branch": "master", "commit": "642d3a4ce306264b05ea3219920b13ea80931767" },
   "telescope.nvim": { "branch": "master", "commit": "9a82b5b73eba8c8d71bacedd062d20fe6d3c791a" },
+  "typescript-vim": { "branch": "master", "commit": "31ede5ad905ce4159a5e285073a391daa3bf83fa" },
   "undotree": { "branch": "master", "commit": "485f01efde4e22cb1ce547b9e8c9238f36566f21" },
   "vim-argumentative": { "branch": "master", "commit": "63a5f7deb675c38126de626f4c00e000902462fe" },
   "vim-argwrap": { "branch": "master", "commit": "feaba6b8b6ca099d267c81ee2c4ba43ce6de8499" },

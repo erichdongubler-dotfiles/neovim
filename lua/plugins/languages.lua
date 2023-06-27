@@ -410,6 +410,19 @@ return {
 	"mxw/vim-jsx",
 
 	{
+		"leafgarland/typescript-vim",
+		dependencies = {
+			"cmp-nvim-lsp",
+			"nvim-lspconfig",
+		},
+		config = function(_, opts)
+			require("lspconfig").tsserver.setup({
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			})
+		end,
+	},
+
+	{
 		"posva/vim-vue",
 		ft = { "markdown" },
 		run = function()
