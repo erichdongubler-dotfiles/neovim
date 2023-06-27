@@ -349,6 +349,8 @@ return {
 
 	--     other general-purpose languages
 
+	"OrangeT/vim-csharp",
+
 	{
 		"fatih/vim-go",
 		dependencies = {
