@@ -1,3 +1,5 @@
+-- TODO: Fix `cgg` not working as expected
+
 -- Set default keyword character group
 vim.opt.iskeyword:remove({ ".", "#" })
 
