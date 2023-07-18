@@ -29,6 +29,7 @@ return {
 			" It's nice to have the builtins highlighted, but they can cause some conflicts
 			hi! link pythonBuiltInObj   Constant
 			hi! link pythonBuiltInType  Constant
+			hi! link rustMacroVariable  SublimeContextParam
 			hi! link xmlProcessingDelim Comment
 			hi! link zshOption          Special
 			hi! link zshTypes           SublimeType
