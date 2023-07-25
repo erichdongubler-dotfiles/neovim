@@ -8,7 +8,7 @@ return {
 			vim.g.sublimemonokai_term_italic = true
 		end,
 		config = function(_, opts)
-			vim.cmd["colorscheme"]("sublimemonokai")
+			vim.cmd.colorscheme("sublimemonokai")
 
 			-- TODO: Get this moved to a better place
 			vim.fn["g:SublimeMonokaiHighlight"]("BreezeHlElement", { format = "reverse" })
