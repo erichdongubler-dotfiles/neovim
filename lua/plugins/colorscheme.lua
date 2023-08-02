@@ -72,6 +72,38 @@ return {
 			vim.fn["g:SublimeMonokaiHighlight"]("LspReferenceText", { bg = vim.g.sublimemonokai_darkgrey })
 			vim.fn["g:SublimeMonokaiHighlight"]("LspReferenceRead", { bg = vim.g.sublimemonokai_addbg })
 			vim.fn["g:SublimeMonokaiHighlight"]("LspReferenceWrite", { bg = vim.g.sublimemonokai_changebg })
+
+			function _G.hi_link(from, to)
+				vim.api.nvim_set_hl(0, from, { link = to })
+			end
+
+			function _G.hi_clear(name)
+				vim.api.nvim_set_hl(0, name, {})
+			end
+
+			hi_clear("@lsp")
+			hi_link("@lsp.mod.declaration", "Tag")
+			hi_link("@lsp.type.enum", "SublimeType")
+			hi_link("@lsp.type.function", "SublimeFunctionCall")
+			hi_link("@lsp.type.interface", "SublimeType")
+			hi_link("@lsp.type.macro", "SublimeFunctionCall")
+			hi_link("@lsp.type.method", "SublimeFunctionCall")
+			hi_link("@lsp.type.namespace", "Normal")
+			hi_link("@lsp.type.parameter", "SublimeContextParam")
+			hi_link("@lsp.type.struct", "SublimeType")
+			hi_link("@lsp.type.typeAlias", "SublimeType")
+			hi_link("@lsp.type.union", "SublimeType")
+			hi_link("@lsp.type.unresolvedReference", "SpellBad")
+			hi_link("@lsp.typemod.decorator.attribute.rust", "SublimeUserAttribute")
+			hi_link("@lsp.typemod.enumMember.declaration", "SublimePurple")
+			hi_link("@lsp.typemod.namespace.attribute.rust", "SublimeUserAttribute")
+			hi_link("@lsp.typemod.parameter.declaration", "SublimeContextParam")
+			hi_link("@lsp.typemod.property.declaration.rust", "Normal")
+			hi_link("@lsp.typemod.selfKeyword.declaration", "SublimeContextParam")
+			hi_link("@lsp.typemod.selfKeyword.reference", "SublimeContextParam")
+			hi_link("@lsp.typemod.typeParameter.declaration", "Normal") -- TODO: maybe italic?
+			hi_link("@lsp.typemod.variable.constant", "SublimePurple")
+			hi_link("@lsp.typemod.variable.declaration", "Normal")
 		end,
 
 		-- TODO: Make `lazy` highlights _not suck_:
