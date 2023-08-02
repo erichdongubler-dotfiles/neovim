@@ -80,39 +80,60 @@ return {
 			})
 			local which_key = require("which-key")
 			which_key.add({
+				{ "<Leader>R", builtin.tags, desc = "Fuzzy-find `builtin.tags`" },
+				{ "<Leader>r", builtin.current_buffer_tags, desc = "Fuzzy-find `builtin.current_buffer_tags`" },
+			})
+		end,
+	},
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		dependencies = {
+			"which-key.nvim",
+		},
+		---@type snacks.Config
+		opts = {
+			picker = { enabled = true },
+		},
+		config = function(_, opts)
+			local snacks = require("snacks")
+			snacks.setup(opts)
+			local which_key = require("which-key")
+			which_key.add({
 				{
 					"<Leader>D",
-					bind_fuse(builtin.diagnostics, { severity_limit = 2 }),
+					snacks.picker.diagnostics,
 					desc = "Fuzzy-find diagnostics",
 				},
-				{ "<Leader>O", builtin.buffers, desc = "Fuzzy-find `builtin.buffers`" },
-				{ "<Leader>R", builtin.tags, desc = "Fuzzy-find `builtin.tags`" },
-				{ "<Leader>T", builtin.builtin, desc = "Fuzzy-find `builtin.builtin`" },
+				{ "<Leader>O", snacks.picker.buffers, desc = "Fuzzy-find buffers by name" },
+				{ "<Leader>T", bind_fuse(snacks.picker), desc = "Fuzzy-find `snack.picker`s" },
 				{
 					"<Leader>d",
-					function()
-						builtin.diagnostics({ bufnr = 0, severity_limit = 2 })
-					end,
+					snacks.picker.diagnostics_buffer,
 					desc = "Fuzzy-find diagnostics (current buffer only)",
 				},
-				{ "<Leader>f", builtin.live_grep, desc = "Fuzzy-find `builtin.live_grep`" },
-				{ "<Leader>o", builtin.oldfiles, desc = "Fuzzy-find `builtin.oldfiles`" },
-				{ "<Leader>p", builtin.find_files, desc = "Fuzzy-find `builtin.find_files`" },
-				{ "<Leader>l<C-]>", builtin.lsp_definitions, desc = "Fuzzy-find `builtin.lsp_definitions`" },
-				{ "<Leader><F12>", builtin.lsp_definitions, desc = "Fuzzy-find `builtin.lsp_definitions`" },
+				{ "<Leader>f", snacks.picker.grep, desc = "Fuzzy-find with live word search" },
+				{ "<Leader>o", snacks.picker.recent, desc = "Fuzzy-find recent files" },
 				{
-					"<Leader>lR",
-					builtin.lsp_dynamic_workspace_symbols,
-					desc = "Fuzzy-find `builtin.lsp_dynamic_workspace_symbols`",
+					"<Leader>p",
+					snacks.picker.files,
+					desc = "Fuzzy-find with `snacks.picker.files`",
 				},
-				{ "<Leader>lgd", builtin.lsp_definitions, desc = "Fuzzy-find `builtin.lsp_definitions`" },
-				{ "<Leader>lgi", builtin.lsp_implementations, desc = "Fuzzy-find `builtin.lsp_implementations`" },
-				{ "<Leader>lgr", builtin.lsp_references, desc = "Fuzzy-find `builtin.lsp_references`" },
-				{ "<Leader><M-S-F12>", builtin.lsp_references, desc = "Fuzzy-find `builtin.lsp_references`" },
-				{ "<Leader>lgt", builtin.lsp_type_definitions, desc = "Fuzzy-find `builtin.lsp_type_definitions`" },
-				{ "<Leader>lr", builtin.lsp_document_symbols, desc = "Fuzzy-find `builtin.lsp_document_symbols`" },
-				{ "<Leader>r", builtin.current_buffer_tags, desc = "Fuzzy-find `builtin.current_buffer_tags`" },
-				{ "<Leader><F2>", builtin.help_tags, desc = "Fuzzy-find `builtin.help_tags`" },
+				{ "<Leader>l<C-]>", snacks.picker.lsp_definitions, desc = "Fuzzy-find LSP definitions" },
+				{ "<Leader><F12>", snacks.picker.lsp_definitions, desc = "Fuzzy-find LSP definitions" },
+				-- {
+				-- 	"<Leader>lR",
+				-- 	builtin.lsp_dynamic_workspace_symbols,
+				-- 	desc = "Fuzzy-find `builtin.lsp_dynamic_workspace_symbols`",
+				-- },
+				{ "<Leader>lgd", snacks.picker.lsp_definitions, desc = "Fuzzy-find LSP definitions" },
+				{ "<Leader>lgi", snacks.picker.lsp_implementations, desc = "Fuzzy-find LSP implementations" },
+				{ "<Leader>lgr", snacks.picker.lsp_references, desc = "Fuzzy-find LSP references" },
+				{ "<Leader><M-S-F12>", snacks.picker.lsp_references, desc = "Fuzzy-find LSP references" },
+				{ "<Leader>lgt", snacks.picker.lsp_type_definitions, desc = "Fuzzy-find LSP type definitions" },
+				-- { "<Leader>lr", builtin.lsp_document_symbols, desc = "Fuzzy-find LSP document symbols" },
+				{ "<Leader><F2>", snacks.picker.help, desc = "Fuzzy-find `help` tags" },
 			})
 		end,
 	},
