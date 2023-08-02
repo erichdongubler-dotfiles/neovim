@@ -109,6 +109,6 @@ return {
 		-- TODO: Make `lazy` highlights _not suck_:
 		-- * Plugin reload messages be _dark red_ 😱
 
-		-- TODO: Make `bufferline` tabs not look stupid plz. 🥺
+		-- TODO: Make `barbar` tabs not look stupid plz. 🥺
 	},
 }

@@ -2,46 +2,36 @@ vim.opt.splitkeep = "screen"
 
 -- Create a VSCode-like tab bar.
 return {
-	"akinsho/bufferline.nvim",
-	version = "v3.*",
+	"romgrk/barbar.nvim",
 	dependencies = {
-		{
-			"famiu/bufdelete.nvim",
-			config = function(_, opts)
-				noremap("n", "<Leader>w", vim.cmd.Bwipeout, { desc = "Close current buffer" })
-			end,
-		},
 		"nvim-tree/nvim-web-devicons",
 		"vim-sublime-monokai",
 		"which-key.nvim",
 		-- "vim-sublime-monokai",
 		-- "vim-unimpaired", -- conflicts with `]b`-ish bindings
 	},
-	config = function()
-		local bufferline = require("bufferline")
-		bufferline.setup({
-			options = {
-				buffer_close_icon = "⤬",
-				close_command = function(bufnum)
-					require("bufdelete").bufwipeout(bufnum)
-				end,
-				close_icon = "⤬",
-				diagnostics = "nvim_lsp",
-				separator_style = "slant",
+	init = function()
+		vim.g.barbar_auto_setup = false
+	end,
+	opts = {
+		focus_on_close = "left",
+		icons = {
+			button = "⤬",
+			diagnostics = {
+				[vim.diagnostic.severity.ERROR] = { enabled = true, icon = "🛇 " },
+				[vim.diagnostic.severity.WARN] = { enabled = true },
 			},
-		})
+		},
+	},
+	config = function(_, opts)
+		require("barbar").setup(opts)
 		local which_key = require("which-key")
-		local bufferline = require("bufferline")
 		local cycle_next = {
-			function()
-				bufferline.cycle(1)
-			end,
+			bind_fuse(vim.cmd.BufferNext),
 			"Switch to tab on right",
 		}
 		local cycle_prev = {
-			function()
-				bufferline.cycle(-1)
-			end,
+			bind_fuse(vim.cmd.BufferPrevious),
 			"Switch to tab on left",
 		}
 		which_key.register({
@@ -52,11 +42,12 @@ return {
 			["[b"] = cycle_prev,
 			["<C-PageUp>"] = cycle_prev,
 			["<C-PageDown>"] = cycle_next,
+			["<Leader>w"] = {
+				bind_fuse(vim.cmd.BufferClose),
+				"Close current buffer",
+			},
 			["<Leader>W"] = {
-				function()
-					bufferline.close_in_direction("left")
-					bufferline.close_in_direction("right")
-				end,
+				bind_fuse(vim.cmd.BufferCloseAllButCurrentOrPinned),
 				"Close all buffers but the current one",
 			},
 		})
