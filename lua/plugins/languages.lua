@@ -47,6 +47,7 @@ return {
 				"lua_ls",
 				"ruff",
 				"rust_analyzer",
+				"taplo", -- TOML
 				"ts_ls",
 				"wgsl_analyzer",
 			},
@@ -158,6 +159,7 @@ return {
 					end
 				end,
 				rust = { "rustfmt", lsp_format = "fallback" },
+				toml = { "taplo" },
 			},
 		},
 		config = function(_, opts)
@@ -253,7 +255,18 @@ return {
 
 	"gisphm/vim-gitignore",
 
-	"cespare/vim-toml",
+	{
+		"cespare/vim-toml",
+		dependencies = {
+			"mason-lspconfig.nvim",
+			"cmp-nvim-lsp",
+		},
+		config = function(_, opts)
+			require("lspconfig").taplo.setup({
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			})
+		end,
+	},
 
 	"zchee/vim-flatbuffers",
 
