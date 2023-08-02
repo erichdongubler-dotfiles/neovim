@@ -9,6 +9,26 @@ vim.g.java_highlight_java_lang_ids = 1
 return {
 	"vitalk/vim-shebang",
 
+	-- Tags: a poor man's go-to-definition
+	{
+		"ludovicchabant/vim-gutentags",
+		init = function()
+			if vim.fn.executable("fd") then
+				vim.g.gutentags_file_list_command = "fd --follow --type file"
+				vim.g.gutentags_file_list_command = "rg --follow --files"
+			else
+				vim.g.gutentags_resolve_symlinks = 1
+			end
+
+			vim.g.gutentags_cache_dir = vim.fn.stdpath("cache") .. "/gutentags"
+			if not vim.fn.isdirectory(vim.g.gutentags_cache_dir) then
+				vim.fn.mkdir(vim.g.gutentags_cache_dir)
+			end
+
+			vim.g.gutentags_ctags_tagfile = ".tags"
+		end,
+	},
+
 	-- LSP-oriented integration
 	{
 		"williamboman/mason.nvim",
@@ -194,6 +214,15 @@ return {
 
 	"pprovost/vim-ps1",
 
+	{
+		"elkasztano/nushell-syntax-vim",
+		config = function(_, opts)
+			require("lspconfig").nushell.setup({
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			})
+		end,
+	},
+
 	--     Data/configuration/IDL-ish languages
 
 	"gisphm/vim-gitignore",
@@ -256,62 +285,36 @@ return {
 			-- TODO
 			function configure_rust()
 				local cargo = vim.cmd.Cargo
-				require("which-key").register({
-					b = {
-						bind_fuse(cargo, "build"),
-						"Run `cargo build`",
-					},
-					B = {
+				require("which-key").add({
+					buffer = 0,
+					{ "<LocalLeader>b", bind_fuse(cargo, "build"), desc = "Run `cargo build`" },
+					{
+						"<LocalLeader>B",
 						bind_fuse(cargo, "build", "--release"),
-						"Run `cargo build --release`",
+						desc = "Run `cargo build --release`",
 					},
-					c = {
-						bind_fuse(cargo, "check"),
-						"Run `cargo check`",
-					},
-					d = {
-						bind_fuse(cargo, "doc"),
-						"Run `cargo doc`",
-					},
-					D = {
-						bind_fuse(cargo, "doc", "--open"),
-						"Run `cargo doc --open`",
-					},
-					F = {
-						bind_fuse(cargo, "fmt"),
-						"Run `cargo fmt`",
-					},
-					f = {
-						vim.cmd.RustFmt,
-						"Run `cargo fmt` on current file",
-					},
-					p = {
-						vim.cmd.RustPlay,
-						"Run `cargo ???`",
-					},
-					r = {
-						bind_fuse(cargo, "run"),
-						"Run `cargo run`",
-					},
-					R = {
+					{ "<LocalLeader>c", bind_fuse(cargo, "check"), desc = "Run `cargo check`" },
+					{ "<LocalLeader>d", bind_fuse(cargo, "doc"), desc = "Run `cargo doc`" },
+					{ "<LocalLeader>D", bind_fuse(cargo, "doc", "--open"), desc = "Run `cargo doc --open`" },
+					{ "<LocalLeader>F", bind_fuse(cargo, "fmt"), desc = "Run `cargo fmt`" },
+					{ "<LocalLeader>f", vim.cmd.RustFmt, desc = "Run `cargo fmt` on current file" },
+					{ "<LocalLeader>p", vim.cmd.RustPlay, desc = "Run `cargo ???`" },
+					{ "<LocalLeader>r", bind_fuse(cargo, "run"), desc = "Run `cargo run`" },
+					{
+						"<LocalLeader>R",
 						bind_fuse(cargo, "run", "--release"),
-						"Run `cargo run --release`",
+						desc = "Run `cargo run --release`",
 					},
-					s = {
+					{
+						"<LocalLeader>s",
 						function()
 							cargo("script", vim.cmd.expand("%"))
 						end,
-						"Run `cargo script` on current file",
+						desc = "Run `cargo script` on current file",
 					},
-					t = {
-						vim.cmd.RustTest,
-						"Run `cargo test` on test under cursor",
-					},
-					T = {
-						bind_fuse(cargo, "test"),
-						"Run `cargo test`",
-					},
-				}, { prefix = "<LocalLeader>", buffer = 0 })
+					{ "<LocalLeader>t", vim.cmd.RustTest, desc = "Run `cargo test` on test under cursor" },
+					{ "<LocalLeader>T", bind_fuse(cargo, "test"), desc = "Run `cargo test`" },
+				})
 			end
 			augroup("rust", function(au)
 				au("FileType", "rust", configure_rust)

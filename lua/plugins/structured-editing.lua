@@ -267,4 +267,11 @@ return {
 			]])
 		end,
 	},
+
+	{
+		"arthurxavierx/vim-caser",
+		init = function()
+			vim.g.caser_prefix = "gS"
+		end,
+	},
 }
