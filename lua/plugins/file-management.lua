@@ -37,4 +37,19 @@ return {
 			nvim_tree.setup(opts)
 		end,
 	},
+	{
+		"ErichDonGubler/vim-file-browser-integration",
+		config = function()
+			-- TODO: This sort of binding seems to happen multiple times. Maybe factoring out is
+			-- interesting?
+			local fb_bindings = {
+				["<Leader>e"] = vim.cmd.SelectCurrentFile,
+				["<Leader>x"] = vim.cmd.OpenCurrentFile,
+				["<Leader>E"] = vim.cmd.OpenCWD,
+			}
+			for binding, cmd in pairs(fb_bindings) do
+				noremap("n", binding, cmd)
+			end
+		end,
+	},
 }
