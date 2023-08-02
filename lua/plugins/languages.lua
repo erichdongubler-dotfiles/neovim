@@ -15,8 +15,8 @@ return {
 		init = function()
 			if vim.fn.executable("fd") then
 				vim.g.gutentags_file_list_command = "fd --follow --type file"
+			elseif vim.fn.executable("rg") then
 				vim.g.gutentags_file_list_command = "rg --follow --files"
-			else
 				vim.g.gutentags_resolve_symlinks = 1
 			end
 
@@ -47,7 +47,7 @@ return {
 				"lua_ls",
 				"rust_analyzer",
 				"taplo", -- TOML
-				"tsserver",
+				"ts_ls",
 				"wgsl_analyzer",
 			},
 		},
@@ -350,7 +350,13 @@ return {
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
 				settings = {
 					["rust-analyzer"] = {
-						cargo = { runBuildScripts = true },
+						cargo = {
+							runBuildScripts = true,
+							targetDir = true,
+						},
+						check = {
+							command = "clippy",
+						},
 						procMacro = {
 							enable = true,
 						},
@@ -405,7 +411,7 @@ return {
 			"nvim-lspconfig",
 		},
 		config = function(_, opts)
-			require("lspconfig").tsserver.setup({
+			require("lspconfig").ts_ls.setup({
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
 			})
 		end,
