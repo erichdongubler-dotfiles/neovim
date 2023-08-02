@@ -32,13 +32,11 @@ return {
 	-- LSP-oriented integration
 	{
 		"williamboman/mason.nvim",
-		event = "VeryLazy",
 		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
 		config = true,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-		event = "VeryLazy",
 		dependencies = {
 			"mason.nvim",
 		},
@@ -193,6 +191,7 @@ return {
 
 	{
 		"plasticboy/vim-markdown",
+		ft = { "markdown", "ghmarkdown" },
 		dependencies = {
 			-- "tagbar", -- TODO: Do we even still want this?
 		},
@@ -216,6 +215,7 @@ return {
 
 	{
 		"liuchengxu/graphviz.vim",
+		ft = { "dot" },
 		init = function()
 			vim.g.graphviz_output_format = "svg"
 		end,
@@ -223,6 +223,7 @@ return {
 
 	{
 		"jceb/vim-orgmode",
+		ft = { "org" },
 		dependencies = {
 			"tpope/vim-speeddating",
 		},
@@ -426,6 +427,7 @@ return {
 
 	{
 		"pangloss/vim-javascript",
+		ft = { "javascript" },
 		dependencies = {
 			"vim-sublime-monokai",
 		},
@@ -455,6 +457,7 @@ return {
 
 	{
 		"leafgarland/typescript-vim",
+		ft = { "typescript" },
 		dependencies = {
 			"blink.cmp",
 			"nvim-lspconfig",
@@ -477,7 +480,10 @@ return {
 		end,
 	},
 
-	"andys8/vim-elm-syntax",
+	{
+		"andys8/vim-elm-syntax",
+		ft = { "elm" },
+	},
 
 	--     other general-purpose languages
 
@@ -494,10 +500,14 @@ return {
 		end,
 	},
 
-	"OrangeT/vim-csharp",
+	{
+		"OrangeT/vim-csharp",
+		ft = { "csharp" },
+	},
 
 	{
 		"fatih/vim-go",
+		ft = { "go" },
 		dependencies = {
 			"vim-sublime-monokai",
 		},
@@ -524,6 +534,7 @@ return {
 
 	{
 		"StanAngeloff/php.vim",
+		ft = { "php" },
 		dependencies = {
 			"vim-sublime-monokai",
 		},
@@ -539,6 +550,7 @@ return {
 
 	{
 		"DingDean/wgsl.vim",
+		ft = { "wgsl" },
 		dependencies = {
 			"blink.cmp",
 			"mason-lspconfig.nvim",
