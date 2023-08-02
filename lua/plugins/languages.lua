@@ -46,6 +46,7 @@ return {
 			ensure_installed = {
 				"lua_ls",
 				"rust_analyzer",
+				"taplo", -- TOML
 				"tsserver",
 				"wgsl_analyzer",
 			},
@@ -126,77 +127,40 @@ return {
 
 	-- Formatting
 	{
-		"Chiel92/vim-autoformat",
-		event = "VeryLazy",
-		cond = vim.fn.has("python3") == 1,
-		config = function()
-			vim.opt.autoindent = true
-
-			augroup("WhitespaceAutoformat", function(au)
-				au("BufWrite", "*", ":Autoformat")
-			end)
-
-			function disable_trailing_whitespace_stripping()
-				vim.b.autoformat_remove_trailing_spaces = 0
-			end
-			function disable_indentation_fixing()
-				vim.b.autoformat_autoindent = 0
-			end
-			function disable_retab()
-				vim.b.autoformat_retab = 0
-			end
-			function disable_whitespace_fixing()
-				disable_trailing_whitespace_stripping()
-				disable_indentation_fixing()
-				disable_retab()
-			end
-
-			local blacklist_entries = {
-				[{ "BufNewFile", "BufRead" }] = {
-					-- TODO: Can we eliminate this with a syntax?
-					[disable_whitespace_fixing] = {
-						"git-revise-todo",
-					},
-				},
-				[{ "FileType" }] = {
-					[disable_whitespace_fixing] = {
-						"cpp",
-						"csv",
-						"ctrlsf",
-						"diff",
-						"git",
-						"gitrebase",
-						"snippets",
-						"txt",
-					},
-					[disable_indentation_fixing] = {
-						"dosini",
-						"dot",
-						"gitcommit",
-						"hgcommit",
-						"javascript",
-						"jj",
-						"kdl",
-						"markdown",
-						"rust",
-						"sh",
-						"toml",
-						"txt",
-						"typescript",
-						"xml",
-					},
-				},
-			}
-
-			augroup("WhitespaceAutoformatBlacklist", function(au)
-				for events, rest in pairs(blacklist_entries) do
-					for callback, rest in pairs(rest) do
-						for _idx, pattern in pairs(rest) do
-							au(events, pattern, callback)
-						end
+		"stevearc/conform.nvim",
+		opts = {
+			format_on_save = {
+				timeout_ms = 500,
+				lsp_format = "fallback",
+			},
+			formatters_by_ft = {
+				-- ["_"] = { "trim_newlines", "trim_whitespace" },
+				["git-revise-todo"] = {},
+				cpp = { "clang-format" },
+				csv = {},
+				ctrlsf = {},
+				diff = {},
+				git = {},
+				gitrebase = {},
+				javascript = { "prettierd", "prettier", stop_after_first = true },
+				lua = { "stylua" },
+				markdown = { "prettierd", "prettier", stop_after_first = true },
+				python = function(bufnr)
+					if require("conform").get_formatter_info("ruff_format", bufnr).available then
+						return { "ruff_format", "ruff_fix" }
+					else
+						return { "isort", "black" }
 					end
-				end
-			end)
+				end,
+				rust = { "rustfmt", lsp_format = "fallback" },
+				snippets = {},
+				text = {},
+				toml = { "taplo" },
+			},
+		},
+		config = function(_, opts)
+			require("conform").setup(opts)
+			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
 
@@ -272,7 +236,18 @@ return {
 
 	"gisphm/vim-gitignore",
 
-	"cespare/vim-toml",
+	{
+		"cespare/vim-toml",
+		dependencies = {
+			"mason-lspconfig.nvim",
+			"cmp-nvim-lsp",
+		},
+		config = function(_, opts)
+			require("lspconfig").taplo.setup({
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			})
+		end,
+	},
 
 	"zchee/vim-flatbuffers",
 
@@ -378,6 +353,9 @@ return {
 						cargo = { runBuildScripts = true },
 						procMacro = {
 							enable = true,
+						},
+						cargo = {
+							targetDir = true,
 						},
 					},
 				},
