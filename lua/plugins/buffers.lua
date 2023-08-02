@@ -71,6 +71,11 @@ return {
 				bind_fuse(vim.cmd.BufferCloseAllButCurrentOrPinned),
 				desc = "Close all buffers but the current one",
 			},
+			{
+				"<Leader><Leader>f",
+				bind_fuse(vim.cmd.BufferPick),
+				desc = "Pick buffer to switch to with key…",
+			},
 		})
 	end,
 }
