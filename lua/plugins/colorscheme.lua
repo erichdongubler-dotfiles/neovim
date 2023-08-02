@@ -37,33 +37,45 @@ return {
 			hi! link zshTypes           SublimeType
 			]])
 
+			vim.cmd([[
+			hi UndercurlRed gui=undercurl guisp=#ff0000
+			hi UndercurlYellow gui=undercurl guisp=#ffff00
+			hi UndercurlCyan gui=undercurl guisp=#00ffff
+			]])
+
 			-- TODO: upstream these?
 			local lsp_highlight_groups = {
 				["Error"] = {
 					[""] = "Error",
 					["Sign"] = "Error",
-					["Underline"] = "SpellBad",
+					["Underline"] = "UndercurlRed",
 					["VirtualText"] = "NonText",
 				},
 				["Warn"] = {
 					[""] = "SpellCap",
 					["Sign"] = "SpellCap",
-					["Underline"] = "SpellCap",
+					["Underline"] = "UndercurlYellow",
 					["VirtualText"] = "NonText",
 				},
 				["Info"] = {
 					[""] = "Comment",
+					["Sign"] = nil,
+					["Underline"] = nil,
 					["VirtualText"] = "NonText",
 				},
 				["Hint"] = {
 					[""] = "Comment",
+					["Sign"] = nil,
+					["Underline"] = "UndercurlCyan",
 					["VirtualText"] = "NonText",
 				},
 			}
 			for severity, rest in pairs(lsp_highlight_groups) do
 				for highlight_location, highlight_spec in pairs(rest) do
 					local highlight_group = "Diagnostic" .. highlight_location .. severity
-					if type(highlight_spec) == "string" then
+					if not highlight_spec then
+						-- pass
+					elseif type(highlight_spec) == "string" then
 						vim.cmd("hi! link " .. highlight_group .. " " .. highlight_spec)
 					else
 						sublime_monokai_highlight(highlight_group, highlight_spec)
