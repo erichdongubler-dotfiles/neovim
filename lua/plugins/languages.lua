@@ -26,6 +26,7 @@ return {
 			ensure_installed = {
 				"lua_ls",
 				"rust_analyzer",
+				"taplo", -- TOML
 				"tsserver",
 				"wgsl_analyzer",
 			},
@@ -198,7 +199,18 @@ return {
 
 	"gisphm/vim-gitignore",
 
-	"cespare/vim-toml",
+	{
+		"cespare/vim-toml",
+		dependencies = {
+			"mason-lspconfig.nvim",
+			"cmp-nvim-lsp",
+		},
+		config = function(_, opts)
+			require("lspconfig").taplo.setup({
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			})
+		end,
+	},
 
 	"zchee/vim-flatbuffers",
 
@@ -452,6 +464,12 @@ return {
 		},
 		config = function(_, opts)
 			require("lspconfig").wgsl_analyzer.setup({
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			})
+			require("lspconfig").html.setup({
+				-- NOTE: We don't expect auto-completion to work ATOW, this is only for
+				-- future-proofing.
+				-- TODO: validate the above.
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
 			})
 		end,
