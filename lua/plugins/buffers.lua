@@ -42,6 +42,14 @@ return {
 			["[b"] = cycle_prev,
 			["<C-PageUp>"] = cycle_prev,
 			["<C-PageDown>"] = cycle_next,
+			["<C-S-PageUp>"] = {
+				bind_fuse(vim.cmd.BufferMovePrevious),
+				"Move current buffer tab to the left",
+			},
+			["<C-S-PageDown>"] = {
+				bind_fuse(vim.cmd.BufferMoveNext),
+				"Move current buffer tab to the right",
+			},
 			["<Leader>w"] = {
 				bind_fuse(vim.cmd.BufferClose),
 				"Close current buffer",
