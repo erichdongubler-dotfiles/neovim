@@ -14,6 +14,7 @@ return {
 		vim.g.barbar_auto_setup = false
 	end,
 	opts = {
+		auto_hide = vim.g.started_by_firenvim,
 		focus_on_close = "left",
 		icons = {
 			button = "⤬",
