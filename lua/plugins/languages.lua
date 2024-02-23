@@ -239,7 +239,7 @@ return {
 
 	{
 		"rust-lang/rust.vim",
-		ft = "rust",
+		event = "BufReadPre",
 		dependencies = {
 			"cmp-nvim-lsp",
 			"mason-lspconfig.nvim",
