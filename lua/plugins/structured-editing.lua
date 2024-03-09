@@ -22,6 +22,14 @@ map_device_character_append(";", "Semicolon")
 map_device_character_append(".", "Period")
 map_device_character_append(",", "Comma")
 
+command("ByteOff", function(info)
+	local offset = tonumber(info.fargs[1])
+	local line = vim.fn.line(".")
+	local col = vim.fn.col(".") - 1
+	local new_byte_offset = vim.fn.line2byte(line) + col + offset
+	vim.cmd("goto " .. new_byte_offset)
+end, { nargs = 1 })
+
 -- Create some lazy init. machinery for plugins that init. or consume
 -- `vim-sandwich`
 
