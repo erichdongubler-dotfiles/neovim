@@ -27,6 +27,7 @@ command("ByteOff", function(info)
 	local line = vim.fn.line(".")
 	local col = vim.fn.col(".") - 1
 	local new_byte_offset = vim.fn.line2byte(line) + col + offset
+	print("new byte offset: " .. new_byte_offset)
 	vim.cmd("goto " .. new_byte_offset)
 end, { nargs = 1 })
 
