@@ -44,6 +44,14 @@ return {
 			-- conflicts by not mapping them in the first place.
 			["]b"] = cycle_next,
 			["[b"] = cycle_prev,
+			["]B"] = {
+				bind_fuse(vim.cmd.BufferLast),
+				"Switch to furthest tab on right",
+			},
+			["[B"] = {
+				bind_fuse(vim.cmd.BufferFirst),
+				"Switch to furthest tab on left",
+			},
 			["<C-PageUp>"] = cycle_prev,
 			["<C-PageDown>"] = cycle_next,
 			["<C-S-PageUp>"] = {
