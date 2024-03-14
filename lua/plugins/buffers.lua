@@ -38,6 +38,10 @@ return {
 			-- Replace default bindings
 			-- TODO: motion repetitions
 			-- TODO: move bindings
+
+			-- NOTE: These bracket bindings conflict with `mini.bracketed` and `vim-unimpaired` by
+			-- default. Other configuration (i.e., of those plugins) should eliminate these
+			-- conflicts by not mapping them in the first place.
 			["]b"] = cycle_next,
 			["[b"] = cycle_prev,
 			["<C-PageUp>"] = cycle_prev,
