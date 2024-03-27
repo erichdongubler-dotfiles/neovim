@@ -46,6 +46,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("mini.bracketed").setup({
+				buffer = { suffix = "" }, -- disable this due to conflict with desired `buffers` mapping
 				diagnostic = { suffix = "d" },
 			})
 		end,

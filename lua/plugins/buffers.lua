@@ -2,63 +2,77 @@ vim.opt.splitkeep = "screen"
 
 -- Create a VSCode-like tab bar.
 return {
-	"akinsho/bufferline.nvim",
-	cond = not vim.g.started_by_firenvim,
-	version = "v3.*",
+	"romgrk/barbar.nvim",
 	dependencies = {
-		{
-			"famiu/bufdelete.nvim",
-			config = function(_, opts)
-				noremap("n", "<Leader>w", vim.cmd.Bwipeout, { desc = "Close current buffer" })
-			end,
-		},
 		"nvim-tree/nvim-web-devicons",
 		"vim-sublime-monokai",
 		"which-key.nvim",
 		-- "vim-sublime-monokai",
 		-- "vim-unimpaired", -- conflicts with `]b`-ish bindings
 	},
-	config = function()
-		local bufferline = require("bufferline")
-		bufferline.setup({
-			options = {
-				buffer_close_icon = "⤬",
-				close_command = function(bufnum)
-					require("bufdelete").bufwipeout(bufnum)
-				end,
-				close_icon = "⤬",
-				diagnostics = "nvim_lsp",
-				separator_style = "slant",
+	init = function()
+		vim.g.barbar_auto_setup = false
+	end,
+	opts = {
+		focus_on_close = "left",
+		icons = {
+			button = "⤬",
+			diagnostics = {
+				[vim.diagnostic.severity.ERROR] = { enabled = true, icon = "🛇 " },
+				[vim.diagnostic.severity.WARN] = { enabled = true },
 			},
-		})
+		},
+	},
+	config = function(_, opts)
+		require("barbar").setup(opts)
 		local which_key = require("which-key")
-		local bufferline = require("bufferline")
 		local cycle_next = {
-			function()
-				bufferline.cycle(1)
-			end,
+			bind_fuse(vim.cmd.BufferNext),
 			"Switch to tab on right",
 		}
 		local cycle_prev = {
-			function()
-				bufferline.cycle(-1)
-			end,
+			bind_fuse(vim.cmd.BufferPrevious),
 			"Switch to tab on left",
 		}
 		which_key.register({
 			-- Replace default bindings
 			-- TODO: motion repetitions
 			-- TODO: move bindings
+
+			-- NOTE: These bracket bindings conflict with `mini.bracketed` and `vim-unimpaired` by
+			-- default. Other configuration (i.e., of those plugins) should eliminate these
+			-- conflicts by not mapping them in the first place.
 			["]b"] = cycle_next,
 			["[b"] = cycle_prev,
+			["]B"] = {
+				bind_fuse(vim.cmd.BufferLast),
+				"Switch to furthest tab on right",
+			},
+			["[B"] = {
+				bind_fuse(vim.cmd.BufferFirst),
+				"Switch to furthest tab on left",
+			},
 			["<C-PageUp>"] = cycle_prev,
 			["<C-PageDown>"] = cycle_next,
+			["<C-S-PageUp>"] = {
+				bind_fuse(vim.cmd.BufferMovePrevious),
+				"Move current buffer tab to the left",
+			},
+			["<C-S-PageDown>"] = {
+				bind_fuse(vim.cmd.BufferMoveNext),
+				"Move current buffer tab to the right",
+			},
+			["<Leader>w"] = {
+				bind_fuse(vim.cmd.BufferClose),
+				"Close current buffer",
+			},
 			["<Leader>W"] = {
-				function()
-					bufferline.close_in_direction("left")
-					bufferline.close_in_direction("right")
-				end,
+				bind_fuse(vim.cmd.BufferCloseAllButCurrentOrPinned),
 				"Close all buffers but the current one",
+			},
+			["<Leader><Leader>f"] = {
+				bind_fuse(vim.cmd.BufferPick),
+				"Pick buffer to switch to with key…",
 			},
 		})
 	end,
