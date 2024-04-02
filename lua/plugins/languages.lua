@@ -124,6 +124,12 @@ return {
 		end,
 	},
 
+	-- `treesitter`-oriented integration
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		opts = {},
+	},
+
 	-- Formatting
 	{
 		"Chiel92/vim-autoformat",
