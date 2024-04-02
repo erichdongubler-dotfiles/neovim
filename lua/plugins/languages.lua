@@ -194,6 +194,18 @@ return {
 
 	"pprovost/vim-ps1",
 
+	{
+		"elkasztano/nushell-syntax-vim",
+		dependencies = {
+			"nvim-lspconfig",
+		},
+		config = function(_, opts)
+			require("lspconfig").nushell.setup({
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			})
+		end,
+	},
+
 	--     Data/configuration/IDL-ish languages
 
 	"gisphm/vim-gitignore",
