@@ -125,6 +125,12 @@ return {
 		end,
 	},
 
+	-- `treesitter`-oriented integration
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		opts = {},
+	},
+
 	-- Formatting
 	{
 		"stevearc/conform.nvim",
