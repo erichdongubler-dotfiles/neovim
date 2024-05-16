@@ -1,6 +1,6 @@
 if vim.g.neovide then
 	-- Get paste back
-	noremap({ "", "i" }, "<C-S-V>", "<C-R>+")
+	noremap({ "", "i" }, "<C-S-V>", "<C-R>+") -- Windows/Linux
 end
 
 noremap("n", "<Leader>ve", ":e " .. vim.fn.stdpath("config"), { desc = "Edit Neovim configuration" })
