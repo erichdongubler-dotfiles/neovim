@@ -3,6 +3,9 @@ if vim.g.neovide then
 	noremap({ "", "i" }, "<C-S-V>", "<C-R>+") -- Windows/Linux
 end
 
+-- MacOS bindings
+noremap("", "<D-v>", "<C-R>+")
+
 noremap("n", "<Leader>ve", ":e " .. vim.fn.stdpath("config"), { desc = "Edit Neovim configuration" })
 noremap("n", "<Leader>", "<cmd>qa!<CR>", { desc = "Quit (force on all windows)" })
 noremap("n", "<Leader>Q", "<cmd>q!<CR>", { desc = "Quit (force on current window)" })
