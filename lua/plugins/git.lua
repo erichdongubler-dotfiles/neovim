@@ -20,6 +20,7 @@ return {
 				delete = { text = "_" },
 				topdelete = { text = "‾" },
 				changedelete = { text = "~" },
+				untracked = { text = "┆" },
 			},
 			signs_staged = {
 				add = { text = "+" },
@@ -27,6 +28,7 @@ return {
 				delete = { text = "_" },
 				topdelete = { text = "‾" },
 				changedelete = { text = "~" },
+				untracked = { text = "┆" },
 			},
 		},
 		config = function(_, opts)
