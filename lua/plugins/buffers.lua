@@ -27,15 +27,21 @@ return {
 	config = function(_, opts)
 		require("barbar").setup(opts)
 		local which_key = require("which-key")
-		local cycle_next = {
-			bind_fuse(vim.cmd.BufferNext),
-			"Switch to tab on right",
-		}
-		local cycle_prev = {
-			bind_fuse(vim.cmd.BufferPrevious),
-			"Switch to tab on left",
-		}
-		which_key.register({
+		local cycle_next = function(binding)
+			return {
+				binding,
+				bind_fuse(vim.cmd.BufferNext),
+				desc = "Switch to tab on right",
+			}
+		end
+		local cycle_prev = function(binding)
+			return {
+				binding,
+				bind_fuse(vim.cmd.BufferPrevious),
+				desc = "Switch to tab on left",
+			}
+		end
+		which_key.add({
 			-- Replace default bindings
 			-- TODO: motion repetitions
 			-- TODO: move bindings
@@ -43,33 +49,27 @@ return {
 			-- NOTE: These bracket bindings conflict with `mini.bracketed` and `vim-unimpaired` by
 			-- default. Other configuration (i.e., of those plugins) should eliminate these
 			-- conflicts by not mapping them in the first place.
-			["]b"] = cycle_next,
-			["[b"] = cycle_prev,
-			["]B"] = {
-				bind_fuse(vim.cmd.BufferLast),
-				"Switch to furthest tab on right",
-			},
-			["[B"] = {
-				bind_fuse(vim.cmd.BufferFirst),
-				"Switch to furthest tab on left",
-			},
-			["<C-PageUp>"] = cycle_prev,
-			["<C-PageDown>"] = cycle_next,
-			["<C-S-PageUp>"] = {
+			cycle_next("]b"),
+			cycle_prev("[b"),
+			{ "]B", bind_fuse(vim.cmd.BufferLast), desc = "Switch to furthest tab on right" },
+			{ "[B", bind_fuse(vim.cmd.BufferFirst), desc = "Switch to furthest tab on left" },
+			cycle_prev("<C-PageUp>"),
+			cycle_next("<C-PageDown>"),
+			{
+				"<C-S-PageUp>",
 				bind_fuse(vim.cmd.BufferMovePrevious),
-				"Move current buffer tab to the left",
+				desc = "Move current buffer tab to the left",
 			},
-			["<C-S-PageDown>"] = {
+			{
+				"<C-S-PageDown>",
 				bind_fuse(vim.cmd.BufferMoveNext),
-				"Move current buffer tab to the right",
+				desc = "Move current buffer tab to the right",
 			},
-			["<Leader>w"] = {
-				bind_fuse(vim.cmd.BufferClose),
-				"Close current buffer",
-			},
-			["<Leader>W"] = {
+			{ "<Leader>w", bind_fuse(vim.cmd.BufferClose), desc = "Close current buffer" },
+			{
+				"<Leader>W",
 				bind_fuse(vim.cmd.BufferCloseAllButCurrentOrPinned),
-				"Close all buffers but the current one",
+				desc = "Close all buffers but the current one",
 			},
 		})
 	end,

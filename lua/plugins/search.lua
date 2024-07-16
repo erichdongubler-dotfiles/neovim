@@ -79,40 +79,40 @@ return {
 				},
 			})
 			local which_key = require("which-key")
-			which_key.register({
-				["<Leader>"] = {
-					["D"] = { builtin.diagnostics, "Fuzzy-find diagnostics" },
-					["O"] = { builtin.buffers, "Fuzzy-find `builtin.buffers`" },
-					["R"] = { builtin.tags, "Fuzzy-find `builtin.tags`" },
-					["T"] = { builtin.builtin, "Fuzzy-find `builtin.builtin`" },
-					["d"] = {
-						function()
-							builtin.diagnostics({ bufnr = 0 })
-						end,
-						"Fuzzy-find diagnostics (current buffer only)",
-					},
-					["f"] = { builtin.live_grep, "Fuzzy-find `builtin.live_grep`" },
-					["o"] = { builtin.oldfiles, "Fuzzy-find `builtin.oldfiles`" },
-					["p"] = { builtin.find_files, "Fuzzy-find `builtin.find_files`" },
-					["l<C-]>"] = { builtin.lsp_definitions, "Fuzzy-find `builtin.lsp_definitions`" },
-					["<F12>"] = { builtin.lsp_definitions, "Fuzzy-find `builtin.lsp_definitions`" },
-					["lR"] = {
-						builtin.lsp_dynamic_workspace_symbols,
-						"Fuzzy-find `builtin.lsp_dynamic_workspace_symbols`",
-					},
-					["la"] = { vim.lsp.buf.code_action, "Fuzzy-find `vim.lsp.buf.code_action`" },
-					["lgd"] = { builtin.lsp_definitions, "Fuzzy-find `builtin.lsp_definitions`" },
-					["lgi"] = { builtin.lsp_implementations, "Fuzzy-find `builtin.lsp_implementations`" },
-					["lgr"] = { builtin.lsp_references, "Fuzzy-find `builtin.lsp_references`" },
-					["<M-S-F12>"] = { builtin.lsp_references, "Fuzzy-find `builtin.lsp_references`" },
-					["lgt"] = { builtin.lsp_type_definitions, "Fuzzy-find `builtin.lsp_type_definitions`" },
-					["lr"] = { builtin.lsp_document_symbols, "Fuzzy-find `builtin.lsp_document_symbols`" },
-					["r"] = { builtin.current_buffer_tags, "Fuzzy-find `builtin.current_buffer_tags`" },
-					["<F2>"] = { builtin.help_tags, "Fuzzy-find `builtin.help_tags`" },
+			which_key.add({
+				{ "<Leader>D", builtin.diagnostics, desc = "Fuzzy-find diagnostics" },
+				{ "<Leader>O", builtin.buffers, desc = "Fuzzy-find `builtin.buffers`" },
+				{ "<Leader>R", builtin.tags, desc = "Fuzzy-find `builtin.tags`" },
+				{ "<Leader>T", builtin.builtin, desc = "Fuzzy-find `builtin.builtin`" },
+				{
+					"<Leader>d",
+					function()
+						builtin.diagnostics({ bufnr = 0 })
+					end,
+					desc = "Fuzzy-find diagnostics (current buffer only)",
 				},
+				{ "<Leader>f", builtin.live_grep, desc = "Fuzzy-find `builtin.live_grep`" },
+				{ "<Leader>o", builtin.oldfiles, desc = "Fuzzy-find `builtin.oldfiles`" },
+				{ "<Leader>p", builtin.find_files, desc = "Fuzzy-find `builtin.find_files`" },
+				{ "<Leader>l<C-]>", builtin.lsp_definitions, desc = "Fuzzy-find `builtin.lsp_definitions`" },
+				{ "<Leader><F12>", builtin.lsp_definitions, desc = "Fuzzy-find `builtin.lsp_definitions`" },
+				{
+					"<Leader>lR",
+					builtin.lsp_dynamic_workspace_symbols,
+					desc = "Fuzzy-find `builtin.lsp_dynamic_workspace_symbols`",
+				},
+				{ "<Leader>la", vim.lsp.buf.code_action, desc = "Fuzzy-find `vim.lsp.buf.code_action`" },
+				{ "<Leader>lgd", builtin.lsp_definitions, desc = "Fuzzy-find `builtin.lsp_definitions`" },
+				{ "<Leader>lgi", builtin.lsp_implementations, desc = "Fuzzy-find `builtin.lsp_implementations`" },
+				{ "<Leader>lgr", builtin.lsp_references, desc = "Fuzzy-find `builtin.lsp_references`" },
+				{ "<Leader><M-S-F12>", builtin.lsp_references, desc = "Fuzzy-find `builtin.lsp_references`" },
+				{ "<Leader>lgt", builtin.lsp_type_definitions, desc = "Fuzzy-find `builtin.lsp_type_definitions`" },
+				{ "<Leader>lr", builtin.lsp_document_symbols, desc = "Fuzzy-find `builtin.lsp_document_symbols`" },
+				{ "<Leader>r", builtin.current_buffer_tags, desc = "Fuzzy-find `builtin.current_buffer_tags`" },
+				{ "<Leader><F2>", builtin.help_tags, desc = "Fuzzy-find `builtin.help_tags`" },
 			})
-			which_key.register({
-				["<Leader>la"] = { bind_fuse(vim.lsp.buf.code_action), "Fuzzy-find code action(s) in selection" },
+			which_key.add({
+				{ "<Leader>la", bind_fuse(vim.lsp.buf.code_action), desc = "Fuzzy-find code action(s) in selection" },
 			}, { mode = "v" })
 		end,
 	},
