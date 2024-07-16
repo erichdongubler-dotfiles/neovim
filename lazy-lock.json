@@ -10,7 +10,7 @@
   "ctrlsf.vim": { "branch": "master", "commit": "32236a8b376d9311dec9b5fe795ca99d32060b13" },
   "dressing.nvim": { "branch": "master", "commit": "6741f1062d3dc6e4755367a7e9b347b553623f04" },
   "dropbar.nvim": { "branch": "fix-outside-paths", "commit": "344c34359c9887683a8501ff61ed3b418562e38e" },
-  "fidget.nvim": { "branch": "main", "commit": "ef99df04a1c53a453602421bc0f756997edc8289" },
+  "firenvim": { "branch": "master", "commit": "3c4babfa0a561d1dc3640a902e67ca0b8af70927" },
   "friendly-snippets": { "branch": "main", "commit": "700c4a25caacbb4648c9a27972c2fe203948e0c2" },
   "gitsigns.nvim": { "branch": "main", "commit": "8df63f2ddc615feb71fd4aee45a4cee022876df1" },
   "graphviz.vim": { "branch": "master", "commit": "dbe1de334097891186e09e5616671091d89011d5" },
