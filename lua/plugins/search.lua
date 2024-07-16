@@ -6,6 +6,8 @@ vim.cmd("hi! link Search Underlined")
 
 map("", "<Leader>h", ":%s/", { desc = "Search and replace in buffer…" })
 map("v", "<Leader>h", ":s/", { desc = "Search and replace in visual range…" })
+map("", "<Leader>g", ":%g/", { desc = "Search and replace in buffer…" })
+map("v", "<Leader>g", ":g/", { desc = "Search and replace in visual range…" })
 
 return {
 	{
