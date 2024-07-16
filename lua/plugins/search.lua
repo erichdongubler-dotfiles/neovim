@@ -102,6 +102,12 @@ return {
 					desc = "Fuzzy-find `builtin.lsp_dynamic_workspace_symbols`",
 				},
 				{ "<Leader>la", vim.lsp.buf.code_action, desc = "Fuzzy-find `vim.lsp.buf.code_action`" },
+				{
+					"<Leader>la",
+					bind_fuse(vim.lsp.buf.code_action),
+					desc = "Fuzzy-find code action(s) in selection",
+					mode = "v",
+				},
 				{ "<Leader>lgd", builtin.lsp_definitions, desc = "Fuzzy-find `builtin.lsp_definitions`" },
 				{ "<Leader>lgi", builtin.lsp_implementations, desc = "Fuzzy-find `builtin.lsp_implementations`" },
 				{ "<Leader>lgr", builtin.lsp_references, desc = "Fuzzy-find `builtin.lsp_references`" },
@@ -111,9 +117,6 @@ return {
 				{ "<Leader>r", builtin.current_buffer_tags, desc = "Fuzzy-find `builtin.current_buffer_tags`" },
 				{ "<Leader><F2>", builtin.help_tags, desc = "Fuzzy-find `builtin.help_tags`" },
 			})
-			which_key.add({
-				{ "<Leader>la", bind_fuse(vim.lsp.buf.code_action), desc = "Fuzzy-find code action(s) in selection" },
-			}, { mode = "v" })
 		end,
 	},
 }
