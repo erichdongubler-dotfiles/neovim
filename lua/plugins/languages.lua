@@ -68,7 +68,7 @@ return {
 	{
 		"Chiel92/vim-autoformat",
 		event = "VeryLazy",
-		enabled = vim.fn.has("python3") == 1,
+		cond = vim.fn.has("python3") == 1,
 		config = function()
 			vim.opt.autoindent = true
 
