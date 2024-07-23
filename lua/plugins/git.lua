@@ -133,4 +133,5 @@ return {
 			}, { mode = "x" })
 		end,
 	},
+	"sindrets/diffview.nvim",
 }
