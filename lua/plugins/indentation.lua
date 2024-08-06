@@ -70,7 +70,7 @@ return {
 			local run_guess_indent = function()
 				-- TODO: figure out if there's a way we can represent `silent!` in Lua
 				vim.cmd([[
-				silent! lua require("guess_indent").set_from_buffer("auto_cmd")
+				silent! lua require("guess-indent").set_from_buffer("auto_cmd")
 				silent! RefreshListChars
 				]])
 				-- guess_indent.set_from_buffer("auto_cmd")
