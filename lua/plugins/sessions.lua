@@ -6,14 +6,12 @@ vim.opt.sessionoptions:append("globals")
 vim.opt.sessionoptions:append("winpos")
 
 return {
-	"dhruvasagar/vim-prosession",
+	"rmagatti/auto-session",
 	cond = not vim.g.started_by_firenvim,
 	dependencies = {
-		"tpope/vim-obsession",
-		"vim-fugitive", -- required for `prosession_per_branch`
+		"nvim-telescope/telescope.nvim",
 	},
-	init = function()
-		vim.g.prosession_per_branch = 1
-	end,
+	opts = {
+		auto_session_use_git_branch = true,
+	},
 }
--- TODO: fuzzy session selection?
