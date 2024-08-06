@@ -1,6 +1,9 @@
+vim.opt.sessionoptions:append("folds")
 vim.opt.sessionoptions:remove("options")
 vim.opt.sessionoptions:append("tabpages")
+vim.opt.sessionoptions:append("terminal")
 vim.opt.sessionoptions:append("globals")
+vim.opt.sessionoptions:append("winpos")
 
 return {
 	"dhruvasagar/vim-prosession",
