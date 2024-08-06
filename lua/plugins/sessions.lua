@@ -1,15 +1,17 @@
+vim.opt.sessionoptions:append("folds")
 vim.opt.sessionoptions:remove("options")
 vim.opt.sessionoptions:append("tabpages")
+vim.opt.sessionoptions:append("terminal")
 vim.opt.sessionoptions:append("globals")
+vim.opt.sessionoptions:append("winpos")
 
 return {
-	"dhruvasagar/vim-prosession",
+	"rmagatti/auto-session",
 	dependencies = {
-		"tpope/vim-obsession",
-		"vim-fugitive", -- required for `prosession_per_branch`
+		"nvim-telescope/telescope.nvim",
 	},
-	init = function()
-		vim.g.prosession_per_branch = 1
-	end,
+	opts = {
+		auto_session_use_git_branch = true,
+	},
 }
 -- TODO: fuzzy session selection?
