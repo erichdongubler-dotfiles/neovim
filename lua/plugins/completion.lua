@@ -42,6 +42,28 @@ return {
 				mode = { "i", "s" },
 			},
 		},
+		config = function(_, opts)
+			local luasnip = require("luasnip")
+			luasnip.setup(opts)
+			local cvs_filetypes = {
+				"gitcommit",
+				"hgcommit",
+				"jj",
+			}
+			local cvs_snippets = {
+				luasnip.snippet("mozpatch", {
+					luasnip.text_node("Bug "),
+					luasnip.insert_node(1, "???????"),
+					luasnip.text_node(" - "),
+					luasnip.insert_node(2, "TODO"),
+					luasnip.text_node(" r="),
+					luasnip.insert_node(3, "TODO"),
+				}),
+			}
+			for _idx, ft in pairs(cvs_filetypes) do
+				luasnip.add_snippets(ft, cvs_snippets)
+			end
+		end,
 	},
 	{
 		"hrsh7th/nvim-cmp",
