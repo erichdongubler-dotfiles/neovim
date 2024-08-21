@@ -84,6 +84,37 @@ return {
 		end,
 	},
 	{
+		"rachartier/tiny-code-action.nvim",
+		dependencies = {
+			"plenary.nvim",
+			"telescope.nvim",
+			"which-key.nvim",
+		},
+		event = "LspAttach",
+		keys = {
+			{ "<Leader>la", desc = "Fuzzy-find code action(s) in selection", mode = "n" },
+			{ "<Leader>la", desc = "Fuzzy-find code action(s) in selection", mode = "v" },
+		},
+		opts = {},
+		config = function(_, opts)
+			local tiny_code_action = require("tiny-code-action")
+			tiny_code_action.setup(opts)
+			require("which-key").add({
+				{
+					"<Leader>la",
+					bind_fuse(tiny_code_action.code_action),
+					desc = "Fuzzy-find `vim.lsp.buf.code_action`",
+				},
+				{
+					"<Leader>la",
+					bind_fuse(tiny_code_action.code_action),
+					desc = "Fuzzy-find code action(s) in selection",
+					mode = "v",
+				},
+			})
+		end,
+	},
+	{
 		-- NOTE: Some settings in `mini.bracketed` are configured to play well with this.
 		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "VeryLazy",
