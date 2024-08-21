@@ -51,6 +51,10 @@ return {
 				"jj",
 			}
 			local cvs_snippets = {
+				luasnip.snippet("mozdiffrev", {
+					luasnip.text_node("Differential Revision: https://phabricator.services.mozilla.com/"),
+					luasnip.insert_node(1, "D??????"),
+				}),
 				luasnip.snippet("mozpatch", {
 					luasnip.text_node("Bug "),
 					luasnip.insert_node(1, "???????"),
