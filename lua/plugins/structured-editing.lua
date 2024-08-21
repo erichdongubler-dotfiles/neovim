@@ -47,7 +47,13 @@ return {
 		event = "VeryLazy",
 		opts = {
 			buffer = { suffix = "" }, -- disable this due to conflict with desired `buffers` mapping
-			diagnostic = { suffix = "d" },
+			diagnostic = {
+				suffix = "d",
+				options = {
+					-- NOTE: disabled because `tiny-inline-diagnostic` opens a pop-pup automatically.
+					float = false,
+				},
+			},
 		},
 	},
 	{

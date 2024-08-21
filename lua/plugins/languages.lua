@@ -83,6 +83,15 @@ return {
 			noremap("n", "<Leader>mw", trouble.toggle, { desc = "Toggle `trouble` in workspace diagnostic mode" })
 		end,
 	},
+	{
+		-- NOTE: Some settings in `mini.bracketed` are configured to play well with this.
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "VeryLazy",
+		opts = {},
+		init = function()
+			vim.diagnostic.config({ virtual_text = false })
+		end,
+	},
 
 	-- Formatting
 	{
