@@ -252,6 +252,7 @@ return {
 		dependencies = {
 			"cmp-nvim-lsp",
 			"mason-lspconfig.nvim",
+			"nvim-lspconfig",
 			"vim-sandwich",
 			"vim-shebang",
 			"vim-sublime-monokai",
@@ -483,6 +484,7 @@ return {
 		"DingDean/wgsl.vim",
 		dependencies = {
 			"mason-lspconfig.nvim",
+			"nvim-lspconfig",
 		},
 		config = function(_, opts)
 			require("lspconfig").wgsl_analyzer.setup({
