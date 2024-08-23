@@ -190,26 +190,13 @@ return {
 	--     Document languages
 
 	{
-		"plasticboy/vim-markdown",
+		"OXY2DEV/markview.nvim",
 		dependencies = {
-			-- "tagbar", -- TODO: Do we even still want this?
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
 		},
-		config = function(_, opts)
-			augroup("markdown", function(au)
-				au("FileType", "markdown", function()
-					vim.cmd.SetRowLimit(80)
-					vim.cmd.EnableWordWrap()
-				end)
-			end)
-			vim.g.tagbar_type_markdown = {
-				ctagstype = "markdown",
-				kinds = {
-					"h:Heading_L1",
-					"i:Heading_L2",
-					"k:Heading_L3",
-				},
-			}
-		end,
+		lazy = false,
+		opts = {},
 	},
 
 	{
