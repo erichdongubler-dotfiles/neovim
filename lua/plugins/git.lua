@@ -112,4 +112,12 @@ return {
 		end,
 	},
 	"sindrets/diffview.nvim",
+	{
+		"julienvincent/hunk.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+		},
+		cmd = "DiffEditor",
+		opts = {},
+	},
 }
