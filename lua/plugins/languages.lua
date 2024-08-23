@@ -190,26 +190,8 @@ return {
 	--     Document languages
 
 	{
-		"plasticboy/vim-markdown",
-		dependencies = {
-			-- "tagbar", -- TODO: Do we even still want this?
-		},
-		config = function(_, opts)
-			augroup("markdown", function(au)
-				au("FileType", "markdown", function()
-					vim.cmd.SetRowLimit(80)
-					vim.cmd.EnableWordWrap()
-				end)
-			end)
-			vim.g.tagbar_type_markdown = {
-				ctagstype = "markdown",
-				kinds = {
-					"h:Heading_L1",
-					"i:Heading_L2",
-					"k:Heading_L3",
-				},
-			}
-		end,
+		"MeanderingProgrammer/render-markdown.nvim",
+		opts = {},
 	},
 
 	{
