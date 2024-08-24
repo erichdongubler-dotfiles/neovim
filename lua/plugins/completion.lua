@@ -63,6 +63,13 @@ return {
 					luasnip.text_node(" r="),
 					luasnip.insert_node(3, "TODO"),
 				}),
+				luasnip.snippet("webgpupatch", {
+					luasnip.text_node("Bug "),
+					luasnip.insert_node(1, "???????"),
+					luasnip.text_node(" - "),
+					luasnip.insert_node(2, "TODO"),
+					luasnip.text_node(" r=#webgpu-reviewers!"),
+				}),
 			}
 			for _idx, ft in pairs(cvs_filetypes) do
 				luasnip.add_snippets(ft, cvs_snippets)
