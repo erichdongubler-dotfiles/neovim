@@ -12,6 +12,7 @@ return {
 					[".*"] = { takeover = "never" },
 				},
 			}
+			vim.opt.laststatus = 0
 		end,
 	},
 }
