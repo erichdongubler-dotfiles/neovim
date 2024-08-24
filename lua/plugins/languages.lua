@@ -135,6 +135,7 @@ return {
 						"gitcommit",
 						"hgcommit",
 						"javascript",
+						"jj",
 						"kdl",
 						"markdown",
 						"rust",
