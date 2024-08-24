@@ -140,6 +140,7 @@ return {
 						"rust",
 						"sh",
 						"toml",
+						"txt",
 						"typescript",
 						"xml",
 					},
