@@ -31,7 +31,6 @@ vim.opt.formatoptions = vim.opt.formatoptions - { "l" } + { "t" }
 vim.opt.textwidth = 100
 
 function set_row_limit(textwidth)
-	print("setting buffer textwidth:", vim.inspect(textwidth))
 	vim.bo.textwidth = textwidth
 end
 command("SetRowLimit", function(opts)
