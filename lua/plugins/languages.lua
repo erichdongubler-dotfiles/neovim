@@ -181,7 +181,7 @@ return {
 			-- "tagbar", -- TODO: Do we even still want this?
 		},
 		config = function(_, opts)
-			augroup("markdown", function()
+			augroup("markdown", function(au)
 				au("FileType", "markdown", function()
 					vim.cmd.SetRowLimit(80)
 					vim.cmd.EnableWordWrap()
