@@ -136,7 +136,7 @@ return {
 			formatters_by_ft = {
 				-- ["_"] = { "trim_newlines", "trim_whitespace" },
 				["git-revise-todo"] = {},
-				cpp = {},
+				cpp = { "clang-format" },
 				csv = {},
 				ctrlsf = {},
 				diff = {},
