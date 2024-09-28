@@ -126,78 +126,17 @@ return {
 
 	-- Formatting
 	{
-		"Chiel92/vim-autoformat",
-		event = "VeryLazy",
-		cond = vim.fn.has("python3") == 1,
-		config = function()
-			vim.opt.autoindent = true
-
-			augroup("WhitespaceAutoformat", function(au)
-				au("BufWrite", "*", ":Autoformat")
-			end)
-
-			function disable_trailing_whitespace_stripping()
-				vim.b.autoformat_remove_trailing_spaces = 0
-			end
-			function disable_indentation_fixing()
-				vim.b.autoformat_autoindent = 0
-			end
-			function disable_retab()
-				vim.b.autoformat_retab = 0
-			end
-			function disable_whitespace_fixing()
-				disable_trailing_whitespace_stripping()
-				disable_indentation_fixing()
-				disable_retab()
-			end
-
-			local blacklist_entries = {
-				[{ "BufNewFile", "BufRead" }] = {
-					-- TODO: Can we eliminate this with a syntax?
-					[disable_whitespace_fixing] = {
-						"git-revise-todo",
-					},
-				},
-				[{ "FileType" }] = {
-					[disable_whitespace_fixing] = {
-						"cpp",
-						"csv",
-						"ctrlsf",
-						"diff",
-						"git",
-						"gitrebase",
-						"snippets",
-						"txt",
-					},
-					[disable_indentation_fixing] = {
-						"dosini",
-						"dot",
-						"gitcommit",
-						"hgcommit",
-						"javascript",
-						"jj",
-						"kdl",
-						"markdown",
-						"rust",
-						"sh",
-						"toml",
-						"txt",
-						"typescript",
-						"xml",
-					},
-				},
-			}
-
-			augroup("WhitespaceAutoformatBlacklist", function(au)
-				for events, rest in pairs(blacklist_entries) do
-					for callback, rest in pairs(rest) do
-						for _idx, pattern in pairs(rest) do
-							au(events, pattern, callback)
-						end
-					end
-				end
-			end)
-		end,
+		"stevearc/conform.nvim",
+		opts = {
+			format_on_save = {
+				timeout_ms = 500,
+				lsp_format = "fallback",
+			},
+			formatters_by_ft = {
+				lua = { "stylua" },
+				rust = { "rustfmt", lsp_format = "fallback" },
+			},
+		},
 	},
 
 	-- Debugging
