@@ -128,15 +128,47 @@ return {
 	{
 		"stevearc/conform.nvim",
 		opts = {
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_format = "fallback",
-			},
+			format_on_save = function(bufnr)
+				local disable_autoformat = false
+
+				if vim.b[bufnr].disable_autoformat ~= nil then
+					disable_autoformat = vim.b[bufnr].disable_autoformat
+				elseif vim.g.disable_autoformat ~= nil then
+					disable_autoformat = vim.g.disable_autoformat
+				end
+
+				if disable_autoformat then
+					return
+				end
+				return {
+					timeout_ms = 500,
+					lsp_format = "fallback",
+				}
+			end,
 			formatters_by_ft = {
 				lua = { "stylua" },
 				rust = { "rustfmt", lsp_format = "fallback" },
 			},
 		},
+		config = function(_, opts)
+			require("conform").setup(opts)
+			command("FormatDisable", function(args)
+				if args.bang then
+					vim.b.disable_autoformat = true
+				else
+					vim.g.disable_autoformat = true
+				end
+			end, {
+				desc = "Disable autoformat-on-save",
+				bang = true,
+			})
+			command("FormatEnable", function()
+				vim.b.disable_autoformat = false
+				vim.g.disable_autoformat = false
+			end, {
+				desc = "Re-enable autoformat-on-save",
+			})
+		end,
 	},
 
 	-- Debugging
