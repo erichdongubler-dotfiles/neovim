@@ -134,6 +134,7 @@ return {
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
+				markdown = { "prettierd", "prettier", stop_after_first = true },
 				rust = { "rustfmt", lsp_format = "fallback" },
 			},
 		},
