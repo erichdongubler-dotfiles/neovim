@@ -45,6 +45,7 @@ return {
 		opts = {
 			ensure_installed = {
 				"lua_ls",
+				"ruff",
 				"rust_analyzer",
 				"ts_ls",
 				"wgsl_analyzer",
@@ -149,6 +150,13 @@ return {
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				lua = { "stylua" },
 				markdown = { "prettierd", "prettier", stop_after_first = true },
+				python = function(bufnr)
+					if require("conform").get_formatter_info("ruff_format", bufnr).available then
+						return { "ruff_format", "ruff_fix" }
+					else
+						return { "isort", "black" }
+					end
+				end,
 				rust = { "rustfmt", lsp_format = "fallback" },
 			},
 		},
