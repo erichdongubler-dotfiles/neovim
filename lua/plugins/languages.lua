@@ -148,7 +148,14 @@ return {
 				}
 			end,
 			formatters_by_ft = {
+				-- ["_"] = { "trim_newlines", "trim_whitespace" },
+				["git-revise-todo"] = {},
 				cpp = { "clang-format" },
+				csv = {},
+				ctrlsf = {},
+				diff = {},
+				git = {},
+				gitrebase = {},
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				lua = { "stylua" },
 				markdown = { "prettierd", "prettier", stop_after_first = true },
@@ -160,6 +167,8 @@ return {
 					end
 				end,
 				rust = { "rustfmt", lsp_format = "fallback" },
+				snippets = {},
+				text = {},
 				toml = { "taplo" },
 			},
 		},
