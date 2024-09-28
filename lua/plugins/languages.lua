@@ -164,6 +164,7 @@ return {
 		},
 		config = function(_, opts)
 			require("conform").setup(opts)
+			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 			command("FormatDisable", function(args)
 				if args.bang then
 					vim.b.disable_autoformat = true
