@@ -384,6 +384,7 @@ return {
 					["rust-analyzer"] = {
 						cargo = {
 							runBuildScripts = true,
+							targetDir = true,
 						},
 						procMacro = {
 							enable = true,
