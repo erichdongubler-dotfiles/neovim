@@ -1,3 +1,19 @@
+-- Make Home go to the beginning of the indented line, not the line itself
+vim.keymap.set("", "<Home>", "^")
+
+-- Ctrl-Enter to go to a new line
+map("i", "<C-CR>", "<C-o>o")
+map("i", "<C-S-CR>", "<C-o>O")
+
+-- Use Shift-Delete to delete the current line
+map("n", "<S-Del>", "dd")
+map("i", "<S-Del>", "<C-o>dd")
+map("v", "<S-Del>", "<Del>") --…but actually just make this like VS Code.
+
+-- Shift-Up and Shift-Down are _really_ annoying for me.
+vim.keymap.set("", "<S-Up>", "<Nop>")
+vim.keymap.set("", "<S-Down>", "<Nop>")
+
 if vim.g.neovide then
 	-- Get paste back
 	noremap({ "", "i" }, "<C-S-V>", "<C-R>+") -- Windows/Linux
