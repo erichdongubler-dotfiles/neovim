@@ -382,7 +382,9 @@ return {
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
 				settings = {
 					["rust-analyzer"] = {
-						cargo = { runBuildScripts = true },
+						cargo = {
+							runBuildScripts = true,
+						},
 						procMacro = {
 							enable = true,
 						},
