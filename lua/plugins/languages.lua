@@ -379,6 +379,9 @@ return {
 						procMacro = {
 							enable = true,
 						},
+						cargo = {
+							targetDir = true,
+						},
 					},
 				},
 			})
