@@ -42,13 +42,19 @@ return {
 			spec = {
 				hidden = true,
 
-				-- rvxt bindings
+				-- Common Xterm and rvxt bindings
 				{ "<Esc>Oa", "<C-Up>" },
 				{ "<Esc>Ob", "<C-Down>" },
 				{ "<Esc>Oc", "<C-Right>" },
 				{ "<Esc>Od", "<C-Left>" },
 				{ "<Esc>[5^", "<C-PageUp>" },
 				{ "<Esc>[6^", "<C-PageDown>" },
+
+				-- Xterm bindings
+				{ "", "<C-CR>" },
+				{ "", "<C-S-CR>" },
+				{ "<Esc>[3$", "<S-Del>" },
+				{ "<Esc>[3;2~", "<S-Del>" },
 			},
 		},
 	},
