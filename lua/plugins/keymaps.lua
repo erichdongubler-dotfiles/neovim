@@ -1,11 +1,3 @@
---   rvxt bindings
-vim.keymap.set("", "<Esc>Oa", "<C-Up>")
-vim.keymap.set("", "<Esc>Ob", "<C-Down>")
-vim.keymap.set("", "<Esc>Oc", "<C-Right>")
-vim.keymap.set("", "<Esc>Od", "<C-Left>")
-vim.keymap.set("", "<Esc>[5^", "<C-PageUp>")
-vim.keymap.set("", "<Esc>[6^", "<C-PageDown>")
-
 if vim.g.neovide then
 	-- Get paste back
 	noremap({ "", "i" }, "<C-S-V>", "<C-R>+")
@@ -21,6 +13,18 @@ noremap("n", "<Leader>0", vim.cmd.Inspect, { desc = "Inspect current items at cu
 return {
 	{
 		"folke/which-key.nvim",
-		opts = {},
+		opts = {
+			spec = {
+				hidden = true,
+
+				-- rvxt bindings
+				{ "<Esc>Oa", "<C-Up>" },
+				{ "<Esc>Ob", "<C-Down>" },
+				{ "<Esc>Oc", "<C-Right>" },
+				{ "<Esc>Od", "<C-Left>" },
+				{ "<Esc>[5^", "<C-PageUp>" },
+				{ "<Esc>[6^", "<C-PageDown>" },
+			},
+		},
 	},
 }
