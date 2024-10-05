@@ -10,11 +10,13 @@ return {
 		config = function(_, opts)
 			vim.cmd.colorscheme("sublimemonokai")
 
+			local sublime_monokai_highlight = vim.fn["g:SublimeMonokaiHighlight"]
+
 			-- TODO: Get this moved to a better place
-			vim.fn["g:SublimeMonokaiHighlight"]("BreezeHlElement", { format = "reverse" })
+			sublime_monokai_highlight("BreezeHlElement", { format = "reverse" })
 
 			-- TODO: What the crap, man!
-			vim.fn["g:SublimeMonokaiHighlight"]("Todo", { fg = vim.g.sublimemonokai_orange, format = "bold,italic" })
+			sublime_monokai_highlight("Todo", { fg = vim.g.sublimemonokai_orange, format = "bold,italic" })
 
 			-- FIXME: Apparently "new" file and file are mixed up for the diff
 			-- highlightlight groups. Ew!
@@ -64,14 +66,14 @@ return {
 					if type(highlight_spec) == "string" then
 						vim.cmd("hi! link " .. highlight_group .. " " .. highlight_spec)
 					else
-						vim.fn["g:SublimeMonokaiHighlight"](highlight_group, highlight_spec)
+						sublime_monokai_highlight(highlight_group, highlight_spec)
 					end
 				end
 			end
 
-			vim.fn["g:SublimeMonokaiHighlight"]("LspReferenceText", { bg = vim.g.sublimemonokai_darkgrey })
-			vim.fn["g:SublimeMonokaiHighlight"]("LspReferenceRead", { bg = vim.g.sublimemonokai_addbg })
-			vim.fn["g:SublimeMonokaiHighlight"]("LspReferenceWrite", { bg = vim.g.sublimemonokai_changebg })
+			sublime_monokai_highlight("LspReferenceText", { bg = vim.g.sublimemonokai_darkgrey })
+			sublime_monokai_highlight("LspReferenceRead", { bg = vim.g.sublimemonokai_addbg })
+			sublime_monokai_highlight("LspReferenceWrite", { bg = vim.g.sublimemonokai_changebg })
 
 			function _G.hi_link(from, to)
 				vim.api.nvim_set_hl(0, from, { link = to })
