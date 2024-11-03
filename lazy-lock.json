@@ -63,7 +63,7 @@
   "vim-file-browser-integration": { "branch": "master", "commit": "b3f5bc778856e3682b3d05439f21a01ca7e3cb1c" },
   "vim-flatbuffers": { "branch": "master", "commit": "95c828bcc7dd83627f732bbb1d78888a3a870d6e" },
   "vim-fugitive": { "branch": "master", "commit": "64d6cafb9dcbacce18c26d7daf617ebb96b273f3" },
-  "vim-github-link": { "branch": "master", "commit": "0612c180d699c5d298e5181befa1830980e8e083" },
+  "vim-github-link": { "branch": "master", "commit": "9df238dbf150417772f2a1b7748750cfeda3d167" },
   "vim-gitignore": { "branch": "master", "commit": "641dfa648d2581a5e5e9b0d11ffee37da8de49d7" },
   "vim-go": { "branch": "master", "commit": "665ef24144b748b842a0a27c237e63f3447f901a" },
   "vim-gutentags": { "branch": "master", "commit": "aa47c5e29c37c52176c44e61c780032dfacef3dd" },
