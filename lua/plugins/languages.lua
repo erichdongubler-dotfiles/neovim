@@ -15,8 +15,8 @@ return {
 		init = function()
 			if vim.fn.executable("fd") then
 				vim.g.gutentags_file_list_command = "fd --follow --type file"
+			elseif vim.fn.executable("rg") then
 				vim.g.gutentags_file_list_command = "rg --follow --files"
-			else
 				vim.g.gutentags_resolve_symlinks = 1
 			end
 
