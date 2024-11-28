@@ -386,6 +386,9 @@ return {
 							runBuildScripts = true,
 							targetDir = true,
 						},
+						check = {
+							command = "clippy",
+						},
 						procMacro = {
 							enable = true,
 						},
