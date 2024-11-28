@@ -80,14 +80,18 @@ return {
 			})
 			local which_key = require("which-key")
 			which_key.add({
-				{ "<Leader>D", builtin.diagnostics, desc = "Fuzzy-find diagnostics" },
+				{
+					"<Leader>D",
+					bind_fuse(builtin.diagnostics, { severity_limit = 2 }),
+					desc = "Fuzzy-find diagnostics",
+				},
 				{ "<Leader>O", builtin.buffers, desc = "Fuzzy-find `builtin.buffers`" },
 				{ "<Leader>R", builtin.tags, desc = "Fuzzy-find `builtin.tags`" },
 				{ "<Leader>T", builtin.builtin, desc = "Fuzzy-find `builtin.builtin`" },
 				{
 					"<Leader>d",
 					function()
-						builtin.diagnostics({ bufnr = 0 })
+						builtin.diagnostics({ bufnr = 0, severity_limit = 2 })
 					end,
 					desc = "Fuzzy-find diagnostics (current buffer only)",
 				},
