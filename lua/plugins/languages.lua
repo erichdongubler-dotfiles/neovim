@@ -47,7 +47,7 @@ return {
 				"lua_ls",
 				"rust_analyzer",
 				"taplo", -- TOML
-				"tsserver",
+				"ts_ls",
 				"wgsl_analyzer",
 			},
 		},
@@ -395,7 +395,7 @@ return {
 			"nvim-lspconfig",
 		},
 		config = function(_, opts)
-			require("lspconfig").tsserver.setup({
+			require("lspconfig").ts_ls.setup({
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
 			})
 		end,
