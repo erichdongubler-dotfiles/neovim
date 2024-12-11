@@ -259,7 +259,19 @@ return {
 
 	"pboettch/vim-cmake-syntax",
 
-	"octol/vim-cpp-enhanced-highlight",
+	{
+		"octol/vim-cpp-enhanced-highlight",
+		dependencies = {
+			"cmp-nvim-lsp",
+			"mason-lspconfig.nvim",
+			"nvim-lspconfig",
+		},
+		config = function()
+			require("lspconfig").clangd.setup({
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			})
+		end,
+	},
 
 	{
 		"rust-lang/rust.vim",
