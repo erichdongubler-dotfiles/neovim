@@ -55,7 +55,7 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		event = "VeryLazy",
+		dependencies = { "blink.cmp" },
 	},
 	{
 		"j-hui/fidget.nvim",
@@ -246,7 +246,7 @@ return {
 		},
 		config = function(_, opts)
 			require("lspconfig").nushell.setup({
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
 		end,
 	},
@@ -258,12 +258,13 @@ return {
 	{
 		"cespare/vim-toml",
 		dependencies = {
+			"blink.cmp",
 			"mason-lspconfig.nvim",
-			"cmp-nvim-lsp",
+			"nvim-lspconfig",
 		},
 		config = function(_, opts)
 			require("lspconfig").taplo.setup({
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
 		end,
 	},
@@ -281,14 +282,14 @@ return {
 	{
 		"octol/vim-cpp-enhanced-highlight",
 		dependencies = {
-			"cmp-nvim-lsp",
+			"blink.cmp",
 			"mason-lspconfig.nvim",
 			"nvim-lspconfig",
 		},
 		config = function()
 			require("lspconfig").clangd.setup({
 				autostart = false,
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
 		end,
 	},
@@ -297,7 +298,7 @@ return {
 		"rust-lang/rust.vim",
 		event = "BufReadPre",
 		dependencies = {
-			"cmp-nvim-lsp",
+			"blink.cmp",
 			"mason-lspconfig.nvim",
 			"nvim-lspconfig",
 			"vim-sandwich",
@@ -379,7 +380,7 @@ return {
 			]])
 
 			require("lspconfig").rust_analyzer.setup({
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
 				settings = {
 					["rust-analyzer"] = {
 						cargo = {
@@ -439,12 +440,12 @@ return {
 	{
 		"leafgarland/typescript-vim",
 		dependencies = {
-			"cmp-nvim-lsp",
+			"blink.cmp",
 			"nvim-lspconfig",
 		},
 		config = function(_, opts)
 			require("lspconfig").ts_ls.setup({
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
 		end,
 	},
@@ -515,7 +516,7 @@ return {
 		},
 		config = function(_, opts)
 			require("lspconfig").wgsl_analyzer.setup({
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
 		end,
 	},

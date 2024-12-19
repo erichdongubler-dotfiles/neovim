@@ -3,6 +3,7 @@ vim.opt.wildmode = "longest,list,full"
 return {
 	{
 		"L3MON4D3/LuaSnip",
+		version = "v2.*", -- NOTE: keep in sync. with `blink.cmp` dep.
 		event = "InsertEnter",
 		build = (not jit.os:find("Windows"))
 				and "echo -e 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
@@ -77,54 +78,30 @@ return {
 		end,
 	},
 	{
-		"hrsh7th/nvim-cmp",
-		version = false, -- last release is way too old
-		event = "InsertEnter",
+		"Saghen/blink.cmp",
+		version = "v0.*",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"hrsh7th/cmp-path",
-			"saadparwaiz1/cmp_luasnip",
+			{ "L3MON4D3/LuaSnip", version = "v2.*" }, -- NOTE: keep in sync. with entry above
 		},
-		opts = function()
-			local cmp = require("cmp")
-			return {
-				completion = {
-					completeopt = "menu,menuone,noinsert",
-				},
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<Tab>"] = cmp.mapping.confirm({ select = true }),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<S-CR>"] = cmp.mapping.confirm({
-						behavior = cmp.ConfirmBehavior.Replace,
-						select = true,
-					}),
-				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp_signature_help" },
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "buffer" },
-					{ name = "path" },
-				}),
-				experimental = {
-					ghost_text = {
-						hl_group = "LspCodeLens",
-					},
-				},
-			}
-		end,
+		opts = {
+			signature = { enabled = true },
+			snippets = {
+				expand = function(snippet)
+					require("luasnip").lsp_expand(snippet)
+				end,
+				active = function(filter)
+					if filter and filter.direction then
+						return require("luasnip").jumpable(filter.direction)
+					end
+					return require("luasnip").in_snippet()
+				end,
+				jump = function(direction)
+					require("luasnip").jump(direction)
+				end,
+			},
+			sources = {
+				default = { "lsp", "path", "luasnip", "buffer" },
+			},
+		},
 	},
 }
