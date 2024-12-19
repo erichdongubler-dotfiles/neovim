@@ -303,7 +303,7 @@ return {
 		},
 		config = function()
 			require("lspconfig").clangd.setup({
-				autostart = false,
+				autostart = true,
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
 		end,
