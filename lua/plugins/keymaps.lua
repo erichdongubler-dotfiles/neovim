@@ -17,6 +17,12 @@ vim.keymap.set("", "<S-Down>", "<Nop>")
 if vim.g.neovide then
 	-- Get paste back
 	noremap({ "", "i" }, "<C-S-V>", "<C-R>+") -- Windows/Linux
+
+	if vim.fn.has("mac") then
+		-- Fix reversed trackpad scrolling
+		noremap({ "", "i" }, "<ScrollWheelLeft>", "<ScrollWheelRight>")
+		noremap({ "", "i" }, "<ScrollWheelRight>", "<ScrollWheelLeft>")
+	end
 end
 
 -- MacOS bindings
