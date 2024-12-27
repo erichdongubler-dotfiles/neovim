@@ -22,11 +22,11 @@ if vim.g.neovide then
 		-- Fix reversed trackpad scrolling
 		noremap({ "", "i" }, "<ScrollWheelLeft>", "<ScrollWheelRight>")
 		noremap({ "", "i" }, "<ScrollWheelRight>", "<ScrollWheelLeft>")
+
+		-- Make `<CMD> + v` work again.
+		noremap({ "", "i" }, "<D-v>", "<C-R>+")
 	end
 end
-
--- MacOS bindings
-noremap("", "<D-v>", "<C-R>+")
 
 noremap("n", "<Leader>ve", ":e " .. vim.fn.stdpath("config"), { desc = "Edit Neovim configuration" })
 noremap("n", "<Leader>", "<cmd>qa!<CR>", { desc = "Quit (force on all windows)" })
