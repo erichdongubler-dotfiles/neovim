@@ -133,18 +133,6 @@ return {
 			"kana/vim-textobj-user",
 		},
 	},
-	{
-		"tyru/open-browser.vim",
-		event = "VeryLazy",
-		config = function()
-			noremap(
-				{ "n", "v" },
-				"<Leader>u",
-				"<Plug>(openbrowser-smart-search)",
-				{ desc = "Open URL on current line in browser" }
-			)
-		end,
-	},
 
 	-- Auto-pairing
 
