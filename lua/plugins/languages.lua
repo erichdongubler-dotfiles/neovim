@@ -16,9 +16,8 @@ return {
 			if vim.fn.executable("fd") then
 				vim.g.gutentags_file_list_command = "fd --follow --type file"
 				vim.g.gutentags_file_list_command = "rg --follow --files"
-			else
-				vim.g.gutentags_resolve_symlinks = 1
 			end
+			vim.g.gutentags_resolve_symlinks = 1
 
 			vim.g.gutentags_cache_dir = vim.fn.stdpath("cache") .. "/gutentags"
 			if not vim.fn.isdirectory(vim.g.gutentags_cache_dir) then
