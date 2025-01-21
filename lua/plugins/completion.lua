@@ -49,7 +49,7 @@ return {
 			local cvs_filetypes = {
 				"gitcommit",
 				"hgcommit",
-				"jj",
+				"jjdescription",
 			}
 			local cvs_snippets = {
 				luasnip.snippet("mozdiffrev", {
