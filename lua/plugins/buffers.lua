@@ -1,4 +1,3 @@
-vim.opt.splitkeep = "screen"
 
 -- Create a VSCode-like tab bar.
 return {
