@@ -46,14 +46,9 @@ return {
 		version = "*",
 		event = "VeryLazy",
 		opts = {
-			buffer = { suffix = "" }, -- disable this due to conflict with desired `buffers` mapping
-			diagnostic = {
-				suffix = "d",
-				options = {
-					-- NOTE: disabled because `tiny-inline-diagnostic` opens a pop-pup automatically.
-					float = false,
-				},
-			},
+			-- Disable these because Neovim 0.11 already binds them.
+			buffer = { suffix = "" },
+			diagnostic = { suffix = "" },
 		},
 	},
 	{
