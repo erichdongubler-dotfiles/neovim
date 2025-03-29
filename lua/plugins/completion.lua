@@ -79,7 +79,7 @@ return {
 	},
 	{
 		"Saghen/blink.cmp",
-		version = "v0.*",
+		version = "v1.*",
 		dependencies = {
 			{ "L3MON4D3/LuaSnip", version = "v2.*" }, -- NOTE: keep in sync. with entry above
 		},
