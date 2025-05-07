@@ -85,6 +85,7 @@ return {
 
 			hi_clear("@lsp")
 			hi_link("@lsp.mod.declaration", "Tag")
+			hi_link("@lsp.type.builtinType", "SublimeType")
 			hi_link("@lsp.type.enum", "SublimeType")
 			hi_link("@lsp.type.function", "SublimeFunctionCall")
 			hi_link("@lsp.type.interface", "SublimeType")
