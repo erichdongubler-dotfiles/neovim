@@ -27,7 +27,7 @@
   "mini.bracketed": { "branch": "main", "commit": "06ad08fc75dc540cba76d3d8de0f2dc9f75b5812" },
   "neoconf.nvim": { "branch": "main", "commit": "352b212598c3cfc52a2d63fa177c84502e281981" },
   "neodev.nvim": { "branch": "main", "commit": "46aa467dca16cf3dfe27098042402066d2ae242d" },
-  "nushell-syntax-vim": { "branch": "main", "commit": "bf44e8c769a9ee966908bd3f2e8437dce28f6c8e" },
+  "nushell-syntax-vim": { "branch": "main", "commit": "4435d83035c59dde2b9bfabd1d0ad0a25d5508bc" },
   "nvim-autopairs": { "branch": "master", "commit": "4d74e75913832866aa7de35e4202463ddf6efd1b" },
   "nvim-lspconfig": { "branch": "master", "commit": "4bc481b6f0c0cf3671fc894debd0e00347089a4e" },
   "nvim-neoclip.lua": { "branch": "main", "commit": "709c97fabec9da7d04f7d2f5e207423af8c02871" },
