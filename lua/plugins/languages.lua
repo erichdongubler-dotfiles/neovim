@@ -550,4 +550,30 @@ return {
 			})
 		end,
 	},
+
+	{
+		"erichdongubler-webidl",
+		virtual = true,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+		init = function()
+			vim.filetype.add({ extension = { webidl = "webidl" } })
+		end,
+		config = function(_, opts)
+			local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+			parser_config.webidl = {
+				install_info = {
+					url = "https://github.com/padenot/tree-sitter-webidl",
+					files = {
+						"src/parser.c",
+					},
+					branch = "main",
+				},
+				filetype = "webidl",
+			}
+			-- vim.treesitter.language.add("webidl", { path = "E:/mozilla/tree-sitter-webidl/webidl.dll" })
+			-- vim.treesitter.language.register("webidl", "webidl")
+		end,
+	},
 }
