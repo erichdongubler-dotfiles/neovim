@@ -92,6 +92,7 @@ return {
 			hi_link("@lsp.type.macro", "SublimeFunctionCall")
 			hi_link("@lsp.type.method", "SublimeFunctionCall")
 			hi_link("@lsp.type.namespace", "Normal")
+			hi_link("@lsp.type.namespace.rust", "SublimeType")
 			hi_link("@lsp.type.parameter", "SublimeContextParam")
 			hi_link("@lsp.type.struct", "SublimeType")
 			hi_link("@lsp.type.typeAlias", "SublimeType")
