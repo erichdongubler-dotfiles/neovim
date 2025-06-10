@@ -466,6 +466,19 @@ return {
 
 	--     other general-purpose languages
 
+	{
+		"ErichDonGubler/lua_ls.nvim",
+		virtual = true,
+		dependencies = {
+			"nvim-lspconfig",
+		},
+		config = function()
+			require("lspconfig").lua_ls.setup({
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
+			})
+		end,
+	},
+
 	"OrangeT/vim-csharp",
 
 	{
