@@ -51,6 +51,7 @@ return {
 				"ts_ls",
 				"wgsl_analyzer",
 			},
+			automatic_enable = false,
 		},
 	},
 	{
