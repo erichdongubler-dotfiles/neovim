@@ -48,7 +48,7 @@ return {
 				"ruff",
 				"taplo", -- TOML
 				"ts_ls",
-				"wgsl_analyzer",
+				-- "wgsl_analyzer",
 			},
 			automatic_enable = false,
 		},
@@ -537,19 +537,19 @@ return {
 		end,
 	},
 
-	{
-		"DingDean/wgsl.vim",
-		dependencies = {
-			"blink.cmp",
-			"mason-lspconfig.nvim",
-			"nvim-lspconfig",
-		},
-		config = function(_, opts)
-			require("lspconfig").wgsl_analyzer.setup({
-				capabilities = require("blink.cmp").get_lsp_capabilities(),
-			})
-		end,
-	},
+	-- {
+	-- 	"DingDean/wgsl.vim",
+	-- 	dependencies = {
+	-- 		"blink.cmp",
+	-- 		"mason-lspconfig.nvim",
+	-- 		"nvim-lspconfig",
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 		require("lspconfig").wgsl_analyzer.setup({
+	-- 			capabilities = require("blink.cmp").get_lsp_capabilities(),
+	-- 		})
+	-- 	end,
+	-- },
 
 	{
 		"ErichDonGubler/whippit-lsp.nvim",
