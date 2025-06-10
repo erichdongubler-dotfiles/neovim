@@ -526,6 +526,7 @@ return {
 	{
 		"DingDean/wgsl.vim",
 		dependencies = {
+			"blink.cmp",
 			"mason-lspconfig.nvim",
 			"nvim-lspconfig",
 		},
