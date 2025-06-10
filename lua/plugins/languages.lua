@@ -550,4 +550,24 @@ return {
 			})
 		end,
 	},
+
+	{
+		"ErichDonGubler/whippit-lsp.nvim",
+		dependencies = {
+			"blink.cmp",
+		},
+		virtual = true,
+		init = function()
+			vim.filetype.add({ pattern = { [".*%.html%.ini"] = { "wpt" } } })
+			vim.lsp.config("whippit", {
+				cmd = {
+					vim.fn.expand("~") .. "/workspace/mozilla/tools/moz-webgpu-cts/target/debug/whippit-lsp",
+				},
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
+				root_markers = { "mozilla-config.h.in" },
+				filetypes = { "wpt" },
+			})
+			vim.lsp.enable("whippit")
+		end,
+	},
 }
