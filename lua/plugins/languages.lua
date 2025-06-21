@@ -277,6 +277,20 @@ return {
 
 	"imsnif/kdl.vim",
 
+	{
+		"ErichDonGubler/yaml.nvim",
+		virtual = true,
+		dependencies = {
+			"nvim-lspconfig",
+			"blink.cmp",
+		},
+		config = function()
+			require("lspconfig").yamlls.setup({
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
+			})
+		end,
+	},
+
 	--     Native world
 
 	"pboettch/vim-cmake-syntax",
