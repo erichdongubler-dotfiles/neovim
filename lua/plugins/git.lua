@@ -74,7 +74,7 @@ return {
 					{
 						"ghp",
 						function()
-							gitsigns.preview_hunk_inline(get_visual_range())
+							gitsigns.preview_hunk_inline()
 						end,
 						desc = "Preview current hunk (range, inline)",
 					},
@@ -95,7 +95,7 @@ return {
 					{
 						"ghu",
 						function()
-							gitsigns.undo_stage_hunk(get_visual_range())
+							gitsigns.undo_stage_hunk()
 						end,
 						desc = "Unstage hunk(s) in range",
 					},
