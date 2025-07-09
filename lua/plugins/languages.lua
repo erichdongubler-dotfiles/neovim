@@ -421,6 +421,20 @@ return {
 		end,
 	},
 
+	{
+		"ErichDongubler/rst",
+		virtual = true,
+		dependencies = {
+			"nvim-lspconfig",
+		},
+		config = function()
+			require("lspconfig").esbonio.setup({
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
+				cmd = { "uvx", "esbonio" },
+			})
+		end,
+	},
+
 	--     web
 
 	{
