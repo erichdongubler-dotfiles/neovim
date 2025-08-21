@@ -78,7 +78,7 @@
   "vim-shebang": { "branch": "master", "commit": "ae2e6f8f258ad7572cefdff4948c045203ee0bd9" },
   "vim-sort-motion": { "branch": "master", "commit": "c8782be8f7da414c6442b3ba4b6abb0345d392d9" },
   "vim-speeddating": { "branch": "master", "commit": "5a36fd29df63ea3f65562bd2bb837be48a5ec90b" },
-  "vim-sublime-monokai": { "branch": "main", "commit": "feb7935e92981590794d906a94355a767b6d1380" },
+  "vim-sublime-monokai": { "branch": "main", "commit": "0a4c4c910ad745fec5af730bb79e1b08b4f9372a" },
   "vim-super-retab": { "branch": "master", "commit": "ca763a978123992b213c0fb87b44f5d7807d3514" },
   "vim-textobj-comment": { "branch": "master", "commit": "58ae4571b76a5bf74850698f23d235eef991dd4b" },
   "vim-textobj-entire": { "branch": "master", "commit": "64a856c9dff3425ed8a863b9ec0a21dbaee6fb3a" },
