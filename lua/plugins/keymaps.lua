@@ -1,4 +1,4 @@
--- Make Home go to the beginning of the indented line, not the line itself
+-- Make `Home` go to the beginning of the indented line, not the line itself.
 vim.keymap.set("", "<Home>", "^")
 
 -- Ctrl-Enter to go to a new line
