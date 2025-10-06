@@ -255,9 +255,10 @@ return {
 			"nvim-lspconfig",
 		},
 		config = function(_, opts)
-			require("lspconfig").nushell.setup({
+			vim.lsp.config("nushell", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
+			vim.lsp.enable("nushell")
 		end,
 	},
 
@@ -273,9 +274,10 @@ return {
 			"nvim-lspconfig",
 		},
 		config = function(_, opts)
-			require("lspconfig").taplo.setup({
+			vim.lsp.config("taplo", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
+			vim.lsp.enable("taplo")
 		end,
 	},
 
@@ -293,9 +295,10 @@ return {
 			"blink.cmp",
 		},
 		config = function()
-			require("lspconfig").yamlls.setup({
+			vim.lsp.config("yamlls", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
+			vim.lsp.enable("yamlls")
 		end,
 	},
 
@@ -311,10 +314,11 @@ return {
 			"nvim-lspconfig",
 		},
 		config = function()
-			require("lspconfig").clangd.setup({
+			vim.lsp.config("clangd", {
 				autostart = false,
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
+			vim.lsp.enable("clangd")
 		end,
 	},
 
@@ -403,7 +407,7 @@ return {
 			AddShebangPattern! rust ^#!.*/bin/run-cargo-(script|eval)\>
 			]])
 
-			require("lspconfig").rust_analyzer.setup({
+			vim.lsp.config("rust_analyzer", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 				settings = {
 					["rust-analyzer"] = {
@@ -420,6 +424,7 @@ return {
 					},
 				},
 			})
+			vim.lsp.enable("rust_analyzer")
 
 			vim.cmd([[
 			hi! link rustAttribute      SublimeDocumentation
@@ -468,9 +473,10 @@ return {
 			"nvim-lspconfig",
 		},
 		config = function(_, opts)
-			require("lspconfig").ts_ls.setup({
+			vim.lsp.config("ts_ls", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
+			vim.lsp.enable("ts_ls")
 		end,
 	},
 
@@ -497,9 +503,10 @@ return {
 			"nvim-lspconfig",
 		},
 		config = function()
-			require("lspconfig").lua_ls.setup({
+			vim.lsp.config("lua_ls", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
+			vim.lsp.enable("lua_ls")
 		end,
 	},
 
@@ -554,9 +561,10 @@ return {
 			"nvim-lspconfig",
 		},
 		config = function(_, opts)
-			require("lspconfig").wgsl_analyzer.setup({
+			vim.lsp.config("wgsl_analyzer", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
+			vim.lsp.enable("wgsl_analyzer")
 		end,
 	},
 }
