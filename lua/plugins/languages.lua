@@ -352,7 +352,7 @@ return {
 			end)
 
 			-- TODO
-			function configure_rust()
+			local configure_rust = function()
 				local cargo = vim.cmd.Cargo
 				require("which-key").add({
 					buffer = 0,
