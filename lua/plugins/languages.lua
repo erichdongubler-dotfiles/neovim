@@ -55,7 +55,6 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "blink.cmp" },
 	},
 	{
 		"j-hui/fidget.nvim",
@@ -243,6 +242,7 @@ return {
 	{
 		"elkasztano/nushell-syntax-vim",
 		dependencies = {
+			"blink.cmp",
 			"nvim-lspconfig",
 		},
 		config = function(_, opts)
@@ -484,6 +484,7 @@ return {
 		"ErichDonGubler/lua_ls.nvim",
 		virtual = true,
 		dependencies = {
+			"blink.cmp",
 			"nvim-lspconfig",
 		},
 		config = function()
