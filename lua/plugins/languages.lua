@@ -46,7 +46,6 @@ return {
 			ensure_installed = {
 				"lua_ls",
 				"ruff",
-				"rust_analyzer",
 				"taplo", -- TOML
 				"ts_ls",
 				"wgsl_analyzer",
