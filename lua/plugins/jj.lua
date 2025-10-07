@@ -1,6 +1,10 @@
 return {
 	{
 		"NicolasGB/jj.nvim",
-		opts = {},
+		opts = {
+			picker = {
+				snacks = {},
+			},
+		},
 	},
 }
