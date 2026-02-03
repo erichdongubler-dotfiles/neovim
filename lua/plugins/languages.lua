@@ -194,7 +194,7 @@ return {
 		dependencies = {
 			-- "tagbar", -- TODO: Do we even still want this?
 		},
-		config = function(_, opts)
+		config = function()
 			augroup("markdown", function(au)
 				au("FileType", "markdown", function()
 					vim.cmd.SetRowLimit(80)
@@ -228,7 +228,7 @@ return {
 			vim.g.org_heading_highlight_colors = { "Identifier" }
 			vim.g.org_heading_highlight_levels = 10
 		end,
-		config = function(_, opts)
+		config = function()
 			augroup("orgmode", function(au)
 				au("FileType", { "text", "org" }, bind_fuse(vim.cmd.EnableWordWrap))
 			end)
@@ -245,7 +245,7 @@ return {
 			"blink.cmp",
 			"nvim-lspconfig",
 		},
-		config = function(_, opts)
+		config = function()
 			vim.lsp.config("nushell", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
@@ -264,7 +264,7 @@ return {
 			"mason-lspconfig.nvim",
 			"nvim-lspconfig",
 		},
-		config = function(_, opts)
+		config = function()
 			vim.lsp.config("taplo", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
@@ -463,7 +463,7 @@ return {
 			"blink.cmp",
 			"nvim-lspconfig",
 		},
-		config = function(_, opts)
+		config = function()
 			vim.lsp.config("ts_ls", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
@@ -537,7 +537,7 @@ return {
 		init = function()
 			vim.g.php_var_selector_is_identifier = 1
 		end,
-		config = function(_, opts)
+		config = function()
 			vim.cmd([[
 			hi! link phpMemberSelector Keyword
 			]])
@@ -551,7 +551,7 @@ return {
 			"mason-lspconfig.nvim",
 			"nvim-lspconfig",
 		},
-		config = function(_, opts)
+		config = function()
 			vim.lsp.config("wgsl_analyzer", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})

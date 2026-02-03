@@ -72,7 +72,7 @@ return {
 					luasnip.text_node(" r=#webgpu-reviewers!"),
 				}),
 			}
-			for _idx, ft in pairs(cvs_filetypes) do
+			for _, ft in pairs(cvs_filetypes) do
 				luasnip.add_snippets(ft, cvs_snippets)
 			end
 		end,
