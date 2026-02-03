@@ -8,7 +8,7 @@ return {
 			},
 		},
 	},
-	{ "folke/neoconf.nvim", cmd = "Neoconf" },
+	{ "folke/neoconf.nvim" },
 	{ "stevearc/dressing.nvim", event = "VeryLazy" },
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
 }
