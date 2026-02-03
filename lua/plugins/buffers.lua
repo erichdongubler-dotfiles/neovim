@@ -1,3 +1,5 @@
+noremap("n", "<C-M-G>", ":let @+=expand('%')<CR>", { desc = "Copy file name to clipboard" })
+noremap("n", "<C-S-M-G>", ":let @+=expand('%:p')<CR>", { desc = "Copy file name to clipboard" })
 
 -- Create a VSCode-like tab bar.
 return {

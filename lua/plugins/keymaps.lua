@@ -1,6 +1,10 @@
 -- Make `Home` go to the beginning of the indented line, not the line itself.
 map("", "<Home>", "^")
 
+-- Make `End` go to the last non-blank character of the indented line, rather than the full end (i.e.,
+-- a newline).
+map("", "<End>", "g_")
+
 -- Ctrl-Enter to go to a new line
 map("i", "<C-CR>", "<C-o>o")
 map("i", "<C-S-CR>", "<C-o>O")
@@ -45,13 +49,19 @@ return {
 			spec = {
 				hidden = true,
 
-				-- rvxt bindings
+				-- Common Xterm and rvxt bindings
 				{ "<Esc>Oa",    "<C-Up>" },
 				{ "<Esc>Ob",    "<C-Down>" },
 				{ "<Esc>Oc",    "<C-Right>" },
 				{ "<Esc>Od",    "<C-Left>" },
 				{ "<Esc>[5^",   "<C-PageUp>" },
 				{ "<Esc>[6^",   "<C-PageDown>" },
+
+				-- Xterm bindings
+				{ "",          "<C-CR>" },
+				{ "",          "<C-S-CR>" },
+				{ "<Esc>[3$",   "<S-Del>" },
+				{ "<Esc>[3;2~", "<S-Del>" },
 			},
 		},
 	},
