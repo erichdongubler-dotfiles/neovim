@@ -84,7 +84,7 @@ return {
 					desc = "Fuzzy-find diagnostics (current buffer only)",
 				},
 				{ "<Leader>f", snacks.picker.grep, desc = "Fuzzy-find with live word search" },
-				{ "<Leader>o", snacks.picker.recent, desc = "Fuzzy-find recent files" },
+				{ "<Leader>P", snacks.picker.recent, desc = "Fuzzy-find recent files" },
 				{
 					"<Leader>p",
 					snacks.picker.files,
