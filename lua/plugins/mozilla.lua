@@ -36,6 +36,16 @@ return {
 			for _, ft in pairs(cvs_filetypes) do
 				luasnip.add_snippets(ft, cvs_snippets)
 			end
+			luasnip.add_snippets("markdown", {
+				luasnip.snippet("wgpuchangelog", {
+					luasnip.insert_node(1, "TODO"),
+					luasnip.text_node(". By "),
+					luasnip.insert_node(2, "@ErichDonGubler"),
+					luasnip.text_node(" in "),
+					luasnip.insert_node(3, "[????](https://github.com/gfx-rs/wgpu/pull/????)"),
+					luasnip.text_node("."),
+				}),
+			})
 		end,
 	},
 
