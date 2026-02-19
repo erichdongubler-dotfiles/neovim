@@ -112,4 +112,31 @@ return {
 		end,
 	},
 	"sindrets/diffview.nvim",
+
+	{
+		"ErichDonGubler/git.nvim",
+		virtual = true,
+		dependencies = {
+			"LuaSnip",
+		},
+		config = function()
+			local luasnip = require("luasnip")
+			local cvs_filetypes = {
+				"gitcommit",
+				"hgcommit",
+				"jjdescription",
+			}
+			-- TODO: Move to a separate module
+			local cvs_snippets = {
+				luasnip.snippet("coauby", {
+					luasnip.text_node("Co-authored-by: "),
+					luasnip.insert_node(1, "NAME <email@gmail.com>"),
+				}),
+			}
+			for _, ft in pairs(cvs_filetypes) do
+				luasnip.add_snippets(ft, cvs_snippets)
+			end
+		end,
+	},
+
 }
