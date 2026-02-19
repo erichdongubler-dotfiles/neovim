@@ -64,11 +64,11 @@ return {
 					bind_fuse(gitsigns.reset_buffer_index),
 					desc = "Unstage all hunks in current file",
 				},
-				{ "ghb", bind_fuse(gitsigns.blame_line, true), desc = "Show blame for the current line" },
+				{ "ghb", bind_fuse(gitsigns.blame_line, true),    desc = "Show blame for the current line" },
 				{ "ghp", bind_fuse(gitsigns.preview_hunk_inline), desc = "Preview current hunk (line)" },
-				{ "ghr", bind_fuse(gitsigns.reset_hunk), desc = "Restore current hunk (line)" },
-				{ "ghs", bind_fuse(gitsigns.stage_hunk), desc = "Stage current hunk (line)" },
-				{ "ghu", bind_fuse(gitsigns.undo_stage_hunk), desc = "Unstage current hunk (line)" },
+				{ "ghr", bind_fuse(gitsigns.reset_hunk),          desc = "Restore current hunk (line)" },
+				{ "ghs", bind_fuse(gitsigns.stage_hunk),          desc = "Stage current hunk (line)" },
+				{ "ghu", bind_fuse(gitsigns.undo_stage_hunk),     desc = "Unstage current hunk (line)" },
 				{
 					mode = { "v" },
 					{

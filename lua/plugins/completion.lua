@@ -6,7 +6,7 @@ return {
 		version = "v2.*", -- NOTE: keep in sync. with `blink.cmp` dep.
 		event = "InsertEnter",
 		build = (not jit.os:find("Windows"))
-				and "echo -e 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
+			and "echo -e 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
 			or nil,
 		dependencies = {
 			"rafamadriz/friendly-snippets",
