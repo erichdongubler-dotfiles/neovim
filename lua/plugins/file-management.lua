@@ -21,7 +21,7 @@ return {
 			},
 		},
 		config = function(_, opts)
-			local nvim_tree = require("nvim-tree")
+			require("nvim-tree").setup(opts)
 			local nvim_tree_api = require("nvim-tree.api")
 			local which_key = require("which-key")
 			which_key.add({
@@ -36,7 +36,6 @@ return {
 					desc = "Find current file in file browser sidebar",
 				},
 			})
-			nvim_tree.setup(opts)
 		end,
 	},
 	{
