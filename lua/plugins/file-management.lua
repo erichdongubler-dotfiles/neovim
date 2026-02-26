@@ -20,7 +20,7 @@ return {
 				group_empty = true,
 			},
 		},
-		config = function()
+		config = function(_, opts)
 			local nvim_tree = require("nvim-tree")
 			local nvim_tree_api = require("nvim-tree.api")
 			local which_key = require("which-key")
