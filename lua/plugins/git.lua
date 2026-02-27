@@ -67,8 +67,7 @@ return {
 				{ "ghb", bind_fuse(gitsigns.blame_line, true),    desc = "Show blame for the current line" },
 				{ "ghp", bind_fuse(gitsigns.preview_hunk_inline), desc = "Preview current hunk (line)" },
 				{ "ghr", bind_fuse(gitsigns.reset_hunk),          desc = "Restore current hunk (line)" },
-				{ "ghs", bind_fuse(gitsigns.stage_hunk),          desc = "Stage current hunk (line)" },
-				{ "ghu", bind_fuse(gitsigns.undo_stage_hunk),     desc = "Unstage current hunk (line)" },
+				{ "ghs", bind_fuse(gitsigns.stage_hunk),          desc = "Toggle staging of current hunk (line)" },
 				{
 					mode = { "v" },
 					{
@@ -90,14 +89,7 @@ return {
 						function()
 							gitsigns.stage_hunk(get_visual_range())
 						end,
-						desc = "Stage hunk(s) in range",
-					},
-					{
-						"ghu",
-						function()
-							gitsigns.undo_stage_hunk()
-						end,
-						desc = "Unstage hunk(s) in range",
+						desc = "Toggle staging of hunk(s) in range",
 					},
 				},
 				{
