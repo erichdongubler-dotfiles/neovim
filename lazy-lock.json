@@ -36,7 +36,7 @@
   "php.vim": { "branch": "master", "commit": "930aec5c7026297a6630bd2940c08c5ff552cf2a" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "rust.vim": { "branch": "master", "commit": "889b9a7515db477f4cb6808bef1769e53493c578" },
-  "smear-cursor.nvim": { "branch": "main", "commit": "8820b313e49a018c7d56fc309c51363c0e9ae653" },
+  "smear-cursor.nvim": { "branch": "main", "commit": "c85bdbb25db096fbcf616bc4e1357bd61fe2c199" },
   "snacks.nvim": { "branch": "main", "commit": "9912042fc8bca2209105526ac7534e9a0c2071b2" },
   "statuscol.nvim": { "branch": "main", "commit": "c46172d0911aa5d49ba5f39f4351d1bb7aa289cc" },
   "targets.vim": { "branch": "master", "commit": "642d3a4ce306264b05ea3219920b13ea80931767" },
