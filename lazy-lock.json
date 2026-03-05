@@ -42,7 +42,7 @@
   "targets.vim": { "branch": "master", "commit": "642d3a4ce306264b05ea3219920b13ea80931767" },
   "telescope.nvim": { "branch": "master", "commit": "c392f1b78eaaf870ca584bd698e78076ed301b26" },
   "tiny-code-action.nvim": { "branch": "main", "commit": "3204f45e4102788486f440259e09d50046081675" },
-  "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "7dcf8542059fb15c978de845fc8665428ae13a04" },
+  "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "ba133b3e932416e4b9507095731a6d7276878fe8" },
   "typescript-vim": { "branch": "master", "commit": "8d169e16b5487771f6568125d4c63e6086e524d9" },
   "undotree": { "branch": "master", "commit": "56c684a805fe948936cda0d1b19505b84ad7e065" },
   "vim-argumentative": { "branch": "master", "commit": "63a5f7deb675c38126de626f4c00e000902462fe" },
