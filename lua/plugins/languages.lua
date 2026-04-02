@@ -315,7 +315,6 @@ return {
 
 	{
 		"rust-lang/rust.vim",
-		event = "BufReadPre",
 		dependencies = {
 			"blink.cmp",
 			"mason-lspconfig.nvim",
