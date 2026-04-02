@@ -1,9 +1,7 @@
 return {
 	{
+		-- NOTE: We set `number` in the root `init.lua`.
 		"luukvbaal/statuscol.nvim",
-		init = function()
-			vim.opt.number = true
-		end,
 		opts = {
 			relculright = true,
 		},
