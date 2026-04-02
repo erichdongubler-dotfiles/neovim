@@ -473,7 +473,7 @@ return {
 
 	{
 		"posva/vim-vue",
-		ft = { "markdown" },
+		ft = { "vue" },
 		run = function()
 			if vim.fn.executable("npm") then
 				-- TODO: I wonder if we can use Mason here?
