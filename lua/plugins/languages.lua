@@ -6,8 +6,30 @@ vim.g.java_comment_strings = 1
 vim.g.java_highlight_functions = 1
 vim.g.java_highlight_java_lang_ids = 1
 
+local configure_treesitter = function()
+	vim.treesitter.start()
+	vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+	vim.wo.foldmethod = "expr"
+	vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+end
+
 return {
 	"vitalk/vim-shebang",
+
+	{
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		lazy = false,
+		build = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter").install({ "rust", "python", "typescript" })
+		end,
+	},
+
+	{
+		"RRethy/nvim-treesitter-textsubjects",
+		dependencies = { "nvim-treesitter" },
+	},
 
 	-- Tags: a poor man's go-to-definition
 	{
@@ -320,6 +342,7 @@ return {
 			"blink.cmp",
 			"mason-lspconfig.nvim",
 			"nvim-lspconfig",
+			"nvim-treesitter",
 			"vim-sandwich",
 			"vim-shebang",
 			"vim-sublime-monokai",
@@ -388,6 +411,7 @@ return {
 					{ "<LocalLeader>t", vim.cmd.RustTest, desc = "Run `cargo test` on test under cursor" },
 					{ "<LocalLeader>T", bind_fuse(cargo, "test"), desc = "Run `cargo test`" },
 				})
+				configure_treesitter()
 			end
 			augroup("rust", function(au)
 				au("FileType", "rust", configure_rust)
