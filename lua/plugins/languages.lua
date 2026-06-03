@@ -368,19 +368,19 @@ return {
 				local cargo = vim.cmd.Cargo
 				require("which-key").add({
 					buffer = 0,
-					{ "<LocalLeader>b", bind_fuse(cargo, "build"), desc = "Run `cargo build`" },
+					{ "<LocalLeader>b", bind_fuse(cargo, "build"),         desc = "Run `cargo build`" },
 					{
 						"<LocalLeader>B",
 						bind_fuse(cargo, "build", "--release"),
 						desc = "Run `cargo build --release`",
 					},
-					{ "<LocalLeader>c", bind_fuse(cargo, "check"), desc = "Run `cargo check`" },
-					{ "<LocalLeader>d", bind_fuse(cargo, "doc"), desc = "Run `cargo doc`" },
+					{ "<LocalLeader>c", bind_fuse(cargo, "check"),         desc = "Run `cargo check`" },
+					{ "<LocalLeader>d", bind_fuse(cargo, "doc"),           desc = "Run `cargo doc`" },
 					{ "<LocalLeader>D", bind_fuse(cargo, "doc", "--open"), desc = "Run `cargo doc --open`" },
-					{ "<LocalLeader>F", bind_fuse(cargo, "fmt"), desc = "Run `cargo fmt`" },
-					{ "<LocalLeader>f", vim.cmd.RustFmt, desc = "Run `cargo fmt` on current file" },
-					{ "<LocalLeader>p", vim.cmd.RustPlay, desc = "Run `cargo ???`" },
-					{ "<LocalLeader>r", bind_fuse(cargo, "run"), desc = "Run `cargo run`" },
+					{ "<LocalLeader>F", bind_fuse(cargo, "fmt"),           desc = "Run `cargo fmt`" },
+					{ "<LocalLeader>f", vim.cmd.RustFmt,                   desc = "Run `cargo fmt` on current file" },
+					{ "<LocalLeader>p", vim.cmd.RustPlay,                  desc = "Run `cargo ???`" },
+					{ "<LocalLeader>r", bind_fuse(cargo, "run"),           desc = "Run `cargo run`" },
 					{
 						"<LocalLeader>R",
 						bind_fuse(cargo, "run", "--release"),
@@ -393,7 +393,7 @@ return {
 						end,
 						desc = "Run `cargo script` on current file",
 					},
-					{ "<LocalLeader>t", vim.cmd.RustTest, desc = "Run `cargo test` on test under cursor" },
+					{ "<LocalLeader>t", vim.cmd.RustTest,         desc = "Run `cargo test` on test under cursor" },
 					{ "<LocalLeader>T", bind_fuse(cargo, "test"), desc = "Run `cargo test`" },
 				})
 			end
