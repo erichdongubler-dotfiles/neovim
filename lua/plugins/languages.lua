@@ -566,4 +566,12 @@ return {
 			vim.lsp.enable("wgsl_analyzer")
 		end,
 	},
+
+	{
+		"onlyati/quadlet-lsp.nvim",
+		lazy = false,
+		opts = {
+			cmd = "/var/home/erich/Downloads/quadlet-lsp-0.7.3-linux-amd64/quadlet-lsp",
+		},
+	}
 }
