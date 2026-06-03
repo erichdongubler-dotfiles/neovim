@@ -35,6 +35,7 @@
   "nvim-tree.lua": { "branch": "master", "commit": "7e1da84aaffb413e1fa47b3895e5caa12501142d" },
   "nvim-web-devicons": { "branch": "master", "commit": "0dc0cfb0c6858041174a53c7aa4adaf65e994b3c" },
   "php.vim": { "branch": "master", "commit": "930aec5c7026297a6630bd2940c08c5ff552cf2a" },
+  "quadlet-lsp.nvim": { "branch": "main", "commit": "a8125999000861dc08be7f37093e6699c514fb57" },
   "rust.vim": { "branch": "main", "commit": "2beee60144703b574fd95adaa07e0dfd83e71006" },
   "smear-cursor.nvim": { "branch": "main", "commit": "f6cb57c342268177f719acc3968b9d8de3ecc969" },
   "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" },
