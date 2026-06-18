@@ -46,7 +46,7 @@ return {
 			ensure_installed = {
 				"lua_ls",
 				"ruff",
-				"taplo", -- TOML
+				"tombi", -- TOML
 				"ts_ls",
 				"wgsl_analyzer",
 			},
@@ -168,7 +168,7 @@ return {
 				rust = { "rustfmt", lsp_format = "fallback" },
 				snippets = {},
 				text = {},
-				toml = { "taplo" },
+				toml = { "tombi" },
 			},
 		},
 		config = function(_, opts)
@@ -274,10 +274,10 @@ return {
 			"nvim-lspconfig",
 		},
 		config = function()
-			vim.lsp.config("taplo", {
+			vim.lsp.config("tombi", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
-			vim.lsp.enable("taplo")
+			vim.lsp.enable("tombi")
 		end,
 	},
 
