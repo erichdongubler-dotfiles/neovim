@@ -5,6 +5,7 @@ end)
 return {
 	{
 		"gbprod/yanky.nvim",
+		enabled = false,
 		event = "VeryLazy",
 		dependencies = {
 			"snacks.nvim",
