@@ -14,6 +14,9 @@ map("v", "<S-Del>", "<Del>") --…but actually just make this like VS Code.
 map("", "<S-Up>", "<Nop>")
 map("", "<S-Down>", "<Nop>")
 
+-- I like using Zellij's web server. However, CTRL + W is not usable in that environment.
+map("i", "<M-w>", "<C-w>")
+
 if vim.g.neovide then
 	-- Get paste back
 	noremap({ "", "i" }, "<C-S-V>", "<C-R>+") -- Windows/Linux
