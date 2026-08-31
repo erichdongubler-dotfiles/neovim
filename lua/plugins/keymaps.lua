@@ -43,12 +43,12 @@ return {
 				hidden = true,
 
 				-- rvxt bindings
-				{ "<Esc>Oa", "<C-Up>" },
-				{ "<Esc>Ob", "<C-Down>" },
-				{ "<Esc>Oc", "<C-Right>" },
-				{ "<Esc>Od", "<C-Left>" },
-				{ "<Esc>[5^", "<C-PageUp>" },
-				{ "<Esc>[6^", "<C-PageDown>" },
+				{ "<Esc>Oa",    "<C-Up>" },
+				{ "<Esc>Ob",    "<C-Down>" },
+				{ "<Esc>Oc",    "<C-Right>" },
+				{ "<Esc>Od",    "<C-Left>" },
+				{ "<Esc>[5^",   "<C-PageUp>" },
+				{ "<Esc>[6^",   "<C-PageDown>" },
 			},
 		},
 	},
