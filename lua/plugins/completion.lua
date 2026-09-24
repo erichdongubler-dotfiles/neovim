@@ -5,8 +5,16 @@ return {
 		"L3MON4D3/LuaSnip",
 		version = "v2.*", -- NOTE: keep in sync. with `blink.cmp` dep.
 		event = "InsertEnter",
+		-- NOTE: a function, not a string: `build` strings run through `&shell`,
+		-- which is `nu` here, and Nushell rejects Bash-isms at parse time.
 		build = (not jit.os:find("Windows"))
-				and "echo -e 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
+				and function(plugin)
+					vim.notify(
+						"NOTE: jsregexp is optional, so not a big deal if it fails to build",
+						vim.log.levels.INFO
+					)
+					vim.system({ "make", "install_jsregexp" }, { cwd = plugin.dir }):wait()
+				end
 			or nil,
 		dependencies = {
 			"rafamadriz/friendly-snippets",
