@@ -8,7 +8,7 @@ return {
 	},
 	{
 		"lewis6991/gitsigns.nvim",
-		requires = {
+		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"which-key.nvim",
 		},
