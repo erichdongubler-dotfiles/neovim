@@ -12,6 +12,6 @@ return {
 		"nvim-telescope/telescope.nvim",
 	},
 	opts = {
-		auto_session_use_git_branch = true,
+		git_use_branch_name = true,
 	},
 }
