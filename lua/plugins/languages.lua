@@ -87,8 +87,7 @@ return {
 	{
 		"rachartier/tiny-code-action.nvim",
 		dependencies = {
-			"plenary.nvim",
-			"telescope.nvim",
+			"snacks.nvim",
 			"which-key.nvim",
 		},
 		event = "LspAttach",
@@ -96,7 +95,11 @@ return {
 			{ "<Leader>la", desc = "Fuzzy-find code action(s) in selection", mode = "n" },
 			{ "<Leader>la", desc = "Fuzzy-find code action(s) in selection", mode = "v" },
 		},
-		opts = {},
+		opts = {
+			-- NOTE: autodetect order is telescope -> fzf-lua -> snacks, and
+			-- telescope stays installed for `neoclip`, so this has to be explicit.
+			picker = "snacks",
+		},
 		config = function(_, opts)
 			local tiny_code_action = require("tiny-code-action")
 			tiny_code_action.setup(opts)
