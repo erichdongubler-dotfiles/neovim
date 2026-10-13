@@ -509,8 +509,6 @@ return {
 		end,
 	},
 
-	"OrangeT/vim-csharp",
-
 	{
 		"fatih/vim-go",
 		dependencies = {
