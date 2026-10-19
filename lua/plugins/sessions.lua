@@ -1,9 +1,9 @@
 vim.opt.sessionoptions:append("folds")
-vim.opt.sessionoptions:remove("options")
+vim.opt.sessionoptions:append("globals")
 vim.opt.sessionoptions:append("tabpages")
 vim.opt.sessionoptions:append("terminal")
-vim.opt.sessionoptions:append("globals")
 vim.opt.sessionoptions:append("winpos")
+vim.opt.sessionoptions:remove("options")
 
 return {
 	"rmagatti/auto-session",
