@@ -256,9 +256,6 @@ return {
 			"nvim-lspconfig",
 		},
 		config = function()
-			vim.lsp.config("nushell", {
-				capabilities = require("blink.cmp").get_lsp_capabilities(),
-			})
 			vim.lsp.enable("nushell")
 		end,
 	},
@@ -275,9 +272,6 @@ return {
 			"nvim-lspconfig",
 		},
 		config = function()
-			vim.lsp.config("tombi", {
-				capabilities = require("blink.cmp").get_lsp_capabilities(),
-			})
 			vim.lsp.enable("tombi")
 		end,
 	},
@@ -296,9 +290,6 @@ return {
 			"blink.cmp",
 		},
 		config = function()
-			vim.lsp.config("yamlls", {
-				capabilities = require("blink.cmp").get_lsp_capabilities(),
-			})
 			vim.lsp.enable("yamlls")
 		end,
 	},
@@ -317,7 +308,6 @@ return {
 		config = function()
 			vim.lsp.config("clangd", {
 				autostart = false,
-				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
 			vim.lsp.enable("clangd")
 		end,
