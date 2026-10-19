@@ -12,11 +12,13 @@ return {
 		opts = {},
 		config = function(_, opts)
 			require("yanky").setup(opts)
+
+			local snacks = require("snacks")
 			local which_key = require("which-key")
 			which_key.add({
 				{
 					'<Leader>"',
-					bind_fuse(Snacks.picker.yanky),
+					bind_fuse(snacks.picker.yanky),
 					desc = "Replace unnamed register with fuzzy history selection",
 				},
 			})

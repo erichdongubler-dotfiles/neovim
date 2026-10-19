@@ -9,9 +9,12 @@ return {
 	"rmagatti/auto-session",
 	cond = not vim.g.started_by_firenvim,
 	dependencies = {
-		"nvim-telescope/telescope.nvim",
+		"snacks.nvim",
 	},
 	opts = {
 		git_use_branch_name = true,
+		session_lens = {
+			picker = "snacks",
+		},
 	},
 }
