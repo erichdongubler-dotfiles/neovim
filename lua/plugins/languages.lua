@@ -87,7 +87,6 @@ return {
 	{
 		"rachartier/tiny-code-action.nvim",
 		dependencies = {
-			"plenary.nvim",
 			"snacks.nvim",
 			"which-key.nvim",
 		},
