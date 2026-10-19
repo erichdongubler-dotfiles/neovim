@@ -4,28 +4,20 @@ end)
 
 return {
 	{
-		"AckslD/nvim-neoclip.lua",
+		"gbprod/yanky.nvim",
 		event = "VeryLazy",
 		dependencies = {
-			"telescope.nvim",
-			"which-key.nvim",
+			"snacks.nvim",
 		},
 		opts = {},
 		config = function(_, opts)
-			require("neoclip").setup(opts)
-			require("telescope").load_extension("neoclip")
+			require("yanky").setup(opts)
 			local which_key = require("which-key")
 			which_key.add({
 				{
 					'<Leader>"',
-					bind_fuse(vim.cmd["Telescope"], "neoclip"),
+					bind_fuse(Snacks.picker.yanky),
 					desc = "Replace unnamed register with fuzzy history selection",
-				},
-				{
-					'<Leader><Leader>"',
-					":Telescope neoclip ",
-					desc = "Replace register with fuzzy history selection (prompt)",
-					silent = false,
 				},
 			})
 		end,
