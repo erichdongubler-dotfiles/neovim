@@ -1,5 +1,6 @@
 vim.opt.sessionoptions:append("folds")
 vim.opt.sessionoptions:append("globals")
+vim.opt.sessionoptions:append("localoptions")
 vim.opt.sessionoptions:append("tabpages")
 vim.opt.sessionoptions:append("terminal")
 vim.opt.sessionoptions:append("winpos")
