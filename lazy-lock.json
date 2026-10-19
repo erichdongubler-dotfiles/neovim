@@ -30,6 +30,7 @@
   "neoconf.nvim": { "branch": "main", "commit": "46afdcdf973bfb1237f4850c3ffa973c87db0f5c" },
   "nushell-syntax-vim": { "branch": "main", "commit": "c915d13ed4c22f8705ba26b30ea51308300f5ce5" },
   "nvim-autopairs": { "branch": "master", "commit": "59bce2eef357189c3305e25bc6dd2d138c1683f5" },
+  "nvim-lsp-file-operations": { "branch": "master", "commit": "8b150305362e971db0c40cee89ea4576a64e86cd" },
   "nvim-lspconfig": { "branch": "master", "commit": "ead0f5f342d8d323441e7d4b88f0fc436a81ad5f" },
   "nvim-tree.lua": { "branch": "master", "commit": "ae16aab5fd1792b97758622b9fb53408ec804fd8" },
   "nvim-web-devicons": { "branch": "master", "commit": "c0cfc1738361b5da1cd0a962dd6f774cc444f856" },
