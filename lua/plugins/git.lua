@@ -2,7 +2,7 @@ return {
 	"knsh14/vim-github-link",
 	{
 		"tpope/vim-fugitive",
-		config = function(_, opts)
+		config = function()
 			noremap("n", "ghB", bind_fuse(vim.cmd.Git, "blame"), { desc = "Show `git blame`" })
 		end,
 	},

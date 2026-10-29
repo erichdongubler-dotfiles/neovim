@@ -7,7 +7,7 @@ return {
 			vim.opt.termguicolors = true
 			vim.g.sublimemonokai_term_italic = true
 		end,
-		config = function(_, opts)
+		config = function()
 			vim.cmd.colorscheme("sublimemonokai")
 
 			local sublime_monokai_highlight = vim.fn["g:SublimeMonokaiHighlight"]

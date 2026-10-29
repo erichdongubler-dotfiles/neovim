@@ -66,7 +66,6 @@ return {
 		config = function(_, opts)
 			local guess_indent = require("guess-indent")
 			guess_indent.setup(opts)
-			local run_guess_indent = bind_fuse(guess_indent.set_from_buffer, "auto_cmd")
 			local run_guess_indent = function()
 				-- TODO: figure out if there's a way we can represent `silent!` in Lua
 				vim.cmd([[

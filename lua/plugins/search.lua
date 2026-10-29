@@ -20,7 +20,7 @@ return {
 		requires = {
 			"is.vim", -- for `is-nohl-1`
 		},
-		config = function(_, opts)
+		config = function()
 			local bindings = {
 				["*"] = {
 					"<Plug>(asterisk-z*)<Plug>(is-nohl-1)",

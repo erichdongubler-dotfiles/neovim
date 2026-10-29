@@ -148,7 +148,7 @@ return {
 			vim.g.matchup_override_vimtex = 1
 			vim.g.matchup_surround_enabled = 1
 		end,
-		config = function(_, opts)
+		config = function()
 			vim.cmd([[
 			hi! clear MatchParenCur
 			hi! clear MatchWordCur
@@ -231,7 +231,7 @@ return {
 	{
 		"junegunn/vim-easy-align",
 		event = "VeryLazy",
-		config = function(_, opts)
+		config = function()
 			map({ "x", "n" }, "ga", "<Plug>(EasyAlign)", { desc = "Begin EasyAlign" })
 		end,
 	},

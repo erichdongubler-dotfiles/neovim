@@ -5,7 +5,7 @@ return {
 		dependencies = {
 			"LuaSnip",
 		},
-		config = function(_, opts)
+		config = function()
 			local luasnip = require("luasnip")
 			local cvs_filetypes = {
 				"gitcommit",
