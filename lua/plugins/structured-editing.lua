@@ -161,9 +161,6 @@ return {
 	{
 		"machakann/vim-sandwich",
 		event = "VeryLazy",
-		event = {
-			"BufEnter",
-		},
 		config = function()
 			_G.add_sandwich_recipes(function(add_recipe)
 				local vim_surround_ish_recipes = {
