@@ -48,6 +48,9 @@ end)
 command("RefreshListChars", function()
 	refresh_listchars(true)
 end, { nargs = 0 })
+command("ToggleListChars", function()
+	toggle_list_verbosity(true)
+end, { nargs = 0 })
 
 -- TODO: Does this actually work?
 if vim.g.erichdongubler_initted_indent_opts == nil then
