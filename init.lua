@@ -40,14 +40,14 @@ end
 
 function _G.augroup(name, callback)
 	local augroup_id = vim.api.nvim_create_augroup(name, {})
-	function au(name, patterns, cmd)
+	local au = function(au_name, patterns, cmd)
 		local args = { pattern = patterns, group = augroup_id }
 		if type(cmd) == "string" then
 			args.command = cmd
 		else
 			args.callback = cmd
 		end
-		vim.api.nvim_create_autocmd(name, args)
+		vim.api.nvim_create_autocmd(au_name, args)
 	end
 	callback(au, augroup_id) -- TODO: reorder?
 end
@@ -56,6 +56,7 @@ require("lazy").setup({
 	spec = {
 		import = "plugins",
 	},
+	---@diagnostic disable-next-line: assign-type-mismatch
 	dev = {
 		path = "~/workspace/erichdongubler-dotfiles/neovim",
 	},

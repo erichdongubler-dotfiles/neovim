@@ -1,5 +1,5 @@
 local is_indentation_verbose = false
-function refresh_listchars(is_local)
+local refresh_listchars = function(is_local)
 	local shiftwidth = is_local and vim.bo.shiftwidth or vim.o.shiftwidth
 	local listchars = is_indentation_verbose
 			and {
@@ -29,7 +29,7 @@ function refresh_listchars(is_local)
 	listchars_opts_short.listchars = ""
 	listchars_opts_long.listchars = listchars
 end
-function toggle_list_verbosity(is_local)
+local toggle_list_verbosity = function(is_local)
 	if is_indentation_verbose then
 		vim.notify("quieting `listchars`; `is_local`: " .. vim.inspect(is_local))
 		is_indentation_verbose = false

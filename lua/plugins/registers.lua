@@ -18,6 +18,7 @@ return {
 			which_key.add({
 				{
 					'<Leader>"',
+					---@diagnostic disable-next-line: undefined-field
 					bind_fuse(snacks.picker.yanky),
 					desc = "Replace unnamed register with fuzzy history selection",
 				},

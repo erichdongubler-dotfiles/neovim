@@ -4,14 +4,14 @@
 vim.opt.iskeyword:remove({ ".", "#" })
 
 --   Add some common line-ending shortcuts
-function append_chars(sequence)
+local append_chars = function(sequence)
 	local line = vim.fn.line(".")
 	local col = vim.fn.col(".")
 	vim.cmd("exec 'normal! A" .. sequence .. "'")
 	vim.fn.cursor(line, col)
 end
-function map_device_character_append(sequence, name)
-	function cmd()
+local map_device_character_append = function(sequence, name)
+	local cmd = function()
 		append_chars(sequence)
 	end
 	local opts = { desc = "Append `" .. sequence .. "` to end of line" }
@@ -25,7 +25,7 @@ map_device_character_append(",", "Comma")
 -- Create some lazy init. machinery for plugins that init. or consume
 -- `vim-sandwich`
 
-sandwich_initted = false
+local sandwich_initted = false
 function _G.add_sandwich_recipes(callback)
 	if not sandwich_initted then
 		-- Not sure why this needs to be in vimscript. :scratch-head:
@@ -33,7 +33,7 @@ function _G.add_sandwich_recipes(callback)
 		sandwich_initted = true
 	end
 	local recipes = vim.g["sandwich#recipes"]
-	function add_entry(recipe)
+	local add_entry = function(recipe)
 		table.insert(recipes, recipe)
 	end
 	callback(add_entry)
