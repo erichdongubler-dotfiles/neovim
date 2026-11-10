@@ -65,7 +65,7 @@
   "vim-javascript": { "branch": "master", "commit": "b26c9edb3563e02f5c0b20580f7cf9743e95b157" },
   "vim-jsx": { "branch": "master", "commit": "8879e0d9c5ba0e04ecbede1c89f63b7a0efa24af" },
   "vim-markdown": { "branch": "master", "commit": "1bc9d0cd8e1cc3e901b0a49c2b50a843f1c89397" },
-  "vim-matchup": { "branch": "master", "commit": "1535a769d5dca851fe7d41b0be95f7c7203a4bef" },
+  "vim-matchup": { "branch": "master", "commit": "0106b1afd4a2f7e1098037b5ceb161bab7471088" },
   "vim-mkdir": { "branch": "main", "commit": "039f735268ed0d616e3f3dc5a1db12c929d6c7ab" },
   "vim-ninja-feet": { "branch": "master", "commit": "47ebe12017eed3f980eb6690658deffbf7a59b2e" },
   "vim-orgmode": { "branch": "master", "commit": "e9506ee5cb492817c39c3897ed332b4a29b01c87" },
